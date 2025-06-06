@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0fb4dc30-274e-4699-9980-a0880bf17162" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/ArmaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/CidadeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/CombateDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/ConnectionDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/ConsumiveisDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/EquipamentoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/HabilidadesDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/InventarioDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/ItensDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/LojadeItensDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/MenuBuscasDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/MenuCidadeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/NPCDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/PersonasDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/ProtagonistaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/ProtagonistaPersonaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/SerHumanoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/ShadowDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/UsuarioHasPersonaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/UsuarioPersonaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/DAO/UsuariosDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/exceptions/InvalidMenuInputException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/itens/Ativador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/itens/Itens.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/itens/LojadeItens.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/itens/armas/Arma.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/itens/consumiveis/Consumiveis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/itens/equipamentos/Equipamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/itens/inventario/Inventario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/SerHumano.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/UsuarioPersona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/combate/Combate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/combate/CombateManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/interacao/Interacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/interacao/InteracaoManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/jogaveis/Protagonista.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/jogaveis/Usuarios.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personagens/npc/NPC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personas/Habilidades.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personas/Personas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/personas/Shadow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/ProtagonistaHasArma.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/ProtagonistaHasConsumivel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/ProtagonistaHasEquipamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/ProtagonistaPersona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/UsuarioHasArma.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/UsuarioHasConsumivel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/UsuarioHasEquipamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/relacional/UsuarioHasPersona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/Avaliacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/Cidade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/Cores.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/MenuBuscas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/MenuCidade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/MenuSQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/SistemaAvaliacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/sistema/TelaInicial.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/threads/Clock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/br/inatel/projetojava/Model/threads/LoadingBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integracao_SQL/src/main/resources/images/persona.jpeg" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Integracao_SQL" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2xmavZbG1qlSStxLCOoKS1ZODxf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ide.FileNotInSourceRootChecker.no.check": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/aliss/IdeaProjects/Integracao_SQL",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0fb4dc30-274e-4699-9980-a0880bf17162" name="Changes" comment="" />
+      <created>1748545934203</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748545934203</updated>
+      <workItem from="1748545935746" duration="574000" />
+      <workItem from="1748546521904" duration="12064000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

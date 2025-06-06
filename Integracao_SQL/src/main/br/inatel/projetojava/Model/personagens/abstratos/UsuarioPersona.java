@@ -19,8 +19,8 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
     Random random = new Random();
 
     protected int nivel;
-    protected Set<Itens> item = new HashSet<>(); // Agregação todo: arrumar pra ficar protected - colocar get (rever o hash set) inventario tbm
-    public Inventario inventario; // Não faz sentido um inventário existir sem usuário - composição - public pra usar na main.
+    protected Set<Itens> item = new HashSet<>(); // Agregação
+    protected Inventario inventario; // Não faz sentido um inventário existir sem usuário - composição - public pra usar na main.
     protected double defesa = 0;
     protected double sp;
     protected double hp;
@@ -277,5 +277,9 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
 
     public void setDefesa(double defesa) {
         this.defesa = defesa;
+    }
+
+    public Inventario getInventario() {
+        return inventario;
     }
 }

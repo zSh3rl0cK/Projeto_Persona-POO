@@ -31,7 +31,7 @@ public class ProtagonistaDAO extends ConnectionDAO {
             pst.setDouble(6, protagonista.getHp());
             pst.setDouble(7, protagonista.getSp());
             pst.setDouble(8, protagonista.getSaldo());
-            pst.setInt(9, protagonista.ativador.getIdAtivador());
+            pst.setInt(9, protagonista.getAtivador().getIdAtivador());
 
             int affectedRows = pst.executeUpdate();
 
@@ -110,7 +110,7 @@ public class ProtagonistaDAO extends ConnectionDAO {
             pst.setDouble(6, protagonista.getHp());
             pst.setDouble(7, protagonista.getSp());
             pst.setDouble(8, protagonista.getSaldo());
-            pst.setInt(9, protagonista.ativador.getIdAtivador());
+            pst.setInt(9, protagonista.getAtivador().getIdAtivador());
             pst.execute();
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar protagonista: " + e.getMessage());

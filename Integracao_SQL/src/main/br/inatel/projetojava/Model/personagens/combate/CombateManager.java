@@ -93,7 +93,7 @@ public class CombateManager {
         System.out.println(ANSI_BLUE + "\nÉ o turno de " + atacante.getNome() + ANSI_RESET);
 
         if (atacante instanceof Protagonista protagonista) {
-            return atacante.agir(turno, protagonista.persona_atual, defensor);
+            return atacante.agir(turno, protagonista.getPersona_atual(), defensor);
         }
         else if (atacante instanceof Usuarios usuario) {
             return atacante.agir(turno, usuario.getPersonas(), defensor);

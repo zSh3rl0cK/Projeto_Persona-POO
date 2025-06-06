@@ -16,7 +16,7 @@ public class Usuarios extends UsuarioPersona implements Interacao {
     private Personas persona;
     private boolean vilao;
     private int nivelConfidant = 0; // Todos iniciam 0.
-    public Ativador ativador;
+    private Ativador ativador;
 
     // Construtor existente
     public Usuarios(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, String papel, boolean vilao) {
@@ -123,5 +123,9 @@ public class Usuarios extends UsuarioPersona implements Interacao {
 
     public void setHp(double hp){
         this.hp = hp;
+    }
+
+    public Ativador getAtivador() {
+        return ativador;
     }
 }

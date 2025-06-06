@@ -36,7 +36,7 @@ public class LojadeItens {
             switch (novo_item) {
                 case Arma arma -> {
                     if (this.itens.containsKey(novo_item) && this.itens.get(novo_item) > 0) {
-                        protagonista.inventario.adicionarArma(arma, 1);
+                        protagonista.getInventario().adicionarArma(arma, 1);
                         this.itens.put(novo_item, this.itens.get(novo_item) - 1);
                         if (this.itens.get(novo_item) == 0) {
                             this.itens.remove(novo_item);
@@ -46,7 +46,7 @@ public class LojadeItens {
                 }
                 case Equipamento equipamento -> {
                     if (this.itens.containsKey(novo_item) && this.itens.get(novo_item) > 0) {
-                        protagonista.inventario.adicionarEquipamento(equipamento, 1);
+                        protagonista.getInventario().adicionarEquipamento(equipamento, 1);
                         this.itens.put(novo_item, this.itens.get(novo_item) - 1);
                         if (this.itens.get(novo_item) == 0) {
                             this.itens.remove(novo_item);
@@ -56,7 +56,7 @@ public class LojadeItens {
                 }
                 case Consumiveis consumiveis -> {
                     if (this.itens.containsKey(novo_item) && this.itens.get(novo_item) > 0) {
-                        protagonista.inventario.adicionarConsumivel(consumiveis, 1);
+                        protagonista.getInventario().adicionarConsumivel(consumiveis, 1);
                         this.itens.put(novo_item, this.itens.get(novo_item) - 1);
                         if (this.itens.get(novo_item) == 0) {
                             this.itens.remove(novo_item);

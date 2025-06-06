@@ -1,6 +1,6 @@
 package main.br.inatel.projetojava.DAO;
 
-import main.br.inatel.projetojava.Model.relacional.ProtagonistaPersona;
+import main.br.inatel.projetojava.Model.relacional.ProtagonistaHasPersona;
 
 import java.sql.SQLException;
 
@@ -10,7 +10,7 @@ public class ProtagonistaPersonaDAO extends ConnectionDAO {
         this.connectToDb();
     }
 
-    public boolean insertProtagonistaPersona(ProtagonistaPersona protagonistaPersona) {
+    public boolean insertProtagonistaPersona(ProtagonistaHasPersona protagonistaPersona) {
         connectToDb();
 
         boolean sucesso;

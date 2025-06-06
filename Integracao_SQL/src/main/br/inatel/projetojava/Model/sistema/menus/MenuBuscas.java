@@ -31,16 +31,16 @@ public class MenuBuscas {
 
         System.out.print(ANSI_CYAN + "👉 Escolha uma opção: " + ANSI_RESET);
         try{
-        opcao = sc.nextInt();
-        if(opcao < 0 || opcao > 8) {
-            throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
-        }
-        sc.nextLine();
+            opcao = sc.nextInt();
+            if(opcao < 0 || opcao > 8) {
+                throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
+            }
+            sc.nextLine();
 
-        if(opcao == 0) {
-            System.out.println(ANSI_YELLOW + "Saindo do menu de buscas...!" + ANSI_RESET);
-        }
-        return opcao;
+            if(opcao == 0) {
+                System.out.println(ANSI_YELLOW + "Saindo do menu de buscas...!" + ANSI_RESET);
+            }
+            return opcao;
         }catch(InputMismatchException e){
             throw new InvalidMenuInputException("Por favor, insira um número inteiro...");
         }

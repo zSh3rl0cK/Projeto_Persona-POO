@@ -17,11 +17,11 @@ import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
 public class Protagonista extends UsuarioPersona {
 
-    public List<Personas> personas; // O protagonista pode ter mais de uma persona.
+    private List<Personas> personas; // O protagonista pode ter mais de uma persona.
     private double saldo;
     private int id;
-    public Personas persona_atual;
-    public Ativador ativador;
+    private final Ativador ativador;
+    private Personas persona_atual;
 
     public Protagonista(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, double saldo, int Ativador_idAtivador) {
         super(nome, idade, genero, nivel, arcana, hp, sp);
@@ -67,7 +67,7 @@ public class Protagonista extends UsuarioPersona {
         switch(novo_item){
             case Arma arma -> {
                 if(this.inventario.getQuantidadeArma(arma) > 0){
-                    usuario.inventario.adicionarArma((Arma)novo_item, 1);
+                    usuario.getInventario().adicionarArma((Arma)novo_item, 1);
                     this.inventario.removerArma(novo_item);
                     System.out.println(ANSI_BLUE + "Arma " + novo_item.getNome() + " transferido para " + usuario.getNome() + "\n" + ANSI_RESET);
                 }
@@ -77,7 +77,7 @@ public class Protagonista extends UsuarioPersona {
             }
             case Equipamento equipamento -> {
                 if(this.inventario.getQuantidadeEquipamento(equipamento) > 0){
-                    usuario.inventario.adicionarEquipamento((Equipamento)novo_item, 1);
+                    usuario.getInventario().adicionarEquipamento((Equipamento)novo_item, 1);
                     this.inventario.removerEquipamento(novo_item);
                     System.out.println(ANSI_BLUE + "Equipamento " + novo_item.getNome() + " transferido para " + usuario.getNome() + "\n" + ANSI_RESET);
                 }
@@ -87,7 +87,7 @@ public class Protagonista extends UsuarioPersona {
             }
             case Consumiveis consumivel -> {
                 if (this.inventario.getQuantidadeConsumivel(consumivel) > 0) {
-                    usuario.inventario.adicionarConsumivel((Consumiveis)novo_item, 1);
+                    usuario.getInventario().adicionarConsumivel((Consumiveis)novo_item, 1);
                     this.inventario.removerConsumivel(novo_item);
                     System.out.println(ANSI_BLUE + "Colecionavel " + novo_item.getNome() + " transferido para " + usuario.getNome() + "\n" + ANSI_RESET);
                 }
@@ -243,5 +243,17 @@ public class Protagonista extends UsuarioPersona {
 
     public Ativador getAtivador() {
         return ativador;
+    }
+
+    public Personas getPersona_atual() {
+        return persona_atual;
+    }
+
+    public List<Personas> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Personas> personas) {
+        this.personas = personas;
     }
 }

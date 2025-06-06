@@ -28,11 +28,9 @@ public class Creditos extends JFrame {
         creditos.add("Felipe Tagawa Reis & Pedro Henrique Ribeiro Dias");
         creditos.add("");
         creditos.add("ORIENTAÇÃO:");
-        creditos.add("Chris");
+        creditos.add("CHRISTOPHER");
         creditos.add("");
         creditos.add("OBRIGADO POR JOGAR!");
-        creditos.add("");
-        creditos.add("FIM");
     }
 
     private void configurarJanela() {

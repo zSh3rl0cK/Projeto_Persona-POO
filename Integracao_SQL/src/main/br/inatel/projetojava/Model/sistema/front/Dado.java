@@ -1,7 +1,5 @@
 package main.br.inatel.projetojava.Model.sistema.front;
 
-import java.util.Random;
-
 public class Dado {
 
     // Retorna uma string com a arte do dado baseada no valor

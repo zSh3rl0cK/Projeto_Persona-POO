@@ -12,9 +12,8 @@ public class MenuDoJogo {
 
     public static int opcao;
 
-    public static int mostrar_menu_principal() throws InvalidMenuInputException {
+    public static int mostrar_menu_principal(Scanner sc) throws InvalidMenuInputException {
         AudioManager.getInstance().setGameStateMusic(AudioManager.GameState.MAIN_MENU);
-        Scanner sc = new Scanner(System.in);
         System.out.println(ANSI_PURPLE +
                 "╔════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                      🎮 MENU PRINCIPAL DO JOGO                     ║");
@@ -49,7 +48,7 @@ public class MenuDoJogo {
             }
             return opcao;
         }catch(InputMismatchException e){
-            throw new InvalidMenuInputException("Por favor, insira um número inteiro...");
+            throw new InvalidMenuInputException("Por favor, insira um valor correto...");
         }
     }
 }
