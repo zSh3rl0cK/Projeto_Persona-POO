@@ -1,6 +1,5 @@
 package main.br.inatel.projetojava.Model.sistema.avaliacao;
 
-import main.br.inatel.projetojava.Model.sistema.Creditos;
 import main.br.inatel.projetojava.Model.threads.AudioManager;
 
 import java.util.Scanner;
@@ -69,7 +68,6 @@ public class SistemaAvaliacao implements Avaliacao {
 
         AudioManager.getInstance().stopMusic();
         AudioManager.getInstance().shutdown();
-        new Creditos().setVisible(true);
-        // System.out.println(ANSI_GREEN + "Obrigado por avaliar e jogar nosso jogo!" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "Obrigado por avaliar e jogar nosso jogo!" + ANSI_RESET);
     }
 }
