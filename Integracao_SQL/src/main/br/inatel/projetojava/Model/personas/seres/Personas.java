@@ -1,8 +1,6 @@
 package main.br.inatel.projetojava.Model.personas.seres;
 
-import main.br.inatel.projetojava.Model.personagens.abstratos.SerHumano;
 import main.br.inatel.projetojava.Model.personas.Habilidades;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,10 +59,6 @@ public class Personas {
         for(Habilidades habilidade : habilidades){
             habilidade.descreverHabilidade();
         }
-    }
-
-    public void usarHabilidade(Habilidades habilidade, SerHumano alvo){
-
     }
 
     // Setters n Getters:

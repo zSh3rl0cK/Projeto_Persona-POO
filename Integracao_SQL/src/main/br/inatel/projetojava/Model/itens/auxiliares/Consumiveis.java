@@ -1,7 +1,6 @@
 package main.br.inatel.projetojava.Model.itens.auxiliares;
 
 import main.br.inatel.projetojava.Model.itens.geral.Itens;
-import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 

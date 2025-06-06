@@ -14,11 +14,13 @@ public class Shadow extends Personas {
         this.vida = vida;
     }
 
-    public Shadow(String nome, double vida, int nivel, String arcana, List<String> tipo, String fraqueza, String resistencia, double dano, int id) {
+    // Usar se precisar inserir no BD
+    /*public Shadow(String nome, double vida, int nivel, String arcana, List<String> tipo, String fraqueza, String resistencia, double dano, int id) {
         super(nome, nivel, arcana, tipo, fraqueza, resistencia, dano);
         this.vida = vida;
         this.id = id;
     }
+     */
 
 
     @Override

@@ -24,7 +24,6 @@ import main.br.inatel.projetojava.Model.threads.AudioManager;
 
 import java.util.*;
 
-import static main.br.inatel.projetojava.Model.itens.lojas.LojaUtil.confirmarAcao;
 import static main.br.inatel.projetojava.Model.itens.lojas.LojaUtil.visitarLoja;
 import static main.br.inatel.projetojava.Model.personagens.combate.CombateManager.iniciarCombate;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
@@ -32,6 +31,7 @@ import static main.br.inatel.projetojava.Model.sistema.menus.MenuBuscas.mostrar_
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuCidade.mostrarMenuCidade;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuDoJogo.mostrar_menu_principal;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuSQL.mostrarMenuSQL;
+import static main.br.inatel.projetojava.Model.sistema.menus.MethodUtil.*;
 
 public class MenuGeral {
     public static void mostrarMenuGeral(){
@@ -85,15 +85,11 @@ public class MenuGeral {
         user.put("Shinjiro", new Usuarios("Shinjiro Aragaki", 18, "Masculino", 55, "The Fool", 200.0, 65.0, "Brute Physical Attacker", false));
 
         // Inserção de usuários SEES no banco de dados:
-        usuariosDAO.insertUsuario(user.get("Yukari"));
-        usuariosDAO.insertUsuario(user.get("Mitsuru"));
-        usuariosDAO.insertUsuario(user.get("Junpei"));
-        usuariosDAO.insertUsuario(user.get("Akihiko"));
-        usuariosDAO.insertUsuario(user.get("Fuuka"));
-        usuariosDAO.insertUsuario(user.get("Aigis"));
-        usuariosDAO.insertUsuario(user.get("Koromaru"));
-        usuariosDAO.insertUsuario(user.get("Ken"));
-        usuariosDAO.insertUsuario(user.get("Shinjiro"));
+        String[] usuariosSEES = {"Yukari", "Mitsuru", "Junpei", "Akihiko", "Fuuka",
+                "Aigis", "Koromaru", "Ken", "Shinjiro"};
+        for (String nomeUsuario : usuariosSEES) {
+            usuariosDAO.insertUsuario(user.get(nomeUsuario));
+        }
 
         // ---------------------------------------- Vilões (Strega): ----------------------------------------------------
 
@@ -101,11 +97,13 @@ public class MenuGeral {
         user.put("Jin", new Usuarios("Jin Shirato", 19, "Masculino", 10, "Hermit", 120.0, 130.0, "Support Hacker / Tech", true));
         user.put("Chidori", new Usuarios("Chidori Yoshino", 17, "Feminino", 99, "Hanged Man", 130.0, 150.0, "Fire Caster / Emo Artista", true));
 
-        // Inserção de usuários STREGA no banco de dados:
-        usuariosDAO.insertUsuario(user.get("Takaya"));
-        usuariosDAO.insertUsuario(user.get("Jin"));
-        usuariosDAO.insertUsuario(user.get("Chidori"));
 
+        // Inserção de usuários STREGA no banco de dados:
+
+        String[] usuariosStrega = {"Takaya", "Jin", "Chidori"};
+        for (String nomeUsuario : usuariosStrega) {
+            usuariosDAO.insertUsuario(user.get(nomeUsuario));
+        }
 
 // ---------------------------------------- Personas: ---------------------------------------------------
 
@@ -124,15 +122,9 @@ public class MenuGeral {
 
         PersonasDAO personasDAOuser = new PersonasDAO();
 
-        personasDAOuser.insertPersona(user.get("Yukari").getPersonas());
-        personasDAOuser.insertPersona(user.get("Mitsuru").getPersonas());
-        personasDAOuser.insertPersona(user.get("Junpei").getPersonas());
-        personasDAOuser.insertPersona(user.get("Akihiko").getPersonas());
-        personasDAOuser.insertPersona(user.get("Fuuka").getPersonas());
-        personasDAOuser.insertPersona(user.get("Aigis").getPersonas());
-        personasDAOuser.insertPersona(user.get("Koromaru").getPersonas());
-        personasDAOuser.insertPersona(user.get("Ken").getPersonas());
-        personasDAOuser.insertPersona(user.get("Shinjiro").getPersonas());
+        for (String nomeUsuario : usuariosSEES) {
+            personasDAOuser.insertPersona(user.get(nomeUsuario).getPersonas());
+        }
 
         usuarioHasPersonaDAO.insertUsuarioHasPersona(user.get("Yukari").getId(), user.get("Yukari").getPersonas().getIdPersona());
         usuarioHasPersonaDAO.insertUsuarioHasPersona(user.get("Mitsuru").getId(), user.get("Mitsuru").getPersonas().getIdPersona());
@@ -148,9 +140,9 @@ public class MenuGeral {
         user.get("Takaya").addPersona(new Personas("Hypnos", 52, "Death", List.of(TiposPersona.getTipoUsuarioPorIndice(9)), "Light", "Dark", random.nextDouble(50) + 30, 9));
         user.get("Jin").addPersona(new Personas("Moros", 50, "Hermit", List.of(TiposPersona.getTipoUsuarioPorIndice(10)), "Bless", "Almighty", random.nextDouble(50) + 30, 10));
         user.get("Chidori").addPersona(new Personas("Medea", 44, "Magician", List.of(TiposPersona.getTipoUsuarioPorIndice(11)), "Ice", "Fire", random.nextDouble(50) + 30, 11));
-        personasDAOuser.insertPersona(user.get("Takaya").getPersonas());
-        personasDAOuser.insertPersona(user.get("Jin").getPersonas());
-        personasDAOuser.insertPersona(user.get("Chidori").getPersonas());
+        for (String nomeUsuario : usuariosStrega) {
+            personasDAOuser.insertPersona(user.get(nomeUsuario).getPersonas());
+        }
 
         usuarioHasPersonaDAO.insertUsuarioHasPersona(user.get("Takaya").getId(), user.get("Takaya").getPersonas().getIdPersona());
         usuarioHasPersonaDAO.insertUsuarioHasPersona(user.get("Jin").getId(), user.get("Jin").getPersonas().getIdPersona());
@@ -174,22 +166,18 @@ public class MenuGeral {
         npcs.put("Maiko", new NPC("Maiko", 8, "Feminino", "Estudante do Jardim", "Hanged Man"));
         npcs.put("Bebé", new NPC("Bebé", 17, "Masculino", "Estudante francês de intercâmbio", "Temperance"));
         npcs.put("Tanaka", new NPC("Tanaka", 36, "Masculino", "Empresário da Tanaka's Amazing Commodities", "Devil"));
+        npcs.put("Pharos", new NPC("Pharos", 8, "indefinido", "Manifestaçao da Morte", "Death"));
+        npcs.put("Hayase", new NPC("Hayase", 17, "Masculino", "Atleta competitivo", "Star"));
 
         NPCDAO npcdao = new NPCDAO();
-        npcdao.insertNPC(npcs.get("Bunkichi e Mitsuko"));
-        npcdao.insertNPC(npcs.get("Kenji"));
-        npcdao.insertNPC(npcs.get("Kazushi"));
-        npcdao.insertNPC(npcs.get("Odagiri"));
-        npcdao.insertNPC(npcs.get("Yuko"));
-        npcdao.insertNPC(npcs.get("Chihiro"));
-        npcdao.insertNPC(npcs.get("Maya"));
-        npcdao.insertNPC(npcs.get("Suemitsu"));
-        npcdao.insertNPC(npcs.get("Hiraga"));
-        npcdao.insertNPC(npcs.get("Akinari"));
-        npcdao.insertNPC(npcs.get("Mutatsu"));
-        npcdao.insertNPC(npcs.get("Maiko"));
-        npcdao.insertNPC(npcs.get("Bebé"));
-        npcdao.insertNPC(npcs.get("Tanaka"));
+        String[] npcNames = {
+                "Bunkichi e Mitsuko", "Kenji", "Kazushi", "Odagiri", "Yuko", "Chihiro", "Maya",
+                "Suemitsu", "Hiraga", "Akinari", "Mutatsu", "Maiko", "Bebé", "Tanaka"
+        };
+
+        for (String npcName : npcNames) {
+            npcdao.insertNPC(npcs.get(npcName));
+        }
 
 // ----------------------------------------- Shadows(inimigos): -------------------------------------
 
@@ -248,42 +236,11 @@ public class MenuGeral {
 
         HabilidadesDAO habilidadesdao = new HabilidadesDAO();
 
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().getFirst().getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().getFirst().getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().getFirst().getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(1).getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(1).getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(1).getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(2).getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(2).getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(2).getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(3).getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(3).getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(3).getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(4).getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(4).getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(4).getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(5).getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(5).getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(5).getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(6).getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(6).getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(6).getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(7).getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(7).getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().get(7).getHabilidades().get(2));
-
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().getLast().getHabilidades().get(0));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().getLast().getHabilidades().get(1));
-        habilidadesdao.insertHabilidade(protagonista.getPersonas().getLast().getHabilidades().get(2));
-
+        for (Personas persona : protagonista.getPersonas()) {
+            for (Habilidades habilidade : persona.getHabilidades()) {
+                habilidadesdao.insertHabilidade(habilidade);
+            }
+        }
 
         // Habilidades dos usuários (SEES e Strega):
         // ---------------------------------------- Personas habilidadeds: ----------------------------------------
@@ -341,57 +298,15 @@ public class MenuGeral {
 
         HabilidadesDAO habilidadesdaouser = new HabilidadesDAO();
 
-        habilidadesdaouser.insertHabilidade(user.get("Yukari").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Yukari").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Yukari").getPersonas().getHabilidades().get(2));
-        habilidadesdaouser.insertHabilidade(user.get("Yukari").getPersonas().getHabilidades().get(3));
+        String[] usuarios = {"Yukari", "Junpei", "Mitsuru", "Akihiko", "Ken", "Koromaru",
+                "Aigis", "Shinjiro", "Takaya", "Jin", "Chidori"};
 
-        habilidadesdaouser.insertHabilidade(user.get("Junpei").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Junpei").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Junpei").getPersonas().getHabilidades().get(2));
-        habilidadesdaouser.insertHabilidade(user.get("Junpei").getPersonas().getHabilidades().get(3));
-
-        habilidadesdaouser.insertHabilidade(user.get("Mitsuru").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Mitsuru").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Mitsuru").getPersonas().getHabilidades().get(2));
-        habilidadesdaouser.insertHabilidade(user.get("Mitsuru").getPersonas().getHabilidades().get(3));
-
-        habilidadesdaouser.insertHabilidade(user.get("Akihiko").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Akihiko").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Akihiko").getPersonas().getHabilidades().get(2));
-        habilidadesdaouser.insertHabilidade(user.get("Akihiko").getPersonas().getHabilidades().get(3));
-
-        habilidadesdaouser.insertHabilidade(user.get("Aigis").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Aigis").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Aigis").getPersonas().getHabilidades().get(2));
-        habilidadesdaouser.insertHabilidade(user.get("Aigis").getPersonas().getHabilidades().get(3));
-
-        habilidadesdaouser.insertHabilidade(user.get("Koromaru").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Koromaru").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Koromaru").getPersonas().getHabilidades().get(2));
-        habilidadesdaouser.insertHabilidade(user.get("Koromaru").getPersonas().getHabilidades().get(3));
-
-        habilidadesdaouser.insertHabilidade(user.get("Ken").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Ken").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Ken").getPersonas().getHabilidades().get(2));
-        habilidadesdaouser.insertHabilidade(user.get("Ken").getPersonas().getHabilidades().get(3));
-
-        habilidadesdaouser.insertHabilidade(user.get("Shinjiro").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Shinjiro").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Shinjiro").getPersonas().getHabilidades().get(2));
-
-        habilidadesdaouser.insertHabilidade(user.get("Takaya").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Takaya").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Takaya").getPersonas().getHabilidades().get(2));
-
-        habilidadesdaouser.insertHabilidade(user.get("Jin").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Jin").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Jin").getPersonas().getHabilidades().get(2));
-
-        habilidadesdaouser.insertHabilidade(user.get("Chidori").getPersonas().getHabilidades().getFirst());
-        habilidadesdaouser.insertHabilidade(user.get("Chidori").getPersonas().getHabilidades().get(1));
-        habilidadesdaouser.insertHabilidade(user.get("Chidori").getPersonas().getHabilidades().get(2));
-
+        for (String nomeUsuario : usuarios) {
+            List<Habilidades> habilidades = user.get(nomeUsuario).getPersonas().getHabilidades();
+            for (Habilidades habilidade : habilidades) {
+                habilidadesdaouser.insertHabilidade(habilidade);
+            }
+        }
         //                                         Adicionar Itens:
 
         // HashMap - facilidade na busca e compra:
@@ -494,31 +409,6 @@ public class MenuGeral {
         tatsumiPort.adicionarPersonagemAoLocal("Shopping", user.get("Aigis"));
         tatsumiPort.adicionarPersonagemAoLocal("Loja de Itens", user.get("Fuuka"));
 
-        /*
-
-        cidadesDAO.adicionarLocal("Tatsumi Port Island","Dormitório");
-        cidadesDAO.adicionarLocal("Tatsumi Port Island","Escola");
-        cidadesDAO.adicionarLocal("Tatsumi Port Island","Rua");
-        cidadesDAO.adicionarLocal("Tatsumi Port Island","Shopping");
-        cidadesDAO.adicionarLocal("Tatsumi Port Island","Loja de Itens");
-        cidadesDAO.adicionarPersonagemAoLocal("Dormitório", protagonista);
-
-        /*
-                            trecho do Codigo duplicado removido
-
-        cidadesDAO.adicionarPersonagemAoLocal("Dormitório", user.get("Yukari"));
-        cidadesDAO.adicionarPersonagemAoLocal("Rua", user.get("Junpei"));
-        cidadesDAO.adicionarPersonagemAoLocal("Escola", user.get("Mitsuru"));
-        cidadesDAO.adicionarPersonagemAoLocal("Rua", user.get("Takaya"));
-        cidadesDAO.adicionarPersonagemAoLocal("Rua", user.get("Chidori"));
-        cidadesDAO.adicionarPersonagemAoLocal("Shopping", user.get("Akihiko"));
-        cidadesDAO.adicionarPersonagemAoLocal("Shopping", user.get("Aigis"));
-        cidadesDAO.adicionarPersonagemAoLocal("Loja de Itens", user.get("Fuuka"));
-        cidadesDAO.buscarTodasCidades();
-        cidadesDAO.deletarCidade("Tatsumi Port Island");
-
-        */
-
         String localAtual = "Dormitório";
 
         int opcao;
@@ -559,138 +449,102 @@ public class MenuGeral {
                                         System.out.println();
                                         protagonista.mostraInfoPersonagem();
 
-                                        while (true) {
-                                            System.out.println(ANSI_GRAY + "\nDeseja ver detalhes de alguma persona? (S/N)");
-                                            String resposta = sc.nextLine();
-                                            System.out.println(ANSI_RESET);
-
-                                            if (resposta.equalsIgnoreCase("Sim") || resposta.equalsIgnoreCase("S")) {
-                                                System.out.println(ANSI_GRAY + "Digite o número da persona: " + ANSI_RESET);
-                                                System.out.println(ANSI_BLUE + "1. Alice");
-                                                System.out.println("2. Eligor");
-                                                System.out.println("3. Arsène");
-                                                System.out.println("4. Jack-o'-Lantern");
-                                                System.out.println("5. Pixie");
-                                                System.out.println("6. Incubus");
-                                                System.out.println("7. Succubus");
-                                                System.out.println("8. Silky");
-                                                System.out.println("9. Orobas" + ANSI_RESET);
+                                        // Visualizar detalhes de personas
+                                        if (confirmarAcao(sc, "Deseja ver detalhes de alguma persona?")) {
+                                            boolean sairVisualizacao = false;
+                                            while (!sairVisualizacao) {
+                                                System.out.println(ANSI_BLUE + "Lista de Personas:" + ANSI_RESET);
+                                                for (int i = 0; i < protagonista.getPersonas().size(); i++) {
+                                                    System.out.println(ANSI_BLUE + (i + 1) + ". " + protagonista.getPersonas().get(i).getNome() + ANSI_RESET);
+                                                }
 
                                                 try {
+                                                    System.out.print(ANSI_GRAY + "Digite o número da persona (ou 0 para cancelar): " + ANSI_RESET);
                                                     int numPersona = sc.nextInt();
-                                                    sc.nextLine(); // Limpa buffer
+                                                    sc.nextLine(); // Limpar buffer
 
-                                                    if (numPersona > 0 && numPersona <= protagonista.getPersonas().size()) {
+                                                    if (numPersona == 0) {
+                                                        sairVisualizacao = true;
+                                                    } else if (numPersona > 0 && numPersona <= protagonista.getPersonas().size()) {
                                                         protagonista.getPersonas().get(numPersona - 1).mostrarStatusPersona();
+                                                        sairVisualizacao = !confirmarAcao(sc, "Deseja ver outra persona?");
                                                     } else {
-                                                        System.out.println(ANSI_RED + "Número inválido!" + ANSI_RESET);
+                                                        System.out.println(ANSI_RED + "Número inválido! Tente novamente." + ANSI_RESET);
                                                     }
                                                 } catch (InputMismatchException e) {
                                                     System.out.println(ANSI_RED + "Erro: Digite apenas números!" + ANSI_RESET);
-                                                    sc.nextLine(); // Limpa buffer
+                                                    sc.nextLine(); // Limpar buffer
                                                 }
-                                            } else if (resposta.equalsIgnoreCase("N") || resposta.equalsIgnoreCase("NAO")) {
-                                                break;
-                                            } else {
-                                                System.out.println(ANSI_RED + "Entrada Incorreta!" + ANSI_RESET);
                                             }
                                         }
 
-                                        while (true) {
-                                            System.out.println(ANSI_GRAY + "Deseja evoluir uma Persona? (S/N)");
-                                            String resposta2 = sc.nextLine();
+                                        // Evoluir Persona
+                                        if (confirmarAcao(sc, "Deseja evoluir uma Persona?")) {
+                                            boolean sairEvolucao = false;
+                                            while (!sairEvolucao) {
+                                                System.out.println(ANSI_GRAY + "Qual o nome da Persona que deseja evoluir? (ou digite 'cancelar')" + ANSI_RESET);
+                                                String nomePersona = sc.nextLine();
 
-                                            if (resposta2.equalsIgnoreCase("Sim") || resposta2.equalsIgnoreCase("S")) {
-                                                System.out.println("Qual o nome da Persona que deseja evoluir?");
-                                                String nome = sc.nextLine();
-                                                System.out.println(ANSI_RESET);
-                                                boolean encontrada = false;
-
-                                                for (Personas p : protagonista.getPersonas()) {
-                                                    if (p.getNome().equalsIgnoreCase(nome)) {
-                                                        protagonista.evoluirPersona(p);
-                                                        System.out.println(ANSI_GREEN + p.getNome() + " evoluiu para o nivel " + p.getNivel() + "!" + ANSI_RESET);
-                                                        encontrada = true;
-                                                        break;
+                                                if (nomePersona.equalsIgnoreCase("cancelar")) {
+                                                    sairEvolucao = true;
+                                                } else {
+                                                    boolean encontrada = false;
+                                                    for (Personas p : protagonista.getPersonas()) {
+                                                        if (p.getNome().equalsIgnoreCase(nomePersona)) {
+                                                            protagonista.evoluirPersona(p);
+                                                            System.out.println(ANSI_GREEN + p.getNome() + " evoluiu para o nivel " + p.getNivel() + "!" + ANSI_RESET);
+                                                            encontrada = true;
+                                                            break;
+                                                        }
                                                     }
-                                                }
-                                                try {
+
                                                     if (!encontrada) {
-                                                        throw new IllegalArgumentException(ANSI_RED + "Persona não encontrada!" + ANSI_RESET);
+                                                        System.out.println(ANSI_RED + "Persona não encontrada! Tente novamente." + ANSI_RESET);
                                                     }
-                                                } catch (IllegalArgumentException e) {
-                                                    System.out.println(e.getMessage());
+
+                                                    sairEvolucao = !confirmarAcao(sc, "Deseja evoluir outra Persona?");
                                                 }
-                                            } else if (resposta2.equalsIgnoreCase("N") || resposta2.equalsIgnoreCase("NAO")) {
-                                                break;
-                                            } else {
-                                                System.out.println(ANSI_RED + "Entrada Incorreta!" + ANSI_RESET);
                                             }
                                         }
                                     }
                                     case 2 -> {
-                                        System.out.println(ANSI_CYAN + "\n----- Usuários -----" + ANSI_RESET);
-                                        System.out.println();
-                                        int count = 1;
-                                        for (String nomeUsuario : user.keySet()) {
-                                            System.out.println(ANSI_BLUE + count + ". " + nomeUsuario);
-                                            count++;
-                                        }
-                                        System.out.print(ANSI_RESET);
-                                        System.out.println(ANSI_GRAY + "\nDigite o nome do usuário que deseja consultar: ");
-                                        String nomeUsuario = sc.nextLine();
-                                        System.out.println(ANSI_RESET);
+                                        boolean continuarConsultando = true;
+                                        while (continuarConsultando) {
+                                            System.out.println(ANSI_CYAN + "\n----- Usuários Cadastrados -----" + ANSI_RESET);
+                                            listarUsuarios(user); // Listar usuários
 
+                                            System.out.print(ANSI_GRAY + "Digite o nome do usuário que deseja consultar: " + ANSI_RESET);
+                                            String nomeUsuario = sc.nextLine();
 
-                                        try {
-                                            if (user.containsKey(nomeUsuario)) {
-                                                user.get(nomeUsuario).mostraInfoPersonagem();
-                                                if (user.get(nomeUsuario).getPersonas() != null) {
-                                                    user.get(nomeUsuario).getPersonas().mostrarStatusPersona();
-                                                } else {
-                                                    System.out.println(ANSI_RED + "Este usuário não possui personas." + ANSI_RESET);
-                                                }
-                                            } else {
-                                                throw new IllegalArgumentException(ANSI_RED + "Nome incorreto ou número inserido!" + ANSI_RESET);
+                                            try {
+                                                consultarUsuario(user, nomeUsuario); // Consultar usuário
+                                            } catch (IllegalArgumentException e) {
+                                                System.out.println(e.getMessage());
                                             }
-                                        } catch (IllegalArgumentException e) {
-                                            System.out.println(e.getMessage());
+
+                                            continuarConsultando = confirmarAcao(sc, "Deseja consultar outro usuário?");
                                         }
                                     }
                                     case 3 -> {
-                                        while (true) {
-                                            System.out.println(ANSI_CYAN + "\n----- NPC -----" + ANSI_RESET);
+                                        boolean continuarConsultando = true;
+                                        while (continuarConsultando) {
+                                            System.out.println(ANSI_CYAN + "\n----- NPCs Disponíveis -----" + ANSI_RESET);
+                                            listarNPCs(npcs);
 
-                                            int count = 1;
-                                            for (String nomeNPC : npcs.keySet()) {
-                                                System.out.println(ANSI_BLUE + count + ". " + nomeNPC);
-                                                count++;
-                                            }
-
-                                            System.out.println(ANSI_RESET);
-                                            System.out.println(ANSI_GRAY + "Digite o nome do NPC que deseja consultar: ");
+                                            System.out.print(ANSI_GRAY + "Digite o nome do NPC que deseja consultar: " + ANSI_RESET);
                                             String nomeNPC = sc.nextLine();
-                                            System.out.println(ANSI_RESET);
 
                                             try {
                                                 if (npcs.containsKey(nomeNPC)) {
                                                     npcs.get(nomeNPC).mostraInfoPersonagem();
                                                 } else {
-                                                    throw new IllegalArgumentException(ANSI_RED + "Nome incorreto ou número inserido!" + ANSI_RESET);
+                                                    throw new IllegalArgumentException(ANSI_RED + "NPC não encontrado! Verifique o nome e tente novamente." + ANSI_RESET);
                                                 }
                                             } catch (IllegalArgumentException e) {
-                                                System.out.println(e.getMessage());
+                                                System.out.println(ANSI_RED + "Erro: " + e.getMessage() + ANSI_RESET);
                                             }
 
-                                            System.out.print(ANSI_GRAY + "Deseja pesquisar outro NPC? (S/N) ");
-                                            String resposta = sc.nextLine();
-                                            System.out.println(ANSI_RESET);
-
-                                            if (resposta.equalsIgnoreCase("N") || resposta.equalsIgnoreCase("NAO")) {
-                                                break;
-                                            } else if (!resposta.equalsIgnoreCase("Sim") && !resposta.equalsIgnoreCase("S")) {
-                                                System.out.println(ANSI_RED + "Entrada Incorreta!" + ANSI_RESET);
-                                            }
+                                            continuarConsultando = confirmarAcao(sc, "Deseja consultar outro NPC?");
                                         }
                                     }
 
@@ -710,25 +564,16 @@ public class MenuGeral {
                                         System.out.println(ANSI_BLUE + "Itens disponíveis no inventário do protagonista:" + ANSI_RESET);
                                         protagonista.getInventario().mostrarInventarioPersonagem();
 
-                                        System.out.println(ANSI_BLUE + "\nUsuários disponíveis:");
-                                        int count = 1;
-                                        for (String nomeUsuario : user.keySet()) {
-                                            System.out.println(count + ". " + nomeUsuario);
-                                            count++;
-                                        }
-                                        System.out.println(ANSI_RESET);
+                                        System.out.println(ANSI_BLUE + "\nUsuários disponíveis:" + ANSI_RESET);
+                                        listarUsuarios(user);
 
-                                        System.out.println(ANSI_GRAY + "Deseja equipar um item no protagonista ou dá-lo a um aliado? (S/N)");
-                                        String resposta = sc.nextLine();
-                                        System.out.println(ANSI_RESET);
-                                        if (resposta.equalsIgnoreCase("S") || resposta.equalsIgnoreCase("Sim")) {
+                                        if(confirmarAcao(sc, "Deseja equipar um item no protagonista ou dá-lo a um aliado?")){
                                             System.out.println(ANSI_BLUE + "1. Protagonista");
                                             System.out.println("2. Aliado");
                                             System.out.println("0. Sair" + ANSI_RESET);
 
-                                            try {
-                                                opcao = sc.nextInt();
-                                                sc.nextLine(); // Limpa buffer
+                                            try{
+                                                opcao = selecionarDestinoItem(sc);
 
                                                 switch (opcao) {
                                                     case 1 -> {
@@ -831,11 +676,7 @@ public class MenuGeral {
                                         System.out.println(ANSI_CYAN + "\n----- Inventário de Usuário -----" + ANSI_RESET);
 
                                         while (true) {
-                                            int count = 1;
-                                            for (String nomeUsuario : user.keySet()) {
-                                                System.out.println(ANSI_BLUE + count + ". " + nomeUsuario + ANSI_RESET);
-                                                count++;
-                                            }
+                                            listarUsuarios(user);
 
                                             System.out.println(ANSI_GRAY + "\nDigite o nome do usuário que deseja ver o inventário (ou digite 'sair' para voltar): ");
                                             String nomeUsuario = sc.nextLine();
@@ -940,14 +781,8 @@ public class MenuGeral {
 
                                                 if (escolha == 1) {
                                                     while (true) {
-                                                        int count = 1;
                                                         System.out.println(ANSI_PURPLE + "\nAliados disponíveis:" + ANSI_RESET);
-                                                        for (String nomeUsuario : user.keySet()) {
-                                                            if (!user.get(nomeUsuario).isVilao()) {
-                                                                System.out.println(ANSI_BLUE + count + ". " + nomeUsuario + ANSI_RESET);
-                                                                count++;
-                                                            }
-                                                        }
+                                                        listarAliados(user);
                                                         System.out.println(ANSI_GRAY + "Digite o nome do aliado para interagir ou 'voltar':");
                                                         String nomeAliado = sc.nextLine();
                                                         System.out.print(ANSI_RESET);
@@ -967,12 +802,7 @@ public class MenuGeral {
 
                                                 } else if (escolha == 2) {
                                                     while (true) {
-                                                        int count = 1;
-                                                        System.out.println(ANSI_PURPLE + "\nNPCs disponíveis:" + ANSI_RESET);
-                                                        for (String nomeNPC : npcs.keySet()) {
-                                                            System.out.println(ANSI_BLUE + count + ". " + nomeNPC + ANSI_RESET);
-                                                            count++;
-                                                        }
+                                                        listarNPCs(npcs);
                                                         System.out.println(ANSI_GRAY + "Digite o nome do NPC para interagir ou 'voltar':");
                                                         String nomeNPC = sc.nextLine();
                                                         System.out.print(ANSI_RESET);
@@ -1803,14 +1633,14 @@ public class MenuGeral {
                                     case 12 -> {
                                         // Listar Usuarios
                                         System.out.println("\n=== LISTA DE USUÁRIOS ===");
-                                        List<Usuarios> usuarios = usuariosDAO.selectUsuarios();
+                                        List<Usuarios> usuario = usuariosDAO.selectUsuarios();
 
-                                        if (usuarios.isEmpty()) {
+                                        if (usuario.isEmpty()) {
                                             System.out.println("Nenhum usuário encontrado.");
                                         } else {
                                             System.out.println("Usuários cadastrados:");
                                             System.out.println("================================================");
-                                            for (Usuarios u : usuarios) {
+                                            for (Usuarios u : usuario) {
                                                 System.out.println("ID: " + u.getId());
                                                 System.out.println("Nome: " + u.getNome());
                                                 System.out.println("Idade: " + u.getIdade());

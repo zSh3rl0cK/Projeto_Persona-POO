@@ -56,8 +56,7 @@ public class Protagonista extends UsuarioPersona {
         System.out.println("Mana: " + sp);
         System.out.println("Arcana: " + arcana);
         System.out.println("Saldo: " + saldo);
-        System.out.println();
-        System.out.println(ANSI_RESET);
+        System.out.print(ANSI_RESET);
     }
 
     public void darItemUsuario(Usuarios usuario, Itens novo_item){
@@ -65,8 +64,8 @@ public class Protagonista extends UsuarioPersona {
             usuario.setItens(new HashSet<>());
         }
         switch(novo_item){
-            case Arma arma -> {
-                if(this.inventario.getQuantidadeArma(arma) > 0){
+            case Arma armaItem -> {
+                if(this.inventario.getQuantidadeArma(armaItem) > 0){
                     usuario.getInventario().adicionarArma((Arma)novo_item, 1);
                     this.inventario.removerArma(novo_item);
                     System.out.println(ANSI_BLUE + "Arma " + novo_item.getNome() + " transferido para " + usuario.getNome() + "\n" + ANSI_RESET);

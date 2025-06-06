@@ -99,4 +99,5 @@ public class Inventario {
     public HashMap<Consumiveis, Integer> getConsumiveis() {
         return new HashMap<>(consumiveis);
     }
+
 }

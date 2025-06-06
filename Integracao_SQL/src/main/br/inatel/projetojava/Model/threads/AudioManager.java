@@ -14,7 +14,7 @@ public class AudioManager implements Runnable {
 
     // Tipos de áudio
     public enum AudioType {
-        MUSIC, SFX, VOICE
+        MUSIC, SFX
     }
 
     // Estados do jogo para música contextual
@@ -178,7 +178,6 @@ public class AudioManager implements Runnable {
         return switch (type) {
             case MUSIC -> musicVolume;
             case SFX -> sfxVolume;
-            default -> 1.0f;
         };
     }
 

@@ -1,9 +1,5 @@
 package main.br.inatel.projetojava.Model.personagens.abstratos;
 
-import main.br.inatel.projetojava.Model.personagens.jogaveis.Protagonista;
-
-import java.io.IOException;
-
 public abstract class SerHumano {
 
     protected String nome;
@@ -19,7 +15,7 @@ public abstract class SerHumano {
         this.arcana = arcana;
     }
 
-    public abstract void mostraInfoPersonagem() throws IOException;
+    public abstract void mostraInfoPersonagem();
 
     public String getNome(){
         return this.nome;

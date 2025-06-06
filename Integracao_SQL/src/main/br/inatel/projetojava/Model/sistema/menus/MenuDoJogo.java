@@ -48,7 +48,7 @@ public class MenuDoJogo {
             }
             return opcao;
         }catch(InputMismatchException e){
-            throw new InvalidMenuInputException("Por favor, insira um valor correto...");
+            throw new InvalidMenuInputException("Por favor, insira um número inteiro...");
         }
     }
 }

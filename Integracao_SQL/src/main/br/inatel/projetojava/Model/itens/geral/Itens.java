@@ -1,7 +1,5 @@
 package main.br.inatel.projetojava.Model.itens.geral;
 
-import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
-
 public abstract class Itens {
     protected String nome;
     protected String tipo;

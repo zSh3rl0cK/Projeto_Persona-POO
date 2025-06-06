@@ -10,8 +10,8 @@ import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
 public class Cidade {
 
-    private String nomeCidade;
-    private Map<String, ArrayList<SerHumano>> locais; // <nomeLocal, personagens no local>
+    private final String nomeCidade;
+    private final Map<String, ArrayList<SerHumano>> locais; // <nomeLocal, personagens no local>
 
     public Cidade(String nomeCidade) {
         this.nomeCidade = nomeCidade;
@@ -67,20 +67,9 @@ public class Cidade {
         }
     }
 
-    public String getNomeCidade() {
-        return nomeCidade;
-    }
-
-    public void setNomeCidade(String nomeCidade) {
-        this.nomeCidade = nomeCidade;
-    }
-
     public Map<String, ArrayList<SerHumano>> getLocais() {
         return locais;
     }
 
-    public void setLocais(Map<String, ArrayList<SerHumano>> locais) {
-        this.locais = locais;
-    }
 }
 

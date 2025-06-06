@@ -4,8 +4,6 @@ import main.br.inatel.projetojava.Model.exceptions.InvalidMenuInputException;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 import main.br.inatel.projetojava.Model.personagens.jogaveis.Protagonista;
 import main.br.inatel.projetojava.Model.personagens.jogaveis.Usuarios;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;

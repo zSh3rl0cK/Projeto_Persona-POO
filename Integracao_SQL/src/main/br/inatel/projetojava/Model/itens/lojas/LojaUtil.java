@@ -7,21 +7,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
+import static main.br.inatel.projetojava.Model.sistema.menus.MethodUtil.confirmarAcao;
 
 public class LojaUtil {
-
-    public static boolean confirmarAcao(Scanner sc, String mensagem) {
-        while (true) {
-            System.out.println(ANSI_GRAY + "\n" + mensagem + " (S/N)");
-            String resposta = sc.nextLine().trim().toLowerCase(); // sem espaços e sem maiúsculas
-            System.out.println(ANSI_RESET);
-
-            if (resposta.equals("s") || resposta.equals("sim")) return true;
-            if (resposta.equals("n") || resposta.equals("nao")) return false;
-
-            System.out.println(ANSI_RED + "Escreva um valor válido!" + ANSI_RESET);
-        }
-    }
 
     private static void processarCompra(Scanner sc, Lojas loja, Protagonista protagonista, Map<String, Itens> itens) {
         loja.mostrarItens();
