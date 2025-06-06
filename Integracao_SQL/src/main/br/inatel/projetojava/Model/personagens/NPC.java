@@ -38,7 +38,7 @@ public class NPC extends SerHumano implements Interacao {
         System.out.println(ANSI_CYAN  + "\nNome do NPC: " + nome + ANSI_RESET);
         System.out.println(ANSI_BLUE + "Idade: " + idade + " anos");
         System.out.println("Gênero: " + genero);
-        System.out.println("ocupacao: " + ocupacao + ANSI_RESET);
+        System.out.println("Ocupacao: " + ocupacao + ANSI_RESET);
         if(arcana == null){
             System.out.println(ANSI_BLUE + "Não tem arcana!" + ANSI_RESET);
         }

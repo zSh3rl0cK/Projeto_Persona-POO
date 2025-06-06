@@ -5,7 +5,6 @@ import main.br.inatel.projetojava.Model.itens.geral.Itens;
 import main.br.inatel.projetojava.Model.itens.auxiliares.Consumiveis;
 import main.br.inatel.projetojava.Model.personagens.Inventario;
 import main.br.inatel.projetojava.Model.personagens.combate.Combate;
-import main.br.inatel.projetojava.Model.personagens.interacao.Interacao;
 import main.br.inatel.projetojava.Model.personas.Habilidades;
 import main.br.inatel.projetojava.Model.personas.seres.Personas;
 
@@ -102,7 +101,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
         System.out.println("2 - Usar Habilidade da Persona" + ANSI_RESET);
 
         Scanner scanner = new Scanner(System.in);
-        int escolhaTipo = 0;
+        int escolhaTipo;
 
         // Loop para garantir entrada válida do tipo de ataque (1 ou 2)
         while (true) {
@@ -201,7 +200,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
         System.out.println("4 - Sair" + ANSI_RESET);
 
         Scanner scanner = new Scanner(System.in);
-        int opcao = 0;
+        int opcao;
 
         // Loop para garantir que a entrada seja um inteiro válido entre 1 e 4
         while (true) {

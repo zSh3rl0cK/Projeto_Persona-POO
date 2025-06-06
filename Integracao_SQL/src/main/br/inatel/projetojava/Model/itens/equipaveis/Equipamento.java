@@ -1,6 +1,6 @@
 package main.br.inatel.projetojava.Model.itens.equipaveis;
 
-import main.br.inatel.projetojava.Model.itens.EquipaItem;
+import main.br.inatel.projetojava.Model.itens.geral.EquipaItem;
 import main.br.inatel.projetojava.Model.itens.geral.Itens;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 

@@ -2,8 +2,9 @@ package main.br.inatel.projetojava.Model.sistema.menus;
 
 import main.br.inatel.projetojava.DAO.*;
 import main.br.inatel.projetojava.Model.exceptions.InvalidMenuInputException;
+import main.br.inatel.projetojava.Model.itens.lojas.FarmaciaAohige;
 import main.br.inatel.projetojava.Model.itens.geral.Itens;
-import main.br.inatel.projetojava.Model.itens.geral.LojadeItens;
+import main.br.inatel.projetojava.Model.itens.lojas.LojadeArmas;
 import main.br.inatel.projetojava.Model.itens.equipaveis.Arma;
 import main.br.inatel.projetojava.Model.itens.auxiliares.Consumiveis;
 import main.br.inatel.projetojava.Model.itens.equipaveis.Equipamento;
@@ -23,6 +24,8 @@ import main.br.inatel.projetojava.Model.threads.AudioManager;
 
 import java.util.*;
 
+import static main.br.inatel.projetojava.Model.itens.lojas.LojaUtil.confirmarAcao;
+import static main.br.inatel.projetojava.Model.itens.lojas.LojaUtil.visitarLoja;
 import static main.br.inatel.projetojava.Model.personagens.combate.CombateManager.iniciarCombate;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuBuscas.mostrar_menu_buscas;
@@ -445,18 +448,37 @@ public class MenuGeral {
         consumiveisDAO.insertConsumivel((Consumiveis) item.get("Snuff Soul"));
         consumiveisDAO.insertConsumivel((Consumiveis) item.get("Medical Powder"));
 
-        // -------------------------------------- Loja de Itens: -------------------------------------
+        // -------------------------------------- Loja de Armas (APENAS Armas e Equipamentos): -------------------------------------
 
         Map<Itens, Integer> estoque = new HashMap<>();
         LojadeItensDAO lojadeItensDAO = new LojadeItensDAO();
 
         int j = 0;
+        // Adiciona APENAS Equipamentos e Armas ao estoque
         for (Itens i : item.values()) {
-            estoque.put(i, 1); // Integer.valueOf(1) caso dê erro de versão
-            lojadeItensDAO.insertItem(i,j, 1);
-            j++;
+            if (i instanceof Equipamento || i instanceof Arma) {
+                estoque.put(i, 1);
+                lojadeItensDAO.insertItem(i, j, 1);
+                j++;
+            }
         }
-        LojadeItens loja = new LojadeItens("Untouchable", estoque);
+
+        LojadeArmas lojaArmas = new LojadeArmas("Untouchable", estoque);
+
+        // -------------------------------------- Farmácia (APENAS Consumíveis): -------------------------------------
+
+        Map<Itens, Integer> armazem = new HashMap<>();
+
+        // Adiciona APENAS Consumíveis ao armazém
+        for (Itens i : item.values()) {
+            if (i instanceof Consumiveis) {
+                armazem.put(i, 1);
+                lojadeItensDAO.insertItem(i, j, 1);
+                j++;
+            }
+        }
+
+        FarmaciaAohige farmacia = new FarmaciaAohige("Farmácia Aohige", armazem);
 
 
         // --------------------------------- Implementação da cidade ---------------------------------
@@ -669,39 +691,16 @@ public class MenuGeral {
                                             } else if (!resposta.equalsIgnoreCase("Sim") && !resposta.equalsIgnoreCase("S")) {
                                                 System.out.println(ANSI_RED + "Entrada Incorreta!" + ANSI_RESET);
                                             }
-
-                                            // Se a resposta for "Sim" ou "S", o loop continua e mostra a tabela novamente
                                         }
                                     }
 
                                     case 4 -> {
-                                        System.out.println(ANSI_CYAN + "\n----- Dados da Loja de Itens -----" + ANSI_RESET);
-                                        loja.mostraInfoLojadeItens();
+                                        // Visitar Loja de Armas
+                                        visitarLoja(sc, lojaArmas, protagonista, item, "Loja de Armas");
 
-                                        while (true) {
-                                            System.out.println(ANSI_GRAY + "\nDeseja comprar algum item? (S/N)");
-                                            String resposta = sc.nextLine();
-                                            System.out.println(ANSI_RESET);
-
-                                            if (resposta.equalsIgnoreCase("S") || resposta.equalsIgnoreCase("Sim")) {
-                                                loja.mostrarItens();
-                                                System.out.println(ANSI_GRAY + "Digite o nome do item: ");
-                                                String nomeItem = sc.nextLine();
-                                                System.out.println(ANSI_RESET);
-
-                                                if (item.containsKey(nomeItem)) {
-                                                    loja.venderItem(protagonista, item.get(nomeItem));
-                                                    System.out.print(ANSI_GREEN + "Item comprado com sucesso!" + ANSI_RESET);
-                                                } else {
-                                                    System.out.println(ANSI_RED + "Item não encontrado!" + ANSI_RESET);
-                                                }
-
-                                            } else if (resposta.equalsIgnoreCase("N") || resposta.equalsIgnoreCase("Nao")) {
-                                                break;
-
-                                            } else {
-                                                System.out.println(ANSI_RED + "Entrada incorreta!" + ANSI_RESET);
-                                            }
+                                        // Visitar Farmácia
+                                        if (confirmarAcao(sc, "Deseja visitar a Farmácia Aohige?")) {
+                                            visitarLoja(sc, farmacia, protagonista, item, "Farmácia Aohige");
                                         }
                                     }
 
@@ -1053,31 +1052,12 @@ public class MenuGeral {
                                         }
                                     }
                                     case 5 -> {
-                                        System.out.println(ANSI_CYAN + "Loja de Itens" + ANSI_RESET);
-                                        loja.mostraInfoLojadeItens();
+                                        // Visitar Loja de Armas
+                                        visitarLoja(sc, lojaArmas, protagonista, item, "Loja de Armas");
 
-                                        loja.mostrarItens(); // Mostra uma vez só
-
-                                        while (true) {
-                                            System.out.println(ANSI_CYAN + "Digite o nome do item: ");
-                                            String nomeItem = sc.nextLine();
-                                            System.out.println(ANSI_RESET);
-
-                                            if (item.containsKey(nomeItem)) {
-                                                loja.venderItem(protagonista, item.get(nomeItem));
-                                            } else {
-                                                System.out.println(ANSI_RED + "Item não encontrado!" + ANSI_RESET);
-                                            }
-
-                                            System.out.println(ANSI_GRAY + "Deseja comprar um novo item? (S/N)");
-                                            String entrada = sc.nextLine();
-                                            System.out.println(ANSI_RESET);
-
-                                            if (entrada.equalsIgnoreCase("N") || entrada.equalsIgnoreCase("NAO")) {
-                                                break;
-                                            } else if (!entrada.equalsIgnoreCase("S") && !entrada.equalsIgnoreCase("SIM")) {
-                                                System.out.println(ANSI_RED + "Entrada incorreta!" + ANSI_RESET);
-                                            }
+                                        // Visitar Farmácia
+                                        if (confirmarAcao(sc, "Deseja visitar a Farmácia Aohige?")) {
+                                            visitarLoja(sc, farmacia, protagonista, item, "Farmácia Aohige");
                                         }
                                     }
                                     default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
@@ -1804,7 +1784,7 @@ public class MenuGeral {
                                             break;
                                         }
 
-                                        System.out.print("ATENÇÃO: Esta ação irá deletar permanentemente o usuário '" + nomeParaDeletar + "'. Confirma? (s/N): ");
+                                        System.out.print(ANSI_RED + "ATENÇÃO: Esta ação irá deletar permanentemente o usuário '" + nomeParaDeletar + "'. Confirma? (s/N): " + ANSI_RESET);
                                         String confirmacaoDelete = sqlScanner.nextLine();
 
                                         if (confirmacaoDelete.equalsIgnoreCase("s") || confirmacaoDelete.equalsIgnoreCase("sim")) {

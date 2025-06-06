@@ -17,24 +17,24 @@ import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
 public class Protagonista extends UsuarioPersona {
 
-    private List<Personas> personas; // O protagonista pode ter mais de uma persona.
-    private double saldo;
-    private int id;
-    private final Ativador ativador;
-    private Personas persona_atual;
+    private List<Personas> personas;  // O protagonista pode ter mais de uma persona
+    private double saldo;             // Útil para compras
+    private int id;                   // Identificador básico
+    private final Ativador ativador;  // Ativador Persona
+    private Personas persona_atual;   // Apenas uma e específica para combate
 
     public Protagonista(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, double saldo, int Ativador_idAtivador) {
         super(nome, idade, genero, nivel, arcana, hp, sp);
-        this.personas = new ArrayList<>(); // Composição
-        this.saldo = saldo;
-        this.inventario = new Inventario();
+        this.personas = new ArrayList<>(); // Ordem necessária
+        this.inventario = new Inventario(); // Sem protagonista = Sem Inventário
         this.ativador = new Ativador(Ativador_idAtivador);
+        this.saldo = saldo;
     }
 
     // Sobrecarga de construtor para busca de protagonista com ID em SQL
     public Protagonista(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, double saldo, int Ativador_idAtivador, int id) {
         super(nome, idade, genero, nivel, arcana, hp, sp);
-        this.personas = new ArrayList<>(); // Composição
+        this.personas = new ArrayList<>();
         this.saldo = saldo;
         this.inventario = new Inventario();
         this.ativador = new Ativador(Ativador_idAtivador);
@@ -103,31 +103,25 @@ public class Protagonista extends UsuarioPersona {
         Scanner entrada = new Scanner(System.in);
         int opcao;
 
-       while(true) {
-           System.out.println(ANSI_BLUE + "Suas personas são: \n" + ANSI_RESET);
-           int i = 0;
-           for (Personas persona : personas) {
-               System.out.println(ANSI_BLUE + (i+1) + " " + persona.getNome() + ANSI_RESET);
-               i++;
-           }
-           System.out.println(ANSI_BLUE + "Digite o indice da persona para qual quer trocar: " + ANSI_RESET);
-           opcao = entrada.nextInt();
+        while(true) {
+            System.out.println(ANSI_BLUE + "Suas personas são: \n" + ANSI_RESET);
+            int i = 0;
+            for (Personas persona : personas) {
+                System.out.println(ANSI_BLUE + (i+1) + " " + persona.getNome() + ANSI_RESET);
+                i++;
+            }
+            System.out.println(ANSI_BLUE + "Digite o indice da persona para qual quer trocar: " + ANSI_RESET);
+            opcao = entrada.nextInt();
 
-           if(opcao > 0 && opcao < personas.size()){
-               persona_atual = personas.get(opcao - 1);
-               break;
-           }
-           else{
-               System.out.println(ANSI_RED + "Escolha invalida" + ANSI_RESET);
-           }
-       }
+            if(opcao > 0 && opcao < personas.size()){
+                persona_atual = personas.get(opcao - 1);
+                break;
+            }
+            else{
+                System.out.println(ANSI_RED + "Escolha invalida" + ANSI_RESET);
+            }
+        }
     }
-
-    /* Fazer se der tempo apenas
-    public void fundirPersona(Personas p1, Personas p2){
-
-    }
-    */
 
     @Override
     public void atacar(Personas persona, UsuarioPersona alvo) throws InvalidMenuInputException {
@@ -145,7 +139,7 @@ public class Protagonista extends UsuarioPersona {
         Scanner scanner = new Scanner(System.in);
         while(true){
             try {
-                escolhaTipo = scanner.nextInt(); // todo: fazer try catch aqui
+                escolhaTipo = scanner.nextInt();
                 if(escolhaTipo > 0 && escolhaTipo <= 3){
                     break;
                 }
