@@ -1,52 +1,142 @@
-### Alunos: Felipe Tagawa Reis & Pedro Henrique Ribeiro Dias.
+# TARTARUS
 
-Matrículas: 2037 e 529.
+### Alunos: Felipe Tagawa Reis & Pedro Henrique Ribeiro Dias  
+### Matrículas: 2037 e 529  
+### Cursos: GEC e GES  
 
-Cursos : GEC e GES
+---
 
-## Sobre o Projeto
+**TARTARUS** é um jogo inspirado em *Persona 3 Reload*, desenvolvido em **Java**. A proposta é simular o ambiente, as mecânicas e a atmosfera do jogo original, incluindo sistema de combate em turnos, interações sociais e músicas do jogo.
 
-Esse jogo baseado em Persona 3 Reload é uma aplicação desenvolvida em Java, 
+---
 
-## Estrutura do Banco de Dados
+## 📦 Banco de Dados
 
-O banco de dados MySQL inclui tabelas para gerenciar raças, classes, personagens, perícias, itens, entre outros. As tabelas principais são:
+Sistema de banco MySQL com tabelas estruturadas para representar os principais elementos do universo Persona:
 
-- `Raca`
-- `Classe`
-- `Personagem`
-- `Pericia`
-- `Personagem_Pericia`
-- `Item`
-- `Arma`
-- `Ferramenta`
+- `Protagonista`  
+- `Usuarios`  
+- `Personas`  
+- `Habilidades`  
+- `ProtagonistaPersona`  
+- `etc`...
 
-## Arquivos de Banco de Dados
+---
 
-Dentro da pasta `databaseSQL`, na raiz do projeto, estão os arquivos:
+## 📁 Estrutura de Arquivos
 
-- `db_der.drawio` e `db.drawio`: Diagramas do banco de dados.
-- `db.sql`: Script de criação das tabelas.
-- `test_cases.sql`: Casos de teste.
+- `Projeto_Lab_BD`: Código SQL geral  
+- `Projeto_UML`: Diagrama UML geral do projeto  
+- `Integracao_SQL`: DAOs e classes de modelo para acesso ao banco  
 
-## Conexão com o Banco de Dados
+---
 
-O programa espera se conectar a um banco de dados chamado 'javaquest'. As credenciais de acesso padrão são:
+## 🧩 Interação com o Usuário
 
-- Usuário: `root`
-- Senha: `root`
+Menus implementados:
 
-Estas configurações estão definidas no arquivo `ConnectionDAO.java`. É importante garantir que o banco de dados MySQL esteja configurado corretamente com estas credenciais para o funcionamento adequado do sistema.
+- **Tela Inicial**  
+  - Iniciar jogo  
+  - Opções (volume)  
+  - Créditos  
+  - Sair
 
-## Menu de Opções
+- **MenuDoJogo**  
+  - Acesso aos menus principais
 
-O sistema conta com um menu interativo que inclui:
+- **MenuGeral**  
+  - Lógica geral de interações e chamadas de menus
 
-1. Criar Personagem
-2. Deletar Personagem
-3. Ver Todos Personagens
-4. Atualizar Personagem
-5. Atacar Personagem
-6. Sair
+- **MenuBuscas**  
+  - Consultas de dados diversos do sistema
 
+- **MenuCidade**  
+  - Simula locomoção, combates e interações com NPCs
 
+- **MenuSQL**  
+  - Interface para comandos SQL integrados
+
+- **Avaliação**  
+  - Após o encerramento do jogo, o usuário pode deixar uma nota e comentário sobre sua experiência
+
+---
+
+## 🗂 Menus Detalhados
+
+### 🎮 MenuDoJogo
+
+1. MenuBuscas  
+2. MenuCidade  
+3. MenuSQL  
+
+### 🔍 MenuBuscas
+
+1. Dados do Protagonista  
+2. Dados de Usuário de Persona  
+3. Dados de NPC  
+4. Acesso à loja de itens  
+5. Dar ou equipar itens  
+6. Dados de inimigos  
+7. Inventário do protagonista  
+8. Inventário de um usuário
+
+### 🏙 MenuCidade
+
+1. Locomoção por locais  
+2. Busca de personagens  
+3. Interações com aliados  
+4. Combate (principal mecânica)  
+5. Loja de itens  
+
+### 💾 MenuSQL
+
+- Comandos `INSERT`, `UPDATE`, `DELETE`, `SELECT` para até **12 opções** de gerenciamento das tabelas do banco.
+
+---
+
+## ⚔️ Mecânicas Principais
+
+### 1. Combate
+
+- Sistema baseado em turnos  
+- Escolha de 3 aliados predefinidos  
+- Enfrente **Sombras** ou **vilões humanos**  
+- Ações disponíveis:
+  - Atacar (físico ou habilidades de Persona)
+  - Defender
+  - Usar item
+  - Fugir
+
+- O protagonista pode trocar de Persona durante o combate  
+- Inimigos atacam automaticamente  
+- Algumas batalhas usam lógica de fraquezas elementares (*One More*)
+
+### 2. Interações
+
+- Apenas o protagonista interage com NPCs/aliados  
+- Evolução de vínculo por Arcana (nível até 10)  
+- Interações especiais com:
+  - `Yukari`
+  - `Mitsuru`
+  - `Aigis`
+  - `Fuuka`
+
+- Cada nível desbloqueia diálogos e mensagens únicas  
+- Sistema semelhante ao de *Social Links*
+
+---
+
+## 🧠 Extras Técnicos
+
+- Arquitetura baseada em **MVC**  
+- Uso de **DAO Pattern** para persistência de dados  
+- Validação de entradas e tratamento de erros  
+- Uso de Threads para garantir imersão  
+- Modularização para fácil expansão de funcionalidades  
+
+---
+
+## 📌 Créditos Finais
+
+Inspirado por *Persona 3 Reload* (Atlus)  
+Desenvolvido como parte do projeto final das disciplinas Banco de Dados & POO  
