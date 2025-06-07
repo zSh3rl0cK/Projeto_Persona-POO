@@ -33,7 +33,7 @@ public class TelaInicial extends JFrame {
         };
 
         // Título
-        JLabel titulo = new JLabel("JOGO PERSONA 3", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("TARTARUS", SwingConstants.CENTER);
         titulo.setFont(new Font("Serif", Font.BOLD, 36));
         titulo.setForeground(Color.WHITE);
         panel.add(titulo, BorderLayout.NORTH);
