@@ -123,8 +123,14 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
                 double danoFinal = Math.max(0, this.arma.getDano() - alvo.getDefesa()); // todo: alterado danoArma para a arma (apenas observação)
                 int missHit = random.nextInt(6) + 1; // (1 a 6)
                 System.out.println(imprimirDado(missHit));
-                if(missHit < 4) System.out.println("Missed!");
+                if(missHit == 1) System.out.println("Missed!");
+                else if (missHit == 6){
+                    danoFinal = danoFinal*1.5;
+                    alvo.setHp(alvo.getHp() - (danoFinal)); // Crítico
+                    System.out.println(ANSI_BLUE + nome + " realizou um ataque físico *crítico* causando " + danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
+                }
                 else {
+                    System.out.println(ANSI_GREEN + "Golpe executado com sucesso!" + ANSI_RESET);
                     alvo.setHp(alvo.getHp() - danoFinal);
                     System.out.println(ANSI_BLUE + nome + " realizou um ataque físico causando " + danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
                 }
@@ -138,8 +144,9 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
 
                 int missHit = random.nextInt(6) + 1;
                 System.out.println(imprimirDado(missHit));
-                if(missHit < 4) System.out.println("Missed!");
+                if(missHit == 1) System.out.println("Missed!");
                 else {
+                    System.out.println(ANSI_GREEN + "Sucesso!" + ANSI_RESET);
                     System.out.println(ANSI_BLUE + "Escolha a habilidade:" + ANSI_RESET);
                     for (int i = 0; i < habilidades.size(); i++) {
                         Habilidades hab = habilidades.get(i);
@@ -197,7 +204,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
         System.out.println("1 - Atacar");
         System.out.println("2 - Defender");
         System.out.println("3 - Usar Item");
-        System.out.println("4 - Sair" + ANSI_RESET);
+        System.out.println("4 - Fugir" + ANSI_RESET);
 
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -232,6 +239,92 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
                 return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean agirAutomatico(int turno, Personas persona, UsuarioPersona alvo, boolean usarHabilidade) {
+        System.out.println(ANSI_CYAN + "\nTurno de " + this.getNome() + ANSI_RESET);
+
+        // Decisão aleatória entre ataque físico e habilidade (60% físico, 40% habilidade)
+        boolean decidiuUsarHabilidade = usarHabilidade && random.nextDouble() < 0.4
+                && !persona.getHabilidades().isEmpty()
+                && this.sp > 0;
+
+        if (decidiuUsarHabilidade) {
+            List<Habilidades> habilidades = persona.getHabilidades();
+            Habilidades habilidade = habilidades.get(random.nextInt(habilidades.size()));
+
+            // Custo baseado no dano da habilidade
+            double custoSP = Math.max(5, habilidade.getDano() * 0.1);
+
+            if (this.sp >= custoSP) {
+                this.sp -= custoSP;
+                usarHabilidade(persona, alvo, habilidade, custoSP);
+            } else {
+                System.out.println(ANSI_YELLOW + this.getNome() + " tentou usar " + habilidade.getNome() +
+                        " mas não tem SP suficiente!" + ANSI_RESET);
+                atacarAutomatico(persona, alvo); // ataques automáticos
+            }
+        } else {
+            atacarAutomatico(persona, alvo); // ataques automáticos
+        }
+
+        return alvo.getHp() > 0;
+    }
+
+    //ataques automáticos (sem interação do usuário)
+    private void atacarAutomatico(Personas persona, UsuarioPersona alvo) {
+        double danoFinal = Math.max(0, this.arma.getDano() - alvo.getDefesa());
+        int missHit = random.nextInt(6) + 1;
+
+        System.out.println(imprimirDado(missHit));
+
+        if(missHit == 1) {
+            System.out.println(ANSI_RED + "Missed! " + this.getNome() + " errou o ataque!" + ANSI_RESET);
+        }
+        else if (missHit == 6) {
+            danoFinal *= 1.5;
+            alvo.setHp(alvo.getHp() - danoFinal);
+            System.out.println(ANSI_YELLOW + "Crítico! " + ANSI_RESET);
+            System.out.println(ANSI_BLUE + this.getNome() + " realizou um ataque físico *crítico* causando " +
+                    danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
+        }
+        else {
+            alvo.setHp(alvo.getHp() - danoFinal);
+            System.out.println(ANSI_BLUE + this.getNome() + " realizou um ataque físico causando " +
+                    danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
+        }
+
+        defesa = 0; // Reseta defesa no fim do turno
+    }
+
+    private void usarHabilidade(Personas persona, UsuarioPersona alvo, Habilidades habilidade, double custoSP) {
+        double danoBase = habilidade.getDano();
+        double danoFinal = Math.max(1, danoBase - alvo.getDefesa());
+
+        // Sistema de acerto (1-6)
+        int dado = random.nextInt(6) + 1;
+        System.out.println(imprimirDado(dado));
+
+        if (dado == 1) {
+            System.out.println(ANSI_RED + "Errou! " + this.getNome() + " falhou ao usar " +
+                    habilidade.getNome() + ANSI_RESET);
+            return;
+        }
+
+        // Crítico
+        if (dado == 6) {
+            danoFinal *= 1.5;
+            System.out.println(ANSI_YELLOW + "Golpe crítico! " + ANSI_RESET);
+        }
+
+        alvo.setHp(alvo.getHp() - danoFinal);
+
+        System.out.println(ANSI_PURPLE + this.getNome() + " usou " + habilidade.getNome() +
+                " (Custo: " + custoSP + " SP)" + ANSI_RESET);
+        System.out.println(ANSI_RED + alvo.getNome() + " sofreu " + danoFinal +
+                " de dano!" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + "SP restante: " + this.sp + ANSI_RESET);
     }
 
 

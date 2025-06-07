@@ -7,10 +7,10 @@ public class Habilidades {
     private final String nome;
     private final String tipo;
     private final String efeito;
-    private final double dano;
+    private final int dano;
     // private int id; // Usar apenas se for inserir no banco de dados.
 
-    public Habilidades(String nome, String tipo, String efeito, double dano){
+    public Habilidades(String nome, String tipo, String efeito, int dano){
         this.nome = nome;
         this.tipo = tipo;
         this.efeito = efeito;
@@ -49,7 +49,7 @@ public class Habilidades {
         return efeito;
     }
 
-    public double getDano() {
+    public int getDano() {
         return dano;
     }
 

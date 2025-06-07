@@ -69,5 +69,6 @@ public class SistemaAvaliacao implements Avaliacao {
         AudioManager.getInstance().stopMusic();
         AudioManager.getInstance().shutdown();
         System.out.println(ANSI_GREEN + "Obrigado por avaliar e jogar nosso jogo!" + ANSI_RESET);
+
     }
 }

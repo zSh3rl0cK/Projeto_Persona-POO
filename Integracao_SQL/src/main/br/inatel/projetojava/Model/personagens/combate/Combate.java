@@ -10,4 +10,7 @@ public interface Combate {
     void defender();
 
     boolean agir(int turno, Personas persona, UsuarioPersona alvo);
+
+    // Ações automáticas (usado pelos inimigos)
+    boolean agirAutomatico(int turno, Personas persona, UsuarioPersona alvo, boolean usarHabilidade);
 }

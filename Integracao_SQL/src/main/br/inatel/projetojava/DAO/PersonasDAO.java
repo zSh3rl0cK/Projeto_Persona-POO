@@ -194,7 +194,7 @@ public class PersonasDAO extends ConnectionDAO {
                         this.rs.getString("nome"),
                         this.rs.getString("tipo"),
                         this.rs.getString("efeito"),
-                        this.rs.getDouble("dano")
+                        this.rs.getInt("dano")
                 );
                 persona.addHabilidade(habilidade);
             }

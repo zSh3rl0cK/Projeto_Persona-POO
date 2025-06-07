@@ -135,7 +135,7 @@ public class HabilidadesDAO extends ConnectionDAO {
                         this.rs.getString("nome"),
                         this.rs.getString("tipo"),
                         this.rs.getString("efeito"),
-                        this.rs.getDouble("dano")
+                        this.rs.getInt("dano")
                 );
 
                 PrintStream var10000 = System.out;
@@ -176,7 +176,7 @@ public class HabilidadesDAO extends ConnectionDAO {
                         this.rs.getString("nome"),
                         this.rs.getString("tipo"),
                         this.rs.getString("efeito"),
-                        this.rs.getDouble("dano")
+                        this.rs.getInt("dano")
                 );
 
                 PrintStream var10000 = System.out;
@@ -216,7 +216,7 @@ public class HabilidadesDAO extends ConnectionDAO {
                         this.rs.getString("nome"),
                         this.rs.getString("tipo"),
                         this.rs.getString("efeito"),
-                        this.rs.getDouble("dano")
+                        this.rs.getInt("dano")
                 );
             }
         } catch (SQLException exc) {

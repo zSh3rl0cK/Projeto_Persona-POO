@@ -67,7 +67,7 @@ public class MenuGeral {
             protagonistaPersonaDAO.insertProtagonistaPersona(relacao);
         }
 
-        //protagonista.getPersona_atual() = protagonista.getPersonas().getFirst(); // Alice
+        protagonista.setPersona_atual(protagonista.getPersonas().getFirst());
 
         // ---------------------------------------- Heróis(SEES): ----------------------------------------
 
@@ -198,41 +198,41 @@ public class MenuGeral {
         //                                  Habilidades das personas do protagonista:
         // ---------------------------------------- Personas habilidades: ----------------------------------------
 
-        protagonista.getPersonas().getFirst().addHabilidade(new Habilidades("Megidolaon", "Almighty", "Causa dano massivo a todos os inimigos", 6));
-        protagonista.getPersonas().getFirst().addHabilidade(new Habilidades("Mudo", "Dark", "Chance de causar morte instantânea a um inimigo", 3));
-        protagonista.getPersonas().getFirst().addHabilidade(new Habilidades("Die For Me!", "Dark", "Alta chance de causar morte instantânea a todos os inimigos", 7));
+        protagonista.getPersonas().getFirst().addHabilidade(new Habilidades("Megidolaon", "Almighty", "Causa dano massivo a todos os inimigos", random.nextInt(10) + 20));
+        protagonista.getPersonas().getFirst().addHabilidade(new Habilidades("Mudo", "Dark", "Chance de causar morte instantânea a um inimigo", random.nextInt(10) + 20));
+        protagonista.getPersonas().getFirst().addHabilidade(new Habilidades("Die For Me!", "Dark", "Alta chance de causar morte instantânea a todos os inimigos", random.nextInt(10) + 20));
 
-        protagonista.getPersonas().get(1).addHabilidade(new Habilidades("Agidyne", "Fire", "Causa dano de fogo pesado a um inimigo", 5));
+        protagonista.getPersonas().get(1).addHabilidade(new Habilidades("Agidyne", "Fire", "Causa dano de fogo pesado a um inimigo", random.nextInt(10) + 20));
         protagonista.getPersonas().get(1).addHabilidade(new Habilidades("Power Charge", "Support", "Aumenta o próximo dano físico causado", 0));
-        protagonista.getPersonas().get(1).addHabilidade(new Habilidades("Maragion", "Fire", "Causa dano de fogo médio a todos os inimigos", 4));
+        protagonista.getPersonas().get(1).addHabilidade(new Habilidades("Maragion", "Fire", "Causa dano de fogo médio a todos os inimigos", random.nextInt(10) + 20));
 
-        protagonista.getPersonas().get(2).addHabilidade(new Habilidades("Eiha", "Dark", "Causa dano sombrio leve a um inimigo", 2));
-        protagonista.getPersonas().get(2).addHabilidade(new Habilidades("Lunge", "Physical", "Causa dano físico leve a um inimigo", 3));
-        protagonista.getPersonas().get(2).addHabilidade(new Habilidades("Cleave", "Physical", "Causa dano físico leve a um inimigo", 3));
+        protagonista.getPersonas().get(2).addHabilidade(new Habilidades("Eiha", "Dark", "Causa dano sombrio leve a um inimigo", random.nextInt(10) + 20));
+        protagonista.getPersonas().get(2).addHabilidade(new Habilidades("Lunge", "Physical", "Causa dano físico leve a um inimigo", random.nextInt(10) + 20));
+        protagonista.getPersonas().get(2).addHabilidade(new Habilidades("Cleave", "Physical", "Causa dano físico leve a um inimigo", random.nextInt(10) + 20));
 
-        protagonista.getPersonas().get(3).addHabilidade(new Habilidades("Agi", "Fire", "Causa dano de fogo leve a um inimigo", 2));
+        protagonista.getPersonas().get(3).addHabilidade(new Habilidades("Agi", "Fire", "Causa dano de fogo leve a um inimigo", random.nextInt(10) + 20));
         protagonista.getPersonas().get(3).addHabilidade(new Habilidades("Rakunda", "Debuff", "Reduz a defesa de um inimigo", 0));
         protagonista.getPersonas().get(3).addHabilidade(new Habilidades("Tarukaja", "Buff", "Aumenta o ataque de um aliado por 3 turnos", 0));
 
-        protagonista.getPersonas().get(4).addHabilidade(new Habilidades("Zio", "Electric", "Causa dano elétrico leve a um inimigo", 2));
+        protagonista.getPersonas().get(4).addHabilidade(new Habilidades("Zio", "Electric", "Causa dano elétrico leve a um inimigo", random.nextInt(10) + 20));
         protagonista.getPersonas().get(4).addHabilidade(new Habilidades("Dia", "Healing", "Restaura uma pequena quantidade de HP a um aliado", 0));
         protagonista.getPersonas().get(4).addHabilidade(new Habilidades("Patra", "Healing", "Cura um aliado de status negativos", 0));
 
-        protagonista.getPersonas().get(5).addHabilidade(new Habilidades("Dream Needle", "Ailment", "Causa dano físico leve com chance de causar sono", 2));
-        protagonista.getPersonas().get(5).addHabilidade(new Habilidades("Life Drain", "Dark", "Drena uma pequena quantidade de HP de um inimigo", 3));
-        protagonista.getPersonas().get(5).addHabilidade(new Habilidades("Mudo", "Dark", "Chance de causar morte instantânea a um inimigo", 3));
+        protagonista.getPersonas().get(5).addHabilidade(new Habilidades("Dream Needle", "Ailment", "Causa dano físico leve com chance de causar sono", random.nextInt(10) + 20));
+        protagonista.getPersonas().get(5).addHabilidade(new Habilidades("Life Drain", "Dark", "Drena uma pequena quantidade de HP de um inimigo", random.nextInt(10) + 20));
+        protagonista.getPersonas().get(5).addHabilidade(new Habilidades("Mudo", "Dark", "Chance de causar morte instantânea a um inimigo", random.nextInt(10) + 20));
 
         protagonista.getPersonas().get(6).addHabilidade(new Habilidades("Tentarafoo", "Ailment", "Chance de causar confusão a todos os inimigos", 0));
         protagonista.getPersonas().get(6).addHabilidade(new Habilidades("Evil Touch", "Ailment", "Chance de causar medo a um inimigo", 0));
-        protagonista.getPersonas().get(6).addHabilidade(new Habilidades("Spirit Drain", "Support", "Drena uma pequena quantidade de SP de um inimigo", 1));
+        protagonista.getPersonas().get(6).addHabilidade(new Habilidades("Spirit Drain", "Support", "Drena uma pequena quantidade de SP de um inimigo", 0));
 
-        protagonista.getPersonas().get(7).addHabilidade(new Habilidades("Bufu", "Ice", "Causa dano de gelo leve a um inimigo", 2));
+        protagonista.getPersonas().get(7).addHabilidade(new Habilidades("Bufu", "Ice", "Causa dano de gelo leve a um inimigo", random.nextInt(10) + 20));
         protagonista.getPersonas().get(7).addHabilidade(new Habilidades("Media", "Healing", "Restaura uma pequena quantidade de HP a todos os aliados", 0));
-        protagonista.getPersonas().get(7).addHabilidade(new Habilidades("Rakukaja", "Buff", "Aumenta a defesa de um aliado por 3 turnos", 0));
+        protagonista.getPersonas().get(7).addHabilidade(new Habilidades("Rakukaja", "Buff", "Aumenta a defesa de um aliado por 1 turno", 0));
 
-        protagonista.getPersonas().getLast().addHabilidade(new Habilidades("Maragi", "Fire", "Causa dano de fogo leve a todos os inimigos", 3));
+        protagonista.getPersonas().getLast().addHabilidade(new Habilidades("Maragi", "Fire", "Causa dano de fogo leve a todos os inimigos", random.nextInt(10) + 20));
         protagonista.getPersonas().getLast().addHabilidade(new Habilidades("Dekunda", "Support", "Remove penalidades de status de todos os aliados", 0));
-        protagonista.getPersonas().getLast().addHabilidade(new Habilidades("Sukukaja", "Buff", "Aumenta a precisão e evasão de um aliado por 3 turnos", 0));
+        protagonista.getPersonas().getLast().addHabilidade(new Habilidades("Sukukaja", "Buff", "Aumenta a precisão e evasão de um aliado por 1 turno", 0));
 
         HabilidadesDAO habilidadesdao = new HabilidadesDAO();
 
@@ -245,54 +245,54 @@ public class MenuGeral {
         // Habilidades dos usuários (SEES e Strega):
         // ---------------------------------------- Personas habilidadeds: ----------------------------------------
 
-        user.get("Yukari").getPersonas().addHabilidade(new Habilidades("Agilao", "Fire", "Causa dano de fogo médio a um inimigo", 6));
+        user.get("Yukari").getPersonas().addHabilidade(new Habilidades("Agilao", "Fire", "Causa dano de fogo médio a um inimigo", random.nextInt(10) + 20));
         user.get("Yukari").getPersonas().addHabilidade(new Habilidades("Rebellion", "Support", "Aumenta a taxa de acerto crítico de um aliado por 3 turnos", 0));
-        user.get("Yukari").getPersonas().addHabilidade(new Habilidades("Maragi", "Fire", "Causa dano de fogo leve a todos os inimigos", 4));
-        user.get("Yukari").getPersonas().addHabilidade(new Habilidades("Fatal End", "Physical", "Causa dano físico pesado a um inimigo", 10));
+        user.get("Yukari").getPersonas().addHabilidade(new Habilidades("Maragi", "Fire", "Causa dano de fogo leve a todos os inimigos", random.nextInt(10) + 20));
+        user.get("Yukari").getPersonas().addHabilidade(new Habilidades("Fatal End", "Physical", "Causa dano físico pesado a um inimigo", random.nextInt(10) + 20));
 
-        user.get("Junpei").getPersonas().addHabilidade(new Habilidades("Zio", "Electric", "Causa dano elétrico leve a um inimigo", 4));
-        user.get("Junpei").getPersonas().addHabilidade(new Habilidades("Maziodyne", "Electric", "Causa dano elétrico pesado a todos os inimigos com chance de causar choque", 12));
-        user.get("Junpei").getPersonas().addHabilidade(new Habilidades("Sonic Punch", "Physical", "Causa dano físico leve a um inimigo com chance de causar aflição", 6));
+        user.get("Junpei").getPersonas().addHabilidade(new Habilidades("Zio", "Electric", "Causa dano elétrico leve a um inimigo", random.nextInt(10) + 20));
+        user.get("Junpei").getPersonas().addHabilidade(new Habilidades("Maziodyne", "Electric", "Causa dano elétrico pesado a todos os inimigos com chance de causar choque", random.nextInt(10) + 20));
+        user.get("Junpei").getPersonas().addHabilidade(new Habilidades("Sonic Punch", "Physical", "Causa dano físico leve a um inimigo com chance de causar aflição", random.nextInt(10) + 20));
         user.get("Junpei").getPersonas().addHabilidade(new Habilidades("Fist Master", "Passive", "Dobra o dano causado por armas de punho", 0));
 
-        user.get("Mitsuru").getPersonas().addHabilidade(new Habilidades("Bufula", "Ice", "Causa dano de gelo médio a um inimigo com chance de congelar", 6));
-        user.get("Mitsuru").getPersonas().addHabilidade(new Habilidades("Tentarafoo", "Ailment", "Chance de causar confusão a todos os inimigos", 8));
+        user.get("Mitsuru").getPersonas().addHabilidade(new Habilidades("Bufula", "Ice", "Causa dano de gelo médio a um inimigo com chance de congelar", random.nextInt(10) + 20));
+        user.get("Mitsuru").getPersonas().addHabilidade(new Habilidades("Tentarafoo", "Ailment", "Chance de causar confusão a todos os inimigos", random.nextInt(10) + 20));
         user.get("Mitsuru").getPersonas().addHabilidade(new Habilidades("Ice Boost", "Passive", "Aumenta o dano de habilidades de gelo em 25%", 0));
-        user.get("Mitsuru").getPersonas().addHabilidade(new Habilidades("Mabufula", "Ice", "Causa dano de gelo médio a todos os inimigos com chance de congelar", 12));
+        user.get("Mitsuru").getPersonas().addHabilidade(new Habilidades("Mabufula", "Ice", "Causa dano de gelo médio a todos os inimigos com chance de congelar", random.nextInt(10) + 20));
 
-        user.get("Akihiko").getPersonas().addHabilidade(new Habilidades("Kill Rush", "Physical", "Causa dano físico leve a um inimigo múltiplas vezes", 12));
+        user.get("Akihiko").getPersonas().addHabilidade(new Habilidades("Kill Rush", "Physical", "Causa dano físico leve a um inimigo múltiplas vezes", random.nextInt(10) + 20));
         user.get("Akihiko").getPersonas().addHabilidade(new Habilidades("Tarukaja", "Support", "Aumenta o ataque de um aliado por 3 turnos", 0));
-        user.get("Akihiko").getPersonas().addHabilidade(new Habilidades("Swift Strike", "Physical", "Causa dano físico leve a todos os inimigos múltiplas vezes", 16));
-        user.get("Akihiko").getPersonas().addHabilidade(new Habilidades("Makarakarn", "Support", "Reflete o próximo ataque mágico recebido por um aliado", 24));
+        user.get("Akihiko").getPersonas().addHabilidade(new Habilidades("Swift Strike", "Physical", "Causa dano físico leve a todos os inimigos múltiplas vezes", random.nextInt(10) + 20));
+        user.get("Akihiko").getPersonas().addHabilidade(new Habilidades("Makarakarn", "Support", "Reflete o próximo ataque mágico recebido por um aliado", random.nextInt(10) + 20));
 
-        user.get("Ken").getPersonas().addHabilidade(new Habilidades("Hama", "Light", "Chance de causar morte instantânea a um inimigo", 8));
-        user.get("Ken").getPersonas().addHabilidade(new Habilidades("Zan-ei", "Light", "Causa dano de luz leve a um inimigo", 6));
+        user.get("Ken").getPersonas().addHabilidade(new Habilidades("Hama", "Light", "Chance de causar morte instantânea a um inimigo", random.nextInt(10) + 20));
+        user.get("Ken").getPersonas().addHabilidade(new Habilidades("Zan-ei", "Light", "Causa dano de luz leve a um inimigo", random.nextInt(10) + 20));
         user.get("Ken").getPersonas().addHabilidade(new Habilidades("Media", "Healing", "Restaura uma pequena quantidade de HP a todos os aliados", 0));
         user.get("Ken").getPersonas().addHabilidade(new Habilidades("Recarm", "Healing", "Revive um aliado com metade do HP", 0));
 
-        user.get("Koromaru").getPersonas().addHabilidade(new Habilidades("Agi", "Fire", "Causa dano de fogo leve a um inimigo", 4));
-        user.get("Koromaru").getPersonas().addHabilidade(new Habilidades("Mudoon", "Dark", "Alta chance de causar morte instantânea a um inimigo", 12));
+        user.get("Koromaru").getPersonas().addHabilidade(new Habilidades("Agi", "Fire", "Causa dano de fogo leve a um inimigo", random.nextInt(10) + 20));
+        user.get("Koromaru").getPersonas().addHabilidade(new Habilidades("Mudoon", "Dark", "Alta chance de causar morte instantânea a um inimigo", random.nextInt(10) + 20));
         user.get("Koromaru").getPersonas().addHabilidade(new Habilidades("Fire Boost", "Passive", "Aumenta o dano de habilidades de fogo em 25%", 0));
-        user.get("Koromaru").getPersonas().addHabilidade(new Habilidades("Hell Fang", "Physical", "Causa dano físico médio a um inimigo", 8));
+        user.get("Koromaru").getPersonas().addHabilidade(new Habilidades("Hell Fang", "Physical", "Causa dano físico médio a um inimigo", random.nextInt(10) + 20));
 
-        user.get("Aigis").getPersonas().addHabilidade(new Habilidades("Fatal End", "Physical", "Causa dano físico pesado a um inimigo", 10));
-        user.get("Aigis").getPersonas().addHabilidade(new Habilidades("Double Fangs", "Physical", "Causa dano físico leve a um inimigo duas vezes", 12));
+        user.get("Aigis").getPersonas().addHabilidade(new Habilidades("Fatal End", "Physical", "Causa dano físico pesado a um inimigo", random.nextInt(10) + 20));
+        user.get("Aigis").getPersonas().addHabilidade(new Habilidades("Int Fangs", "Physical", "Causa dano físico leve a um inimigo duas vezes", random.nextInt(10) + 20));
         user.get("Aigis").getPersonas().addHabilidade(new Habilidades("Power Charge", "Support", "Aumenta o próximo dano físico causado por um aliado", 0));
-        user.get("Aigis").getPersonas().addHabilidade(new Habilidades("Gigantic Fist", "Physical", "Causa dano físico muito pesado a um inimigo", 20));
+        user.get("Aigis").getPersonas().addHabilidade(new Habilidades("Gigantic Fist", "Physical", "Causa dano físico muito pesado a um inimigo", random.nextInt(10) + 20));
 
-        user.get("Shinjiro").getPersonas().addHabilidade(new Habilidades("Fatal End", "Physical", "Causa dano físico pesado a um inimigo", 10));
-        user.get("Shinjiro").getPersonas().addHabilidade(new Habilidades("Kill Rush", "Physical", "Causa dano físico leve a um inimigo múltiplas vezes", 12));
+        user.get("Shinjiro").getPersonas().addHabilidade(new Habilidades("Fatal End", "Physical", "Causa dano físico pesado a um inimigo", random.nextInt(10) + 20));
+        user.get("Shinjiro").getPersonas().addHabilidade(new Habilidades("Kill Rush", "Physical", "Causa dano físico leve a um inimigo múltiplas vezes", random.nextInt(10) + 20));
         user.get("Shinjiro").getPersonas().addHabilidade(new Habilidades("Counterstrike", "Passive", "Chance de 15% de contra-atacar com dano físico médio", 0));
 
-        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Mamudoon", "Dark", "Alta chance de causar morte instantânea a todos os inimigos", 16));
-        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Hamaon", "Light", "Alta chance de causar morte instantânea a um inimigo", 14));
+        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Mamudoon", "Dark", "Alta chance de causar morte instantânea a todos os inimigos", random.nextInt(10) + 20));
+        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Hamaon", "Light", "Alta chance de causar morte instantânea a um inimigo", random.nextInt(10) + 20));
         user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Mind Charge", "Support", "Aumenta o próximo dano mágico causado por um aliado", 0));
 
         user.get("Jin").getPersonas().addHabilidade(new Habilidades("Debilitate", "Support", "Reduz ataque, defesa e agilidade de um inimigo por 3 turnos", 0));
         user.get("Jin").getPersonas().addHabilidade(new Habilidades("Marakunda", "Support", "Reduz a defesa de todos os inimigos por 3 turnos", 0));
-        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Mabufula", "Ice", "Causa dano de gelo médio a todos os inimigos com chance de congelar", 12));
+        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Mabufula", "Ice", "Causa dano de gelo médio a todos os inimigos com chance de congelar", random.nextInt(10) + 20));
 
-        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Maragion", "Fire", "Causa dano de fogo médio a todos os inimigos", 10));
+        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Maragion", "Fire", "Causa dano de fogo médio a todos os inimigos", random.nextInt(10) + 20));
         user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Diarama", "Healing", "Restaura uma quantidade moderada de HP a um aliado", 0));
         user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Fire Break", "Support", "Remove resistência ao fogo de todos os inimigos por 3 turnos", 0));
 
@@ -338,7 +338,7 @@ public class MenuGeral {
         equipamentoDAO.insertEquipamento((Equipamento) item.get("Seven Sisters Badge"));
 
         // ---------------------------------------- Armas: ------------------------------------------
-        item.put("Paradise Lost", new Arma("Paradise Lost", "Espada", 250.0, "Raro", 85.0));
+        item.put("Paradise Lost", new Arma("Paradise Lost", "Espada", 250.0, "Raro", 65.0));
         item.put("Espada Curta", new Arma("Espada Curta", "Espada", 1500.0, "Normal", 48.0));
         item.put("Luvas de Combate", new Arma("Luvas de Combate", "Soco", 1800.0, "Normal", 52.0));
         item.put("Naginata", new Arma("Naginata", "Lança", 2000.0, "Normal", 56.0));
@@ -871,9 +871,33 @@ public class MenuGeral {
 
                                         ArrayList<UsuarioPersona> timeProtagonistas = new ArrayList<>();
                                         timeProtagonistas.add(protagonista);
-                                        timeProtagonistas.add(user.get("Mitsuru"));
-                                        timeProtagonistas.add(user.get("Yukari"));
-                                        timeProtagonistas.add(user.get("Aigis"));
+                                        System.out.println(ANSI_CYAN + "\n----- Batalha -----" + ANSI_RESET);
+                                        System.out.println();
+                                        System.out.println(ANSI_BLUE + "Monte a sua equipe!" + ANSI_RESET);
+                                        listarAliados(user);
+                                        Set<String> aliadosSelecionados = new HashSet<>(); // Armazenar os já escolhidos
+
+                                        for (int i = 1; i <= 3; i++) {
+                                            String posicao = switch (i) {
+                                                case 1 -> "Primeiro";
+                                                case 2 -> "Segundo";
+                                                case 3 -> "Terceiro";
+                                                default -> "";
+                                            };
+
+                                            while (true) {
+                                                System.out.println(posicao + " Aliado: ");
+                                                String nomeAliado = sc.nextLine();
+
+                                                if (user.containsKey(nomeAliado) && !aliadosSelecionados.contains(nomeAliado)) {
+                                                    timeProtagonistas.add(user.get(nomeAliado));
+                                                    aliadosSelecionados.add(nomeAliado);
+                                                    break;
+                                                } else {
+                                                    System.out.println(ANSI_RED + "Aliado não encontrado ou já selecionado! Tente novamente." + ANSI_RESET);
+                                                }
+                                            }
+                                        }
 
                                         if (!viloes.isEmpty()) {
                                             iniciarCombate(timeProtagonistas, viloes);

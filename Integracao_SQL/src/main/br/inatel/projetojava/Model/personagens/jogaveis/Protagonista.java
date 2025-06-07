@@ -123,8 +123,8 @@ public class Protagonista extends UsuarioPersona {
     }
 
     @Override
-    public void atacar(Personas persona, UsuarioPersona alvo) throws InvalidMenuInputException {
-        if (alvo == null || persona == null) {
+    public void atacar(Personas persona_atual, UsuarioPersona alvo) throws InvalidMenuInputException {
+        if (alvo == null || persona_atual == null) {
             System.out.println(ANSI_RED + "Ataque inválido! Persona ou alvo nulo." + ANSI_RESET);
             return;
         }
@@ -154,7 +154,7 @@ public class Protagonista extends UsuarioPersona {
                 System.out.println(ANSI_BLUE + nome + " realizou um ataque físico causando " + danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
             }
             case 2 -> {
-                List<Habilidades> habilidades = persona.getHabilidades();
+                List<Habilidades> habilidades = persona_atual.getHabilidades();
                 if (habilidades.isEmpty()) {
                     System.out.println(ANSI_RED + "Essa persona não possui habilidades!" + ANSI_RESET);
                     return;
@@ -248,5 +248,9 @@ public class Protagonista extends UsuarioPersona {
 
     public void setPersonas(List<Personas> personas) {
         this.personas = personas;
+    }
+
+    public void setPersona_atual(Personas persona_atual) {
+        this.persona_atual = persona_atual;
     }
 }
