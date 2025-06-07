@@ -150,7 +150,7 @@ public class PersonasDAO extends ConnectionDAO {
                         tipoList,
                         this.rs.getString("fraqueza"),
                         this.rs.getString("resistencia"),
-                        this.rs.getDouble("dano")
+                        this.rs.getInt("dano")
                 );
 
                 // Load habilidades for each persona
@@ -232,7 +232,7 @@ public class PersonasDAO extends ConnectionDAO {
                         tipoList,
                         this.rs.getString("fraqueza"),
                         this.rs.getString("resistencia"),
-                        this.rs.getDouble("dano")
+                        this.rs.getInt("dano")
                 );
                 loadHabilidadesForPersona(persona);
             }

@@ -25,15 +25,6 @@ public class Equipamento extends Itens implements EquipaItem {
         }
         usuario.setItem(this);
         usuario.setDefesa(usuario.getDefesa() + this.getDefesa());
-        /*if(this.getDefesa() > 0 && this.getDefesa() <= 100){
-            usuario.setHp(usuario.getHp() + 20);
-        }
-        else if(this.getDefesa() > 100 && this.getDefesa() <= 200){
-            usuario.setHp(usuario.getHp() + 40);
-        }
-        else{
-            usuario.setHp(usuario.getHp() + 60);
-        }*/
     }
 
     @Override

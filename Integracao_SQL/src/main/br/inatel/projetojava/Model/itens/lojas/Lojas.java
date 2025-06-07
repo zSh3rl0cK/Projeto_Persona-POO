@@ -15,6 +15,9 @@ public abstract class Lojas {
         this.itens = itens;
     }
 
+
+    // Getters e Setters
+
     public String getNome() {
         return nome;
     }

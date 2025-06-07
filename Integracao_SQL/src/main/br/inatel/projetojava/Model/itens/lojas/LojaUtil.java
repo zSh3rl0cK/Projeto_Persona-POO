@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 import static main.br.inatel.projetojava.Model.sistema.menus.MethodUtil.confirmarAcao;
 
-public class LojaUtil {
+public abstract class LojaUtil {
 
     private static void processarCompra(Scanner sc, Lojas loja, Protagonista protagonista, Map<String, Itens> itens) {
         loja.mostrarItens();

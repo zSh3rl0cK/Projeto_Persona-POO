@@ -10,6 +10,7 @@ import main.br.inatel.projetojava.Model.itens.equipaveis.Equipamento;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
 public class Inventario {
+    // todo?: agregação com todos os tipos de itens, poderia ser uma agregaca com itens
     private final HashMap<Arma, Integer> armas;
     private final HashMap<Equipamento, Integer> equipamentos;
     private final HashMap<Consumiveis, Integer> consumiveis;
@@ -52,7 +53,7 @@ public class Inventario {
         System.out.println();
     }
 
-
+    // Getters e setters
     public void adicionarArma(Arma arma, int quantidade) {
         armas.put(arma, armas.getOrDefault(arma, 0) + quantidade);
         // GetOrDefault : padrão é 0, quando se tem arma, incrementa.

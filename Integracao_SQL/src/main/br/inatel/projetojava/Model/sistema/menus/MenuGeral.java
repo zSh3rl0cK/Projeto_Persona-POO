@@ -25,6 +25,7 @@ import main.br.inatel.projetojava.Model.threads.AudioManager;
 import java.util.*;
 
 import static main.br.inatel.projetojava.Model.itens.lojas.LojaUtil.visitarLoja;
+import static main.br.inatel.projetojava.Model.personagens.combate.CombateManager.CombateShadows;
 import static main.br.inatel.projetojava.Model.personagens.combate.CombateManager.iniciarCombate;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuBuscas.mostrar_menu_buscas;
@@ -49,22 +50,22 @@ public class MenuGeral {
         // ---------------------------------------- Personas do Makoto --------------------------------
 
         PersonasDAO personasDAO = new PersonasDAO();
-        protagonista.getPersonas().add(new Personas("Alice", 20, "Death", List.of(TiposPersona.getTipoProtagonistaPorIndice(0)), "Bless", "Dark", random.nextDouble(50) + 30)); // forte em Dark, fraca contra Bless
-        protagonista.getPersonas().add(new Personas("Eligor", 25, "Tower", List.of(TiposPersona.getTipoProtagonistaPorIndice(1)), "Ice", "Fire", random.nextDouble(50) + 30)); // forte contra fogo, fraco contra gelo
-        protagonista.getPersonas().add(new Personas("Arsène", 1, "Fool", List.of(TiposPersona.getTipoProtagonistaPorIndice(2)), "Ice", "Dark", random.nextDouble(50) + 30)); // forte em Dark, fraco contra gelo
-        protagonista.getPersonas().add(new Personas("Jack-o'-Lantern", 2, "Magician", List.of(TiposPersona.getTipoProtagonistaPorIndice(3)), "Gun", "Fire", random.nextDouble(50) + 30)); // forte em Fire, fraco contra Gun
-        protagonista.getPersonas().add(new Personas("Pixie", 3, "Lovers", List.of(TiposPersona.getTipoProtagonistaPorIndice(4)), "Gun", "Electricity", random.nextDouble(50) + 30)); // forte em Electric, fraca contra Gun
-        protagonista.getPersonas().add(new Personas("Incubus", 5, "Devil", List.of(TiposPersona.getTipoProtagonistaPorIndice(5)), "Bless", "Dark", random.nextDouble(50) + 30)); // forte em Dark, fraco contra luz
-        protagonista.getPersonas().add(new Personas("Succubus", 8, "Moon", List.of(TiposPersona.getTipoProtagonistaPorIndice(6)), "Bless", "Dark", random.nextDouble(50) + 30)); // forte em Dark, fraca contra luz
-        protagonista.getPersonas().add(new Personas("Silky", 4, "Priestess", List.of(TiposPersona.getTipoProtagonistaPorIndice(7)), "Fire", "Ice", random.nextDouble(50) + 30)); // forte em Ice, fraca contra fogo
-        protagonista.getPersonas().add(new Personas("Orobas", 17, "Hierophant", List.of(TiposPersona.getTipoProtagonistaPorIndice(8)), "Ice", "Fire", random.nextDouble(50) + 30)); // forte em Fire, fraco contra gelo
-        protagonista.getPersonas().add(new Personas("Bicorn", 10, "Hermit", List.of(TiposPersona.getTipoProtagonistaPorIndice(9)), "Light", "Physical", random.nextDouble(50) + 30)); // forte em Physical, fraco contra Light
-        ProtagonistaPersonaDAO protagonistaPersonaDAO = new ProtagonistaPersonaDAO();
+        protagonista.getPersonas().add(new Personas("Alice", 20, "Death", List.of(TiposPersona.getTipoProtagonistaPorIndice(0)), "Bless", "Dark", random.nextInt(50) + 30)); // forte em Dark, fraca contra Bless
+        protagonista.getPersonas().add(new Personas("Eligor", 25, "Tower", List.of(TiposPersona.getTipoProtagonistaPorIndice(1)), "Ice", "Fire", random.nextInt(50) + 30)); // forte contra fogo, fraco contra gelo
+        protagonista.getPersonas().add(new Personas("Arsène", 1, "Fool", List.of(TiposPersona.getTipoProtagonistaPorIndice(2)), "Ice", "Dark", random.nextInt(50) + 30)); // forte em Dark, fraco contra gelo
+        protagonista.getPersonas().add(new Personas("Jack-o'-Lantern", 2, "Magician", List.of(TiposPersona.getTipoProtagonistaPorIndice(3)), "Gun", "Fire", random.nextInt(50) + 30)); // forte em Fire, fraco contra Gun
+        protagonista.getPersonas().add(new Personas("Pixie", 3, "Lovers", List.of(TiposPersona.getTipoProtagonistaPorIndice(4)), "Gun", "Electricity", random.nextInt(50) + 30)); // forte em Electric, fraca contra Gun
+        protagonista.getPersonas().add(new Personas("Incubus", 5, "Devil", List.of(TiposPersona.getTipoProtagonistaPorIndice(5)), "Bless", "Dark", random.nextInt(50) + 30)); // forte em Dark, fraco contra luz
+        protagonista.getPersonas().add(new Personas("Succubus", 8, "Moon", List.of(TiposPersona.getTipoProtagonistaPorIndice(6)), "Bless", "Dark", random.nextInt(50) + 30)); // forte em Dark, fraca contra luz
+        protagonista.getPersonas().add(new Personas("Silky", 4, "Priestess", List.of(TiposPersona.getTipoProtagonistaPorIndice(7)), "Fire", "Ice", random.nextInt(50) + 30)); // forte em Ice, fraca contra fogo
+        protagonista.getPersonas().add(new Personas("Orobas", 17, "Hierophant", List.of(TiposPersona.getTipoProtagonistaPorIndice(8)), "Ice", "Fire", random.nextInt(50) + 30)); // forte em Fire, fraco contra gelo
+        protagonista.getPersonas().add(new Personas("Bicorn", 10, "Hermit", List.of(TiposPersona.getTipoProtagonistaPorIndice(9)), "Light", "Physical", random.nextInt(50) + 30)); // forte em Physical, fraco contra Light
+        ProtagonistaHasPersonaDAO protagonistaHasPersonaDAO = new ProtagonistaHasPersonaDAO();
         for (Personas persona : protagonista.getPersonas()) {
 
             personasDAO.insertPersona(persona); // garantia de existência no banco de dados
             ProtagonistaHasPersona relacao = new ProtagonistaHasPersona(idProtagonista, persona.getIdPersona());
-            protagonistaPersonaDAO.insertProtagonistaPersona(relacao);
+            protagonistaHasPersonaDAO.insertProtagonistaHasPersona(relacao);
         }
 
         protagonista.setPersona_atual(protagonista.getPersonas().getFirst());
@@ -108,15 +109,15 @@ public class MenuGeral {
 // ---------------------------------------- Personas: ---------------------------------------------------
 
 //                                        Personas SEES:
-        user.get("Yukari").addPersona(new Personas("Isis", 45, "Lovers", List.of(TiposPersona.getTipoUsuarioPorIndice(0)), "Electricity", "Wind", random.nextDouble(50) + 30, 0));
-        user.get("Mitsuru").addPersona(new Personas("Artemisia", 48, "Empress", List.of(TiposPersona.getTipoUsuarioPorIndice(1)), "Fire", "Ice", random.nextDouble(50) + 30, 1));
-        user.get("Junpei").addPersona(new Personas("Trismegistus", 43, "Magician", List.of(TiposPersona.getTipoUsuarioPorIndice(2)), "Wind", "Fire", random.nextDouble(50) + 30, 2));
-        user.get("Akihiko").addPersona(new Personas("Caesar", 47, "Emperor", List.of(TiposPersona.getTipoUsuarioPorIndice(3)), "Pierce", "Electricity", random.nextDouble(50) + 30, 3));
+        user.get("Yukari").addPersona(new Personas("Isis", 45, "Lovers", List.of(TiposPersona.getTipoUsuarioPorIndice(0)), "Electricity", "Wind", random.nextInt(50) + 30, 0));
+        user.get("Mitsuru").addPersona(new Personas("Artemisia", 48, "Empress", List.of(TiposPersona.getTipoUsuarioPorIndice(1)), "Fire", "Ice", random.nextInt(50) + 30, 1));
+        user.get("Junpei").addPersona(new Personas("Trismegistus", 43, "Magician", List.of(TiposPersona.getTipoUsuarioPorIndice(2)), "Wind", "Fire", random.nextInt(50) + 30, 2));
+        user.get("Akihiko").addPersona(new Personas("Caesar", 47, "Emperor", List.of(TiposPersona.getTipoUsuarioPorIndice(3)), "Pierce", "Electricity", random.nextInt(50) + 30, 3));
         user.get("Fuuka").addPersona(new Personas("Juno", 40, "Priestess", List.of(TiposPersona.getTipoUsuarioPorIndice(4)), "Physical", "Support", 0, 4)); // suporte, não combate direto
-        user.get("Aigis").addPersona(new Personas("Athena", 50, "Chariot", List.of(TiposPersona.getTipoUsuarioPorIndice(5)), "Electricity", "Strike", random.nextDouble(50) + 30, 5));
-        user.get("Koromaru").addPersona(new Personas("Cerberus", 42, "Strength", List.of(TiposPersona.getTipoUsuarioPorIndice(6)), "Ice", "Dark", random.nextDouble(50) + 30, 6));
-        user.get("Ken").addPersona(new Personas("Kala-Nemi", 41, "Justice", List.of(TiposPersona.getTipoUsuarioPorIndice(7)), "Darkness", "Light", random.nextDouble(50) + 30, 7));
-        user.get("Shinjiro").addPersona(new Personas("Castor", 46, "Hierophant", List.of(TiposPersona.getTipoUsuarioPorIndice(8)), "Light", "Physical", random.nextDouble(50) + 30, 8));
+        user.get("Aigis").addPersona(new Personas("Athena", 50, "Chariot", List.of(TiposPersona.getTipoUsuarioPorIndice(5)), "Electricity", "Strike", random.nextInt(50) + 30, 5));
+        user.get("Koromaru").addPersona(new Personas("Cerberus", 42, "Strength", List.of(TiposPersona.getTipoUsuarioPorIndice(6)), "Ice", "Dark", random.nextInt(50) + 30, 6));
+        user.get("Ken").addPersona(new Personas("Kala-Nemi", 41, "Justice", List.of(TiposPersona.getTipoUsuarioPorIndice(7)), "Darkness", "Light", random.nextInt(50) + 30, 7));
+        user.get("Shinjiro").addPersona(new Personas("Castor", 46, "Hierophant", List.of(TiposPersona.getTipoUsuarioPorIndice(8)), "Light", "Physical", random.nextInt(50) + 30, 8));
 
         UsuarioHasPersonaDAO usuarioHasPersonaDAO = new UsuarioHasPersonaDAO();
 
@@ -137,9 +138,9 @@ public class MenuGeral {
         usuarioHasPersonaDAO.insertUsuarioHasPersona(user.get("Shinjiro").getId(), user.get("Shinjiro").getPersonas().getIdPersona());
 
 //                                            Strega:
-        user.get("Takaya").addPersona(new Personas("Hypnos", 52, "Death", List.of(TiposPersona.getTipoUsuarioPorIndice(9)), "Light", "Dark", random.nextDouble(50) + 30, 9));
-        user.get("Jin").addPersona(new Personas("Moros", 50, "Hermit", List.of(TiposPersona.getTipoUsuarioPorIndice(10)), "Bless", "Almighty", random.nextDouble(50) + 30, 10));
-        user.get("Chidori").addPersona(new Personas("Medea", 44, "Magician", List.of(TiposPersona.getTipoUsuarioPorIndice(11)), "Ice", "Fire", random.nextDouble(50) + 30, 11));
+        user.get("Takaya").addPersona(new Personas("Hypnos", 52, "Death", List.of(TiposPersona.getTipoUsuarioPorIndice(9)), "Light", "Dark", random.nextInt(50) + 30, 9));
+        user.get("Jin").addPersona(new Personas("Moros", 50, "Hermit", List.of(TiposPersona.getTipoUsuarioPorIndice(10)), "Bless", "Almighty", random.nextInt(50) + 30, 10));
+        user.get("Chidori").addPersona(new Personas("Medea", 44, "Magician", List.of(TiposPersona.getTipoUsuarioPorIndice(11)), "Ice", "Fire", random.nextInt(50) + 30, 11));
         for (String nomeUsuario : usuariosStrega) {
             personasDAOuser.insertPersona(user.get(nomeUsuario).getPersonas());
         }
@@ -182,11 +183,11 @@ public class MenuGeral {
 // ----------------------------------------- Shadows(inimigos): -------------------------------------
 
         List<Shadow> shadows = new ArrayList<>(); // Poucas inserções e nome indiferente(uso do ArrayList)
-        shadows.add(new Shadow("Dancer of Sorrow", 160, 18, "Moon", List.of("Magic"), "Fire", "Ice", random.nextDouble(50) + 30));
-        shadows.add(new Shadow("Brutal Ogre", 210, 22, "Strength", List.of("Physical"), "Wind", "Fire", random.nextDouble(50) + 30));
-        shadows.add(new Shadow("Twisted Teacher", 130, 14, "Hierophant", List.of("Mental"), "Electricity", "Dark", random.nextDouble(50) + 30));
-        shadows.add(new Shadow("Dark Cupid", 100, 11, "Lovers", List.of("Ailment"), "Bless", "Dark", random.nextDouble(50) + 30));
-        shadows.add(new Shadow("Searing Beast", 190, 20, "Chariot", List.of("Physical", "Magic"), "Ice", "Fire", random.nextDouble(50) + 30));
+        shadows.add(new Shadow("Dancer of Sorrow", 160, 18, "Moon", List.of("Magic"), "Fire", "Ice", random.nextInt(50) + 30));
+        shadows.add(new Shadow("Brutal Ogre", 210, 22, "Strength", List.of("Physical"), "Wind", "Fire", random.nextInt(50) + 30));
+        shadows.add(new Shadow("Twisted Teacher", 130, 14, "Hierophant", List.of("Mental"), "Electricity", "Dark", random.nextInt(50) + 30));
+        shadows.add(new Shadow("Dark Cupid", 100, 11, "Lovers", List.of("Ailment"), "Bless", "Dark", random.nextInt(50) + 30));
+        shadows.add(new Shadow("Searing Beast", 190, 20, "Chariot", List.of("Physical", "Magic"), "Ice", "Fire", random.nextInt(50) + 30));
 
         ShadowDAO shadowdao = new ShadowDAO();
         shadowdao.insertShadow(shadows.get(0));
@@ -740,33 +741,6 @@ public class MenuGeral {
                                         System.out.println(ANSI_RESET);
                                     }
                                     case 3 -> {
-                                        // Fazer a interação com o usuário localmente
-                                    /*ArrayList<SerHumano> pessoas = tatsumiPort.getPersonagensNoLocal(localAtual);
-                                    if (pessoas.isEmpty()) {
-                                        System.out.println(ANSI_YELLOW + "Ninguém por aqui..." + ANSI_RESET);
-                                        break;
-                                    }
-                                    System.out.println(ANSI_GRAY + "Com quem deseja interagir?" + ANSI_RESET);
-                                    for (int i = 0; i < pessoas.size(); i++) {
-                                        System.out.println(ANSI_BLUE + (i + 1) + ". " + pessoas.get(i).getNome() + ANSI_RESET);
-                                    }
-
-                                    try {
-                                        System.out.println(ANSI_GRAY);
-                                        int escolha = sc.nextInt();
-                                        sc.nextLine(); // Limpa buffer
-                                        System.out.println(ANSI_RESET);
-
-                                        if (escolha > 0 && escolha <= pessoas.size()) {
-                                            System.out.println(ANSI_GREEN + "interagindo" + ANSI_RESET);
-                                            //protagonista.interagir(pessoas.get(escolha - 1));
-                                        } else {
-                                            System.out.println(ANSI_RED + "Escolha inválida!" + ANSI_RESET);
-                                        }
-                                    } catch (InputMismatchException e) {
-                                        System.out.println(ANSI_RED + "Erro: Digite apenas números!" + ANSI_RESET);
-                                        sc.nextLine(); // Limpa buffer
-                                    }*/
                                         System.out.println(ANSI_CYAN + "\n----- Interação -----" + ANSI_RESET);
 
                                         while (true) {
@@ -865,51 +839,124 @@ public class MenuGeral {
                                     }
                                     case 4 -> {
                                         AudioManager.getInstance().setGameStateMusic(AudioManager.GameState.BATTLE);
-                                        ArrayList<SerHumano> pessoas = tatsumiPort.getPersonagensNoLocal(localAtual);
-                                        ArrayList<UsuarioPersona> viloes = new ArrayList<>();
 
-                                        for (SerHumano pessoa : pessoas) {
-                                            if (pessoa instanceof Usuarios u) {
-                                                if (u.isVilao()) {
-                                                    viloes.add(u);
+                                        System.out.println(ANSI_CYAN + "\nDeseja enfrentar qual tipo de inimigo?" + ANSI_RESET);
+                                        System.out.println("1. STREGA");
+                                        System.out.println("2. Shadow");
+                                        System.out.println("0. Sair");
+                                        String escolha = sc.nextLine();
+
+                                        if(escolha.equals("1") || escolha.equalsIgnoreCase("STREGA")) {
+                                            // Código existente para batalha contra STREGA
+                                            ArrayList<SerHumano> pessoas = tatsumiPort.getPersonagensNoLocal(localAtual);
+                                            ArrayList<UsuarioPersona> viloes = new ArrayList<>();
+
+                                            for (SerHumano pessoa : pessoas) {
+                                                if (pessoa instanceof Usuarios u) {
+                                                    if (u.isVilao()) {
+                                                        viloes.add(u);
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        ArrayList<UsuarioPersona> timeProtagonistas = new ArrayList<>();
-                                        timeProtagonistas.add(protagonista);
-                                        System.out.println(ANSI_CYAN + "\n----- Batalha -----" + ANSI_RESET);
-                                        System.out.println();
-                                        System.out.println(ANSI_BLUE + "Monte a sua equipe!" + ANSI_RESET);
-                                        listarAliados(user);
-                                        Set<String> aliadosSelecionados = new HashSet<>(); // Armazenar os já escolhidos
+                                            ArrayList<UsuarioPersona> timeProtagonistas = new ArrayList<>();
+                                            timeProtagonistas.add(protagonista);
+                                            System.out.println(ANSI_CYAN + "\n----- Batalha -----" + ANSI_RESET);
+                                            System.out.println();
+                                            System.out.println(ANSI_BLUE + "Monte a sua equipe!" + ANSI_RESET);
+                                            listarAliados(user);
+                                            Set<String> aliadosSelecionados = new HashSet<>();
 
-                                        for (int i = 1; i <= 3; i++) {
-                                            String posicao = switch (i) {
-                                                case 1 -> "Primeiro";
-                                                case 2 -> "Segundo";
-                                                case 3 -> "Terceiro";
-                                                default -> "";
-                                            };
+                                            for (int i = 1; i <= 3; i++) {
+                                                String posicao = switch (i) {
+                                                    case 1 -> "Primeiro";
+                                                    case 2 -> "Segundo";
+                                                    case 3 -> "Terceiro";
+                                                    default -> "";
+                                                };
 
-                                            while (true) {
-                                                System.out.println(posicao + " Aliado: ");
-                                                String nomeAliado = sc.nextLine();
+                                                while (true) {
+                                                    System.out.println(posicao + " Aliado: ");
+                                                    String nomeAliado = sc.nextLine();
 
-                                                if (user.containsKey(nomeAliado) && !aliadosSelecionados.contains(nomeAliado)) {
-                                                    timeProtagonistas.add(user.get(nomeAliado));
-                                                    aliadosSelecionados.add(nomeAliado);
-                                                    break;
-                                                } else {
-                                                    System.out.println(ANSI_RED + "Aliado não encontrado ou já selecionado! Tente novamente." + ANSI_RESET);
+                                                    if (user.containsKey(nomeAliado) && !aliadosSelecionados.contains(nomeAliado)) {
+                                                        timeProtagonistas.add(user.get(nomeAliado));
+                                                        aliadosSelecionados.add(nomeAliado);
+                                                        break;
+                                                    } else {
+                                                        System.out.println(ANSI_RED + "Aliado não encontrado ou já selecionado! Tente novamente." + ANSI_RESET);
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        if (!viloes.isEmpty()) {
-                                            iniciarCombate(timeProtagonistas, viloes);
-                                        } else {
-                                            System.out.println(ANSI_RED + "Não há vilões na área para combater" + ANSI_RESET);
+                                            if (!viloes.isEmpty()) {
+                                                iniciarCombate(timeProtagonistas, viloes);
+                                            } else {
+                                                System.out.println(ANSI_RED + "Não há vilões na área para combater" + ANSI_RESET);
+                                            }
+                                        }
+                                        else if(escolha.equals("2") || escolha.equalsIgnoreCase("Shadow")) {
+                                            // Nova lógica para batalha contra Shadows
+                                            ArrayList<UsuarioPersona> timeProtagonistas = new ArrayList<>();
+                                            timeProtagonistas.add(protagonista);
+
+                                            System.out.println(ANSI_CYAN + "\n----- Batalha Contra Shadows -----" + ANSI_RESET);
+                                            System.out.println(ANSI_BLUE + "Monte a sua equipe!" + ANSI_RESET);
+                                            listarAliados(user);
+                                            Set<String> aliadosSelecionados = new HashSet<>();
+
+                                            for (int i = 1; i <= 3; i++) {
+                                                String posicao = switch (i) {
+                                                    case 1 -> "Primeiro";
+                                                    case 2 -> "Segundo";
+                                                    case 3 -> "Terceiro";
+                                                    default -> "";
+                                                };
+
+                                                while (true) {
+                                                    System.out.println(posicao + " Aliado: ");
+                                                    String nomeAliado = sc.nextLine();
+
+                                                    if (user.containsKey(nomeAliado) && !aliadosSelecionados.contains(nomeAliado)) {
+                                                        timeProtagonistas.add(user.get(nomeAliado));
+                                                        aliadosSelecionados.add(nomeAliado);
+                                                        break;
+                                                    } else {
+                                                        System.out.println(ANSI_RED + "Aliado não encontrado ou já selecionado! Tente novamente." + ANSI_RESET);
+                                                    }
+                                                }
+                                            }
+
+                                            // Selecionar Shadows aleatórias para batalha
+                                            List<Shadow> shadowsDisponiveis = new ArrayList<>();
+                                            shadowsDisponiveis.add(new Shadow("Dancer of Sorrow", 160, 18, "Moon", List.of("Magic"), "Fire", "Ice", random.nextInt(50) + 30));
+                                            shadowsDisponiveis.add(new Shadow("Brutal Ogre", 210, 22, "Strength", List.of("Physical"), "Wind", "Fire", random.nextInt(50) + 30));
+                                            shadowsDisponiveis.add(new Shadow("Twisted Teacher", 130, 14, "Hierophant", List.of("Mental"), "Electricity", "Dark", random.nextInt(50) + 30));
+                                            shadowsDisponiveis.add(new Shadow("Dark Cupid", 100, 11, "Lovers", List.of("Ailment"), "Bless", "Dark", random.nextInt(50) + 30));
+                                            shadowsDisponiveis.add(new Shadow("Searing Beast", 190, 20, "Chariot", List.of("Physical", "Magic"), "Ice", "Fire", random.nextInt(50) + 30));
+
+                                            // Selecionar 1-3 Shadows aleatórias para a batalha
+                                            int qtdShadows = random.nextInt(3) + 1; // 1 a 3 Shadows
+                                            ArrayList<Shadow> shadowsParaBatalha = new ArrayList<>();
+
+                                            for (int i = 0; i < qtdShadows; i++) {
+                                                int index = random.nextInt(shadowsDisponiveis.size());
+                                                shadowsParaBatalha.add(shadowsDisponiveis.get(index));
+                                                shadowsDisponiveis.remove(index);
+                                            }
+
+                                            System.out.println("\nInimigos encontrados:");
+                                            for (Shadow shadow : shadowsParaBatalha) {
+                                                System.out.println(ANSI_RED + shadow.getNome() + ANSI_RESET + " - " + shadow.getArcana());
+                                            }
+
+                                            CombateShadows(timeProtagonistas, shadowsParaBatalha);
+                                        }
+                                        else if(escolha.equals("0")) {
+                                            System.out.println("Retornando ao menu principal...");
+                                        }
+                                        else {
+                                            System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                         }
                                     }
                                     case 5 -> {

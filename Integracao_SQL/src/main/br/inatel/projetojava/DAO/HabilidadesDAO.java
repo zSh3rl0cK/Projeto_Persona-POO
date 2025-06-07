@@ -20,10 +20,10 @@ public class HabilidadesDAO extends ConnectionDAO {
 
         try {
             this.pst = this.connection.prepareStatement(sql);
-            this.pst.setString(1, habilidade.getNome());
-            this.pst.setString(2, habilidade.getTipo());
-            this.pst.setString(3, habilidade.getEfeito());
-            this.pst.setDouble(4, habilidade.getDano());
+            this.pst.setString(1, habilidade.nome());
+            this.pst.setString(2, habilidade.tipo());
+            this.pst.setString(3, habilidade.efeito());
+            this.pst.setDouble(4, habilidade.dano());
             this.pst.execute();
             sucesso = true;
         } catch (SQLException exc) {
@@ -48,10 +48,10 @@ public class HabilidadesDAO extends ConnectionDAO {
 
         try {
             this.pst = this.connection.prepareStatement(sql);
-            this.pst.setString(1, habilidade.getNome());
-            this.pst.setString(2, habilidade.getTipo());
-            this.pst.setString(3, habilidade.getEfeito());
-            this.pst.setDouble(4, habilidade.getDano());
+            this.pst.setString(1, habilidade.nome());
+            this.pst.setString(2, habilidade.tipo());
+            this.pst.setString(3, habilidade.efeito());
+            this.pst.setDouble(4, habilidade.dano());
             this.pst.setInt(5, id);
             this.pst.execute();
             sucesso = true;
@@ -139,9 +139,9 @@ public class HabilidadesDAO extends ConnectionDAO {
                 );
 
                 PrintStream var10000 = System.out;
-                String var10001 = habilidadeAux.getNome();
-                var10000.println("Nome: " + var10001 + " | Tipo: " + habilidadeAux.getTipo() +
-                        " | Efeito: " + habilidadeAux.getEfeito() + " | Dano: " + habilidadeAux.getDano());
+                String var10001 = habilidadeAux.nome();
+                var10000.println("Nome: " + var10001 + " | Tipo: " + habilidadeAux.tipo() +
+                        " | Efeito: " + habilidadeAux.efeito() + " | Dano: " + habilidadeAux.dano());
                 System.out.println("--------------------");
                 habilidades.add(habilidadeAux);
             }
@@ -180,9 +180,9 @@ public class HabilidadesDAO extends ConnectionDAO {
                 );
 
                 PrintStream var10000 = System.out;
-                String var10001 = habilidadeAux.getNome();
-                var10000.println("Nome: " + var10001 + " | Tipo: " + habilidadeAux.getTipo() +
-                        " | Efeito: " + habilidadeAux.getEfeito() + " | Dano: " + habilidadeAux.getDano());
+                String var10001 = habilidadeAux.nome();
+                var10000.println("Nome: " + var10001 + " | Tipo: " + habilidadeAux.tipo() +
+                        " | Efeito: " + habilidadeAux.efeito() + " | Dano: " + habilidadeAux.dano());
                 System.out.println("--------------------");
                 habilidades.add(habilidadeAux);
             }

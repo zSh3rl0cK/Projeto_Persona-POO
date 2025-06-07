@@ -44,12 +44,12 @@ public class Cidade {
         }
     }
 
-    // Lista os personagens disponíveis para interação em um local
+    // Lista os personagens disponíveis para interação em um local -- Apenas Debug
     public ArrayList<SerHumano> getPersonagensNoLocal(String nomeLocal) {
         return locais.getOrDefault(nomeLocal, new ArrayList<>());
     }
 
-    // Mostra todos os locais disponíveis
+    // Mostra todos os locais disponíveis -- Debug apenas
     public void listarLocais() {
         System.out.println(ANSI_BLUE + "Locais disponíveis em " + nomeCidade + ":" + ANSI_RESET);
         for (String local : locais.keySet()) {

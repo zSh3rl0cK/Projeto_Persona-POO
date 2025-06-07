@@ -2,20 +2,9 @@ package main.br.inatel.projetojava.Model.personas;
 
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
-public class Habilidades {
+public record Habilidades(String nome, String tipo, String efeito, int dano) { // Classes Record são classes imutáveis que servem de armazenamento de dados
 
-    private final String nome;
-    private final String tipo;
-    private final String efeito;
-    private final int dano;
     // private int id; // Usar apenas se for inserir no banco de dados.
-
-    public Habilidades(String nome, String tipo, String efeito, int dano){
-        this.nome = nome;
-        this.tipo = tipo;
-        this.efeito = efeito;
-        this.dano = dano;
-    }
 
     /*
     Usar se for inserir no banco de dados:
@@ -27,31 +16,14 @@ public class Habilidades {
         this.id = id;
     }*/
 
-    public void descreverHabilidade(){
-        System.out.println(ANSI_CYAN + "Nome da Habilidade: " + getNome() + ANSI_RESET);
-        System.out.println(ANSI_BLUE + "Tipo: " + getTipo());
-        System.out.println("Efeito: " + getEfeito());
-        System.out.println("Dano: " + getDano() + ANSI_RESET);
+    public void descreverHabilidade() {
+        System.out.println(ANSI_CYAN + "Nome da Habilidade: " + nome() + ANSI_RESET);
+        System.out.println(ANSI_BLUE + "Tipo: " + tipo());
+        System.out.println("Efeito: " + efeito());
+        System.out.println("Dano: " + dano() + ANSI_RESET);
     }
 
     // Setters e Getters:
-
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public String getEfeito() {
-        return efeito;
-    }
-
-    public int getDano() {
-        return dano;
-    }
 
     /*
     public int getId() {

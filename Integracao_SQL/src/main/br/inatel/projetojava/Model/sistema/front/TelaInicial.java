@@ -6,10 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
 
 public class TelaInicial extends JFrame {
 
-    public TelaInicial() {
+    private final CountDownLatch latch;
+    public TelaInicial(CountDownLatch latch) {
+        this.latch = latch;
         setTitle("Persona 3 - SEES Terminal");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,9 +75,9 @@ public class TelaInicial extends JFrame {
         botaoStart.setFocusPainted(false);
         botaoStart.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoStart.setPreferredSize(new Dimension(150, 40));
-        botaoStart.addActionListener((ActionEvent e) -> {
+        botaoStart.addActionListener((ActionEvent _) -> {
             dispose(); // fecha a tela
-            // continue com o que precisar chamar depois
+            latch.countDown(); // Libera a thread principal
         });
 
         // Botão Opções
@@ -85,9 +88,7 @@ public class TelaInicial extends JFrame {
         btnOpcoes.setFocusPainted(false);
         btnOpcoes.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnOpcoes.setPreferredSize(new Dimension(150, 35));
-        btnOpcoes.addActionListener(e -> {
-            abrirTelaOpcoes();
-        });
+        btnOpcoes.addActionListener(_ -> abrirTelaOpcoes());
 
         // Botão Créditos
         JButton btnCreditos = new JButton("Ver Créditos");
@@ -97,9 +98,7 @@ public class TelaInicial extends JFrame {
         btnCreditos.setFocusPainted(false);
         btnCreditos.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnCreditos.setPreferredSize(new Dimension(150, 35));
-        btnCreditos.addActionListener(e -> {
-            new Creditos().setVisible(true);
-        });
+        btnCreditos.addActionListener(_ -> new Creditos().setVisible(true));
 
         // Botão Sair
         JButton btnSair = new JButton("Sair");
@@ -109,7 +108,7 @@ public class TelaInicial extends JFrame {
         btnSair.setFocusPainted(false);
         btnSair.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnSair.setPreferredSize(new Dimension(150, 35));
-        btnSair.addActionListener(e -> {
+        btnSair.addActionListener(_ -> {
             int resposta = JOptionPane.showConfirmDialog(
                     this,
                     "Tem certeza que deseja sair?",
@@ -138,7 +137,7 @@ public class TelaInicial extends JFrame {
     }
 
     private void abrirTelaOpcoes() {
-        // Cria uma nova janela para opções
+        // Cria uma janela para opções
         JDialog opcoes = new JDialog(this, "Opções de Áudio", true);
         opcoes.setSize(400, 300);
         opcoes.setLocationRelativeTo(this);
@@ -182,7 +181,7 @@ public class TelaInicial extends JFrame {
         JSlider sliderMusica = new JSlider(0, 100, (int)(audioManager.getMusicVolume() * 100));
         sliderMusica.setOpaque(false);
         sliderMusica.setForeground(Color.WHITE);
-        sliderMusica.addChangeListener(e -> {
+        sliderMusica.addChangeListener(_ -> {
             float volume = sliderMusica.getValue() / 100.0f;
             audioManager.setMusicVolume(volume);
         });
@@ -193,7 +192,7 @@ public class TelaInicial extends JFrame {
         JLabel valorMusica = new JLabel(String.format("%.0f%%", audioManager.getMusicVolume() * 100));
         valorMusica.setForeground(Color.CYAN);
         valorMusica.setFont(new Font("Monospaced", Font.BOLD, 12));
-        sliderMusica.addChangeListener(e -> valorMusica.setText(sliderMusica.getValue() + "%"));
+        sliderMusica.addChangeListener(_ -> valorMusica.setText(sliderMusica.getValue() + "%"));
         gbc.gridx = 2; gbc.gridy = 1;
         painelOpcoes.add(valorMusica, gbc);
 
@@ -207,7 +206,7 @@ public class TelaInicial extends JFrame {
         JSlider sliderSFX = new JSlider(0, 100, (int)(audioManager.getSFXVolume() * 100));
         sliderSFX.setOpaque(false);
         sliderSFX.setForeground(Color.WHITE);
-        sliderSFX.addChangeListener(e -> {
+        sliderSFX.addChangeListener(_ -> {
             float volume = sliderSFX.getValue() / 100.0f;
             audioManager.setSFXVolume(volume);
         });
@@ -218,7 +217,7 @@ public class TelaInicial extends JFrame {
         JLabel valorSFX = new JLabel(String.format("%.0f%%", audioManager.getSFXVolume() * 100));
         valorSFX.setForeground(Color.CYAN);
         valorSFX.setFont(new Font("Monospaced", Font.BOLD, 12));
-        sliderSFX.addChangeListener(e -> valorSFX.setText(sliderSFX.getValue() + "%"));
+        sliderSFX.addChangeListener(_ -> valorSFX.setText(sliderSFX.getValue() + "%"));
         gbc.gridx = 2; gbc.gridy = 2;
         painelOpcoes.add(valorSFX, gbc);
 
@@ -228,7 +227,7 @@ public class TelaInicial extends JFrame {
         btnTestarSom.setBackground(new Color(50, 150, 50));
         btnTestarSom.setForeground(Color.WHITE);
         btnTestarSom.setFocusPainted(false);
-        btnTestarSom.addActionListener(e -> audioManager.playLevelUpSFX());
+        btnTestarSom.addActionListener(_ -> audioManager.playLevelUpSFX());
         gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2;
         painelOpcoes.add(btnTestarSom, gbc);
         gbc.gridwidth = 1;
@@ -239,7 +238,7 @@ public class TelaInicial extends JFrame {
         btnFechar.setBackground(new Color(80, 80, 80));
         btnFechar.setForeground(Color.WHITE);
         btnFechar.setFocusPainted(false);
-        btnFechar.addActionListener(e -> opcoes.dispose());
+        btnFechar.addActionListener(_ -> opcoes.dispose());
         gbc.gridx = 1; gbc.gridy = 4;
         painelOpcoes.add(btnFechar, gbc);
 
@@ -247,9 +246,9 @@ public class TelaInicial extends JFrame {
         opcoes.setVisible(true);
     }
 
-    public static void exibirTela() {
+    public static void exibirTela(CountDownLatch latch) {
         SwingUtilities.invokeLater(() -> {
-            TelaInicial tela = new TelaInicial();
+            TelaInicial tela = new TelaInicial(latch);
             tela.setVisible(true);
         });
     }

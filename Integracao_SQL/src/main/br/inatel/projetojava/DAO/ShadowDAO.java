@@ -59,7 +59,7 @@ public class ShadowDAO extends ConnectionDAO {
                         tipos,
                         rs.getString("fraqueza"),
                         rs.getString("resistencia"),
-                        rs.getDouble("dano"),
+                        rs.getInt("dano"),
                         rs.getInt("id")
                 );
             }

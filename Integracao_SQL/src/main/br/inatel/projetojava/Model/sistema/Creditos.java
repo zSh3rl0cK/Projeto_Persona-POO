@@ -2,8 +2,6 @@ package main.br.inatel.projetojava.Model.sistema;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Creditos extends JFrame {
@@ -11,8 +9,8 @@ public class Creditos extends JFrame {
     private ArrayList<String> creditos;
     private int creditoAtual = 0;
     private Timer timer;
-    private Color corFundo = new Color(26, 26, 46);
-    private Color corTexto = new Color(0, 255, 255);
+    private final Color corFundo = new Color(26, 26, 46);
+    private final Color corTexto = new Color(0, 255, 255);
 
     public Creditos() {
         inicializarCreditos();
@@ -36,7 +34,6 @@ public class Creditos extends JFrame {
     private void configurarJanela() {
         setTitle("Créditos");
         setSize(800, 600);
-        // MUDANÇA: Apenas fecha esta janela, não todo o programa
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -72,12 +69,7 @@ public class Creditos extends JFrame {
     }
 
     private void iniciarAnimacao() {
-        timer = new Timer(2000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostrarProximoCredito();
-            }
-        });
+        timer = new Timer(2000, e -> mostrarProximoCredito());
 
         mostrarProximoCredito();
         timer.start();
@@ -124,7 +116,6 @@ public class Creditos extends JFrame {
             finalLabel.setForeground(Color.LIGHT_GRAY);
             painelPrincipal.add(finalLabel, BorderLayout.SOUTH);
 
-            // MUDANÇA: Apenas fecha esta janela após 5 segundos
             Timer closeTimer = new Timer(5000, e -> dispose());
             closeTimer.setRepeats(false);
             closeTimer.start();

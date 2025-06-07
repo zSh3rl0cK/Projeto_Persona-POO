@@ -1,11 +1,10 @@
 package main.br.inatel.projetojava.Model.personagens.jogaveis;
 
-
-import main.br.inatel.projetojava.Model.itens.auxiliares.Ativador;
 import main.br.inatel.projetojava.Model.personagens.Inventario;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 import main.br.inatel.projetojava.Model.personagens.interacao.Interacao;
 import main.br.inatel.projetojava.Model.personas.seres.Personas;
+import main.br.inatel.projetojava.Model.personas.seres.Shadow;
 
 import static main.br.inatel.projetojava.Model.personagens.interacao.InteracaoManager.interagir;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
@@ -16,7 +15,6 @@ public class Usuarios extends UsuarioPersona implements Interacao {
     private Personas persona;
     private boolean vilao;
     private int nivelConfidant = 0; // Todos iniciam 0.
-    private Ativador ativador;
 
     // Construtor existente
     public Usuarios(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, String papel, boolean vilao) {
@@ -73,12 +71,9 @@ public class Usuarios extends UsuarioPersona implements Interacao {
     public String getPapel(){
         return papel;
     }
+
     public int getNivel(){
         return nivel;
-    }
-
-    public int getAtivadorId() {
-        return ativador.getIdAtivador();
     }
 
     public void setId(int idUsuario) {
@@ -125,7 +120,8 @@ public class Usuarios extends UsuarioPersona implements Interacao {
         this.hp = hp;
     }
 
-    public Ativador getAtivador() {
-        return ativador;
+    @Override
+    public boolean agirShadow(int turno, Personas persona, Shadow alvo) {
+        return false;
     }
 }

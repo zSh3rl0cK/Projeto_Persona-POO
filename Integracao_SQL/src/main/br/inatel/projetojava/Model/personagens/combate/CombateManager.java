@@ -4,6 +4,7 @@ import main.br.inatel.projetojava.Model.exceptions.InvalidMenuInputException;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 import main.br.inatel.projetojava.Model.personagens.jogaveis.Protagonista;
 import main.br.inatel.projetojava.Model.personagens.jogaveis.Usuarios;
+import main.br.inatel.projetojava.Model.personas.seres.Shadow;
 import java.util.ArrayList;
 import java.util.Random;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
@@ -90,6 +91,85 @@ public class CombateManager {
         }
     }
 
+    public static void CombateShadows(ArrayList<UsuarioPersona> grupo1, ArrayList<Shadow> grupo2) {
+        int turno = 1;
+        boolean turnoDoGrupo1 = true;
+        boolean combate = true;
+
+        Protagonista protagonista = encontrarProtagonista(grupo1);
+
+        if (protagonista == null) {
+            System.out.println(ANSI_RED + "Erro: O grupo dos aliados precisa conter um protagonista!" + ANSI_RESET);
+            return;
+        }
+
+        System.out.println(ANSI_PURPLE + "\n--- Combate contra Shadows iniciado! ---" + ANSI_RESET);
+
+        while (combate && !todosDerrotadosShadows(grupo2) && protagonista.getHp() > 0) {
+            try {
+                System.out.println(ANSI_BLUE + "\n--- Turno " + turno + " ---" + ANSI_RESET);
+
+                if (turnoDoGrupo1) {
+                    System.out.println(ANSI_BLUE + "Turno dos aliados:" + ANSI_RESET);
+                    for (UsuarioPersona membro : grupo1) {
+                        if (membro.getHp() <= 0) {
+                            System.out.println(ANSI_YELLOW + membro.getNome() + " está incapacitado e não pode agir." + ANSI_RESET);
+                            continue;
+                        }
+
+                        // Caso o protagonista tenha morrido entre turnos
+                        if (protagonista.getHp() <= 0) {
+                            System.out.println(ANSI_YELLOW + protagonista.getNome() + " foi derrotado! Combate encerrado." + ANSI_RESET);
+                            combate = false;
+                            break;
+                        }
+
+                        Shadow alvo = escolherAlvoShadow(grupo2);
+                        if (alvo == null) break;
+
+                        combate = executarTurnoIndividualContraShadow(membro, alvo, turno);
+                        if (!combate) break;
+                    }
+                } else {
+                    System.out.println(ANSI_PURPLE + "Turno dos Shadows:" + ANSI_RESET);
+                    for (Shadow membro : grupo2) {
+                        if (membro.getHp() <= 0) continue;
+
+                        // IA escolhe alvo automaticamente
+                        UsuarioPersona alvo = escolherAlvoAutomatico(grupo1);
+                        if (alvo == null) break;
+
+                        combate = executarTurnoShadowAutomatico(membro, alvo, turno);
+
+                        // Caso o protagonista morra nesse turno
+                        if (protagonista.getHp() <= 0) {
+                            System.out.println(ANSI_YELLOW + protagonista.getNome() + " foi derrotado! Combate encerrado." + ANSI_RESET);
+                            combate = false;
+                            break;
+                        }
+
+                        if (!combate) break;
+                    }
+                }
+
+                turnoDoGrupo1 = !turnoDoGrupo1;
+                turno++;
+            }
+            catch (InvalidMenuInputException e) {
+                System.out.println(ANSI_RED + "Erro: " + e.getMessage() + ANSI_RESET);
+            }
+        }
+
+        if (protagonista.getHp() <= 0) {
+            System.out.println(ANSI_YELLOW + protagonista.getNome() + " caiu em batalha. O grupo recua." + ANSI_RESET);
+        } else if (todosDerrotadosShadows(grupo2)) {
+            System.out.println(ANSI_GREEN + "Parabéns! Todos os Shadows foram derrotados!");
+            System.out.println("Você acabou de ganhar o troféu da batalha contra as sombras!" + ANSI_RESET);
+        }
+
+        System.out.println(ANSI_PURPLE + "--- Combate contra Shadows Encerrado ---" + ANSI_RESET);
+    }
+
     private static boolean executarTurnoIndividual(UsuarioPersona atacante, UsuarioPersona defensor, int turno) {
         System.out.println(ANSI_BLUE + "\nÉ o turno de " + atacante.getNome() + ANSI_RESET);
 
@@ -98,6 +178,18 @@ public class CombateManager {
         }
         else if (atacante instanceof Usuarios usuario) {
             return atacante.agir(turno, usuario.getPersonas(), defensor);
+        }
+        return true;
+    }
+
+    private static boolean executarTurnoIndividualContraShadow(UsuarioPersona atacante, Shadow defensor, int turno) {
+        System.out.println(ANSI_BLUE + "\nÉ o turno de " + atacante.getNome() + ANSI_RESET);
+
+        if (atacante instanceof Protagonista protagonista) {
+            return atacante.agirShadow(turno, protagonista.getPersona_atual(), defensor);
+        }
+        else if (atacante instanceof Usuarios usuario) {
+            return atacante.agirShadow(turno, usuario.getPersonas(), defensor);
         }
         return true;
     }
@@ -118,6 +210,18 @@ public class CombateManager {
             return atacante.agirAutomatico(turno, usuario.getPersonas(), defensor, usarHabilidade);
         }
         return true;
+    }
+
+    private static boolean executarTurnoShadowAutomatico(Shadow atacante, UsuarioPersona defensor, int turno) {
+        System.out.println(ANSI_PURPLE + "\nÉ o turno de " + atacante.getNome() + ANSI_RESET);
+
+        // "IA" decide o tipo de ação (50% físico, 50% habilidade)
+        boolean usarHabilidade = random.nextBoolean();
+        String tipoAtaque = usarHabilidade ? "habilidade sombria" : "ataque físico";
+
+        System.out.println(ANSI_PURPLE + atacante.getNome() + " prepara um " + tipoAtaque + " contra " + defensor.getNome() + "!" + ANSI_RESET);
+
+        return atacante.agirAutomatico(turno, null, defensor, usarHabilidade);
     }
 
     // Escolher alvo automaticamente
@@ -192,9 +296,67 @@ public class CombateManager {
         return alvoEscolhido;
     }
 
+    private static Shadow escolherAlvoShadow(ArrayList<Shadow> grupo) {
+        System.out.println(ANSI_PURPLE + "\nEscolha o Shadow alvo:" + ANSI_RESET);
+        ArrayList<Shadow> alvosDisponiveis = new ArrayList<>();
+
+        for (Shadow s : grupo) {
+            if (s.getHp() > 0) {
+                alvosDisponiveis.add(s);
+            }
+        }
+
+        if (alvosDisponiveis.isEmpty()) {
+            System.out.println(ANSI_RED + "Nenhum Shadow disponível." + ANSI_RESET);
+            return null;
+        }
+
+        for (int i = 0; i < alvosDisponiveis.size(); i++) {
+            Shadow s = alvosDisponiveis.get(i);
+            System.out.println((i + 1) + " - " + s.getNome() + " (HP: " + s.getHp() + ")");
+        }
+
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        Shadow alvoEscolhido = null;
+
+        while (alvoEscolhido == null) {
+            System.out.print(ANSI_PURPLE + "Digite o número ou nome do Shadow alvo: " + ANSI_RESET);
+            String entrada = scanner.nextLine().trim();
+
+            try {
+                int indice = Integer.parseInt(entrada) - 1;
+                if (indice >= 0 && indice < alvosDisponiveis.size()) {
+                    alvoEscolhido = alvosDisponiveis.get(indice);
+                } else {
+                    System.out.println(ANSI_RED + "Índice inválido. Tente novamente." + ANSI_RESET);
+                }
+            } catch (NumberFormatException e) {
+                for (Shadow s : alvosDisponiveis) {
+                    if (s.getNome().equalsIgnoreCase(entrada)) {
+                        alvoEscolhido = s;
+                        break;
+                    }
+                }
+                if (alvoEscolhido == null) {
+                    System.out.println(ANSI_RED + "Nome inválido. Tente novamente." + ANSI_RESET);
+                }
+            }
+        }
+
+        return alvoEscolhido;
+    }
+
     private static boolean todosDerrotados(ArrayList<UsuarioPersona> grupo) {
         for (UsuarioPersona p : grupo) {
             if (p.getHp() > 0)
+                return false;
+        }
+        return true;
+    }
+
+    private static boolean todosDerrotadosShadows(ArrayList<Shadow> grupo) {
+        for (Shadow s : grupo) {
+            if (s.getHp() > 0)
                 return false;
         }
         return true;

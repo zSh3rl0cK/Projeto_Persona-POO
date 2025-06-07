@@ -24,16 +24,6 @@ public class Arma extends Itens implements EquipaItem {
         }
         usuario.setItem(this);
         usuario.setArma(this);
-        /*
-        if(this.getDano() > 0 && this.getDano() <= 50){
-            usuario.getArma().setDano(usuario.getArma().getDano() + 2);
-        }
-        else if(this.getDano() > 50 && this.getDano() <= 60){
-            usuario.getArma().setDano(usuario.getArma().getDano() + 4);
-        }
-        else if(this.getDano() > 60){
-            usuario.getArma().setDano(usuario.getArma().getDano() + 6);
-        }*/
     }
 
     @Override

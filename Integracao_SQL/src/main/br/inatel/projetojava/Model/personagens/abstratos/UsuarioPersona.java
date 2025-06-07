@@ -83,10 +83,6 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
         persona.setNivel(persona.getNivel() + 1);
     }
 
-    public void setArcana(String Arcana) {
-        this.arcana = Arcana;
-    }
-
     // Implementação da 'interface' de Combate
 
     @Override
@@ -150,7 +146,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
                     System.out.println(ANSI_BLUE + "Escolha a habilidade:" + ANSI_RESET);
                     for (int i = 0; i < habilidades.size(); i++) {
                         Habilidades hab = habilidades.get(i);
-                        System.out.println(ANSI_BLUE + (i + 1) + " - " + hab.getNome() + " (Dano: " + (hab.getDano() - alvo.getDefesa()) + ", SP: 10)" + ANSI_RESET);
+                        System.out.println(ANSI_BLUE + (i + 1) + " - " + hab.nome() + " (Dano: " + (hab.dano() - alvo.getDefesa()) + ", SP: 10)" + ANSI_RESET);
                     }
 
                     int escolhaHab;
@@ -179,9 +175,9 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
                     }
 
                     sp -= custoSP;
-                    double danoFinal = Math.max(0, hab.getDano() - alvo.getDefesa());
+                    double danoFinal = Math.max(0, hab.dano() - alvo.getDefesa());
                     alvo.setHp(alvo.getHp() - danoFinal);
-                    System.out.println(ANSI_BLUE + nome + " usou " + hab.getNome() + " causando " + danoFinal + " de dano!");
+                    System.out.println(ANSI_BLUE + nome + " usou " + hab.nome() + " causando " + danoFinal + " de dano!");
                     System.out.println("SP restante: " + sp + ANSI_RESET);
                 }
             }
@@ -241,6 +237,8 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
         return true;
     }
 
+
+
     //ataques automáticos (sem interação do usuário)
     private void atacarAutomatico(Personas persona, UsuarioPersona alvo) {
         double danoFinal = Math.max(0, this.arma.getDano() - alvo.getDefesa());
@@ -281,13 +279,13 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
             Habilidades habilidade = habilidades.get(random.nextInt(habilidades.size()));
 
             // Custo baseado no dano da habilidade
-            double custoSP = Math.max(5, habilidade.getDano() * 0.1);
+            double custoSP = Math.max(5, habilidade.dano() * 0.1);
 
             if (this.sp >= custoSP) {
                 this.sp -= custoSP;
                 usarHabilidade(persona, alvo, habilidade, custoSP);
             } else {
-                System.out.println(ANSI_YELLOW + this.getNome() + " tentou usar " + habilidade.getNome() +
+                System.out.println(ANSI_YELLOW + this.getNome() + " tentou usar " + habilidade.nome() +
                         " mas não tem SP suficiente!" + ANSI_RESET);
                 atacarAutomatico(persona, alvo); // ataques automáticos
             }
@@ -299,7 +297,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
     }
 
     private void usarHabilidade(Personas persona, UsuarioPersona alvo, Habilidades habilidade, double custoSP) {
-        double danoBase = habilidade.getDano();
+        double danoBase = habilidade.dano();
         double danoFinal = Math.max(1, danoBase - alvo.getDefesa());
 
         // Sistema de acerto (1-6)
@@ -308,7 +306,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
 
         if (dado == 1) {
             System.out.println(ANSI_RED + "Errou! " + this.getNome() + " falhou ao usar " +
-                    habilidade.getNome() + ANSI_RESET);
+                    habilidade.nome() + ANSI_RESET);
             return;
         }
 
@@ -320,7 +318,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
 
         alvo.setHp(alvo.getHp() - danoFinal);
 
-        System.out.println(ANSI_PURPLE + this.getNome() + " usou " + habilidade.getNome() +
+        System.out.println(ANSI_PURPLE + this.getNome() + " usou " + habilidade.nome() +
                 " (Custo: " + custoSP + " SP)" + ANSI_RESET);
         System.out.println(ANSI_RED + alvo.getNome() + " sofreu " + danoFinal +
                 " de dano!" + ANSI_RESET);
@@ -359,19 +357,18 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
     public void setArma(Arma arma) {
         this.arma = arma;
     }
-    public Arma getArma() {
-        return arma;
-    }
-
     public double getDefesa(){
         return this.defesa;
     }
-
     public void setDefesa(double defesa) {
         this.defesa = defesa;
     }
 
     public Inventario getInventario() {
         return inventario;
+    }
+
+    public void setArcana(String Arcana) {
+        this.arcana = Arcana;
     }
 }

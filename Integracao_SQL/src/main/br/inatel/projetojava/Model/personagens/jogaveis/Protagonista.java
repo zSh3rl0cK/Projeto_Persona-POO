@@ -10,6 +10,7 @@ import main.br.inatel.projetojava.Model.personagens.Inventario;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 import main.br.inatel.projetojava.Model.personas.Habilidades;
 import main.br.inatel.projetojava.Model.personas.seres.Personas;
+import main.br.inatel.projetojava.Model.personas.seres.Shadow;
 
 import java.util.*;
 
@@ -112,7 +113,8 @@ public class Protagonista extends UsuarioPersona {
             System.out.println(ANSI_BLUE + "Digite o indice da persona para qual quer trocar: " + ANSI_RESET);
             opcao = entrada.nextInt();
 
-            if(opcao > 0 && opcao < personas.size()){
+            // acho que resolvi
+            if(opcao > 0 && opcao < (personas.size()+1)){
                 persona_atual = personas.get(opcao - 1);
                 break;
             }
@@ -142,8 +144,10 @@ public class Protagonista extends UsuarioPersona {
                 if(escolhaTipo > 0 && escolhaTipo <= 3){
                     break;
                 }
+                else System.out.println(ANSI_RED + "Escreva um valor válido (1, 2 ou 3) e tente novamente:" + ANSI_RESET);
             }catch(InputMismatchException e){
-                System.out.println("Erro: " + e.getMessage());
+                System.out.println(ANSI_RED + "Erro: Entrada inválida. Digite um número inteiro (1, 2 ou 3)." + ANSI_RESET);
+                scanner.nextLine(); // Limpa o buffer
             }
         }
 
@@ -163,13 +167,27 @@ public class Protagonista extends UsuarioPersona {
                 System.out.println(ANSI_BLUE + "Escolha a habilidade:" + ANSI_RESET);
                 for (int i = 0; i < habilidades.size(); i++) {
                     Habilidades hab = habilidades.get(i);
-                    System.out.println(ANSI_BLUE + (i + 1) + " - " + hab.getNome() + " (Dano: " + (hab.getDano()-alvo.getDefesa()) + ", SP: 10)" + ANSI_RESET);
+                    System.out.println(ANSI_BLUE + (i + 1) + " - " + hab.nome() + " (Dano: " + (hab.dano()-alvo.getDefesa()) + ", SP: 10)" + ANSI_RESET);
                 }
 
-                int escolhaHab = scanner.nextInt() - 1;
-                if (escolhaHab < 0 || escolhaHab >= habilidades.size()) {
-                    System.out.println(ANSI_RED + "Habilidade inválida!" + ANSI_RESET);
-                    return;
+                // Try-catch com while para entrada segura
+                int escolhaHab = -1;
+                boolean entradaValida = false;
+
+                while (!entradaValida) {
+                    try {
+                        System.out.print(ANSI_CYAN + "Digite o número da habilidade: " + ANSI_RESET);
+                        escolhaHab = scanner.nextInt() - 1;
+
+                        if (escolhaHab >= 0 && escolhaHab < habilidades.size()) {
+                            entradaValida = true;
+                        } else {
+                            System.out.println(ANSI_RED + "Erro: Escolha um número entre 1 e " + habilidades.size() + "!" + ANSI_RESET);
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println(ANSI_RED + "Erro: Digite apenas números inteiros!" + ANSI_RESET);
+                        scanner.nextLine(); // Limpa o buffer do scanner
+                    }
                 }
 
                 Habilidades hab = habilidades.get(escolhaHab);
@@ -181,9 +199,9 @@ public class Protagonista extends UsuarioPersona {
                 }
 
                 sp -= custoSP;
-                double danoFinal = Math.max(0, hab.getDano() - alvo.getDefesa());
+                double danoFinal = Math.max(0, hab.dano() - alvo.getDefesa());
                 alvo.setHp(alvo.getHp() - danoFinal);
-                System.out.println(ANSI_BLUE + nome + " usou " + hab.getNome() + " causando " + danoFinal + " de dano!");
+                System.out.println(ANSI_BLUE + nome + " usou " + hab.nome() + " causando " + danoFinal + " de dano!");
                 System.out.println("SP restante: " + sp + ANSI_RESET);
             }
             case 3 -> trocarPersona();
@@ -191,6 +209,11 @@ public class Protagonista extends UsuarioPersona {
         }
 
         defesa = 0; // Reseta defesa no fim do turno
+    }
+
+    @Override
+    public boolean agirShadow(int turno, Personas persona, Shadow alvo) {
+        return false;
     }
 
     // --------------------------------- Getters e setters ---------------------------------

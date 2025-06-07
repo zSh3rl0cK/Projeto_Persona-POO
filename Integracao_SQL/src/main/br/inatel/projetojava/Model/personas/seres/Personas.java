@@ -14,7 +14,7 @@ public class Personas {
     private final List<String> tipo;
     private final String fraqueza;
     private final String resistencia;
-    private final double dano;
+    private final int dano;
     private int id;
     private final List<Habilidades> habilidades = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class Personas {
     }
 
 
-    public Personas(String nome, int nivel, String arcana, List<String> tipo, String fraqueza, String resistencia, double dano) {
+    public Personas(String nome, int nivel, String arcana, List<String> tipo, String fraqueza, String resistencia, int dano) {
         this.nome = nome;
         this.nivel = nivel;
         this.arcana = arcana;
@@ -34,7 +34,7 @@ public class Personas {
     }
 
     // Sobrecarga de construtor para busca de persona com ID em SQL
-    public Personas(String nome, int nivel, String arcana, List<String> tipo, String fraqueza, String resistencia, double dano, int id) {
+    public Personas(String nome, int nivel, String arcana, List<String> tipo, String fraqueza, String resistencia, int dano, int id) {
         this.nome = nome;
         this.nivel = nivel;
         this.arcana = arcana;
@@ -95,10 +95,12 @@ public class Personas {
     public String getFraqueza() {
         return fraqueza;
     }
+
     public String getResistencia() {
         return resistencia;
     }
-    public double getDano() {
+
+    public int getDano() {
         return dano;
     }
 
