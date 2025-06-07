@@ -1,16 +1,12 @@
-Alunos: Felipe Tagawa Reis & Pedro Henrique Ribeiro Dias.
+### Alunos: Felipe Tagawa Reis & Pedro Henrique Ribeiro Dias.
 
 Matrículas: 2037 e 529.
 
 Cursos : GEC e GES
 
-----------------------------------------------------------------
-
-# JavaQuest README
-
 ## Sobre o Projeto
 
-JavaQuest é uma aplicação desenvolvida em Java, desenhada especificamente para o gerenciamento de personagens de RPG. Com uma base de dados MySQL robusta, o sistema permite criar, armazenar, atualizar e gerenciar personagens de RPG de maneira eficiente e interativa.
+Esse jogo baseado em Persona 3 Reload é uma aplicação desenvolvida em Java, 
 
 ## Estrutura do Banco de Dados
 
