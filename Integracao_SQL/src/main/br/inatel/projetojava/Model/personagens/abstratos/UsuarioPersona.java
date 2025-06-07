@@ -241,6 +241,32 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
         return true;
     }
 
+    //ataques automáticos (sem interação do usuário)
+    private void atacarAutomatico(Personas persona, UsuarioPersona alvo) {
+        double danoFinal = Math.max(0, this.arma.getDano() - alvo.getDefesa());
+        int missHit = random.nextInt(6) + 1;
+
+        System.out.println(imprimirDado(missHit));
+
+        if(missHit == 1) {
+            System.out.println(ANSI_RED + "Missed! " + this.getNome() + " errou o ataque!" + ANSI_RESET);
+        }
+        else if (missHit == 6) {
+            danoFinal *= 1.5;
+            alvo.setHp(alvo.getHp() - danoFinal);
+            System.out.println(ANSI_YELLOW + "Crítico! " + ANSI_RESET);
+            System.out.println(ANSI_BLUE + this.getNome() + " realizou um ataque físico *crítico* causando " +
+                    danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
+        }
+        else {
+            alvo.setHp(alvo.getHp() - danoFinal);
+            System.out.println(ANSI_BLUE + this.getNome() + " realizou um ataque físico causando " +
+                    danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
+        }
+
+        defesa = 0; // Reseta defesa no fim do turno
+    }
+
     @Override
     public boolean agirAutomatico(int turno, Personas persona, UsuarioPersona alvo, boolean usarHabilidade) {
         System.out.println(ANSI_CYAN + "\nTurno de " + this.getNome() + ANSI_RESET);
@@ -270,32 +296,6 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
         }
 
         return alvo.getHp() > 0;
-    }
-
-    //ataques automáticos (sem interação do usuário)
-    private void atacarAutomatico(Personas persona, UsuarioPersona alvo) {
-        double danoFinal = Math.max(0, this.arma.getDano() - alvo.getDefesa());
-        int missHit = random.nextInt(6) + 1;
-
-        System.out.println(imprimirDado(missHit));
-
-        if(missHit == 1) {
-            System.out.println(ANSI_RED + "Missed! " + this.getNome() + " errou o ataque!" + ANSI_RESET);
-        }
-        else if (missHit == 6) {
-            danoFinal *= 1.5;
-            alvo.setHp(alvo.getHp() - danoFinal);
-            System.out.println(ANSI_YELLOW + "Crítico! " + ANSI_RESET);
-            System.out.println(ANSI_BLUE + this.getNome() + " realizou um ataque físico *crítico* causando " +
-                    danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
-        }
-        else {
-            alvo.setHp(alvo.getHp() - danoFinal);
-            System.out.println(ANSI_BLUE + this.getNome() + " realizou um ataque físico causando " +
-                    danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
-        }
-
-        defesa = 0; // Reseta defesa no fim do turno
     }
 
     private void usarHabilidade(Personas persona, UsuarioPersona alvo, Habilidades habilidade, double custoSP) {

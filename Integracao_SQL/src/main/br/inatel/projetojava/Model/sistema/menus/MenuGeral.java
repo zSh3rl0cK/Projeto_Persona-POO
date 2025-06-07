@@ -284,17 +284,24 @@ public class MenuGeral {
         user.get("Shinjiro").getPersonas().addHabilidade(new Habilidades("Kill Rush", "Physical", "Causa dano físico leve a um inimigo múltiplas vezes", random.nextInt(10) + 20));
         user.get("Shinjiro").getPersonas().addHabilidade(new Habilidades("Counterstrike", "Passive", "Chance de 15% de contra-atacar com dano físico médio", 0));
 
-        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Mamudoon", "Dark", "Alta chance de causar morte instantânea a todos os inimigos", random.nextInt(10) + 20));
-        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Hamaon", "Light", "Alta chance de causar morte instantânea a um inimigo", random.nextInt(10) + 20));
-        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Mind Charge", "Support", "Aumenta o próximo dano mágico causado por um aliado", 0));
+        // T A K A Y A
+        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Mamudoon", "Dark", "Alta chance de causar morte instantânea a todos os inimigos", random.nextInt(10) + 15));
+        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Eigaon", "Dark", "Causa grande dano de escuridão a um inimigo", random.nextInt(10) + 15));
+        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Megidola", "Almighty", "Causa dano mágico moderado a todos os inimigos", random.nextInt(10) + 15));
+        user.get("Takaya").getPersonas().addHabilidade(new Habilidades("Mudo", "Dark", "Causa dano leve com chance de morte instantânea a um inimigo", random.nextInt(10) + 15));
 
-        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Debilitate", "Support", "Reduz ataque, defesa e agilidade de um inimigo por 3 turnos", 0));
-        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Marakunda", "Support", "Reduz a defesa de todos os inimigos por 3 turnos", 0));
-        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Mabufula", "Ice", "Causa dano de gelo médio a todos os inimigos com chance de congelar", random.nextInt(10) + 20));
+        // J I N
+        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Bufula", "Ice", "Causa dano de gelo moderado a um inimigo", random.nextInt(10) + 15));
+        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Mabufula", "Ice", "Causa dano de gelo médio a todos os inimigos", random.nextInt(10) + 15));
+        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Blizzaga", "Ice", "Causa grande dano de gelo a um inimigo", random.nextInt(10) + 15));
+        user.get("Jin").getPersonas().addHabilidade(new Habilidades("Diamond Dust", "Ice", "Ataque de gelo devastador contra todos os inimigos", random.nextInt(10) + 15));
 
-        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Maragion", "Fire", "Causa dano de fogo médio a todos os inimigos", random.nextInt(10) + 20));
-        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Diarama", "Healing", "Restaura uma quantidade moderada de HP a um aliado", 0));
-        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Fire Break", "Support", "Remove resistência ao fogo de todos os inimigos por 3 turnos", 0));
+        // C H I D O R I
+        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Agilao", "Fire", "Causa dano de fogo moderado a um inimigo", random.nextInt(10) + 15));
+        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Maragion", "Fire", "Causa dano de fogo médio a todos os inimigos", random.nextInt(10) + 15));
+        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Inferno", "Fire", "Causa dano massivo de fogo a todos os inimigos", random.nextInt(10) + 15));
+        user.get("Chidori").getPersonas().addHabilidade(new Habilidades("Fire Amp", "Fire", "Causa explosão flamejante com dano alto", random.nextInt(10) + 15));
+
 
         HabilidadesDAO habilidadesdaouser = new HabilidadesDAO();
 
