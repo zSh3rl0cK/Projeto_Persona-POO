@@ -119,9 +119,4 @@ public class Usuarios extends UsuarioPersona implements Interacao {
     public void setHp(double hp){
         this.hp = hp;
     }
-
-    @Override
-    public boolean agirShadow(int turno, Personas persona, Shadow alvo) {
-        return false;
-    }
 }
