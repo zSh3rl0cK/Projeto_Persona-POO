@@ -3,12 +3,13 @@ package main.br.inatel.projetojava.Model.personas.seres;
 import main.br.inatel.projetojava.Model.exceptions.InvalidMenuInputException;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 import main.br.inatel.projetojava.Model.personagens.combate.Combate;
+import main.br.inatel.projetojava.Model.personagens.combate.CombateInimigo;
 import main.br.inatel.projetojava.Model.personas.Habilidades;
 import java.util.List;
 import java.util.Random;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
-public class Shadow extends Personas implements Combate {
+public class Shadow extends Personas implements CombateInimigo {
     private double hp;
     private double sp;
     private double defesa;
@@ -35,25 +36,6 @@ public class Shadow extends Personas implements Combate {
                 this.getFraqueza(),
                 this.getResistencia(),
                 this.getDano());
-    }
-
-    @Override
-    public void atacar(Personas persona, UsuarioPersona alvo) throws InvalidMenuInputException {
-        if (alvo == null) {
-            System.out.println(ANSI_RED + "Ataque inválido! Alvo nulo." + ANSI_RESET);
-            return;
-        }
-
-        // Shadow sempre usa ataque automático
-        boolean usarHabilidade = random.nextBoolean();
-
-        if (usarHabilidade && this.getHabilidades() != null && !this.getHabilidades().isEmpty()) {
-            usarHabilidadeSombria(alvo);
-        } else {
-            ataqueCorpoACorpo(alvo);
-        }
-
-        defesa = 5; // Reseta defesa no fim do turno
     }
 
     private void ataqueCorpoACorpo(UsuarioPersona alvo) {
@@ -91,23 +73,6 @@ public class Shadow extends Personas implements Combate {
         System.out.println(ANSI_PURPLE + this.getNome() + " assumiu posição defensiva!" + ANSI_RESET);
     }
 
-    @Override
-    public boolean agir(int turno, Personas persona, UsuarioPersona alvo) {
-        try {
-            atacar(persona, alvo);
-            return true;
-        } catch (InvalidMenuInputException e) {
-            System.out.println(ANSI_RED + "Erro no turno do Shadow: " + e.getMessage() + ANSI_RESET);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean agirShadow(int turno, Personas persona, Shadow alvo) {
-        // Shadows não atacam outros Shadows normalmente
-        System.out.println(ANSI_PURPLE + this.getNome() + " hesita em atacar outro Shadow..." + ANSI_RESET);
-        return true;
-    }
 
     @Override
     public boolean agirAutomatico(int turno, Personas persona, UsuarioPersona alvo, boolean usarHabilidade) {

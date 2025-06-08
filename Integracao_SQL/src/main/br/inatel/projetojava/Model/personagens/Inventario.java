@@ -9,7 +9,7 @@ import main.br.inatel.projetojava.Model.itens.equipaveis.Equipamento;
 
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
-public class Inventario {
+public class Inventario  {
     // todo?: agregação com todos os tipos de itens, poderia ser uma agregaca com itens
     private final HashMap<Arma, Integer> armas;
     private final HashMap<Equipamento, Integer> equipamentos;

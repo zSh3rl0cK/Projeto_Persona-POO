@@ -10,7 +10,6 @@ import main.br.inatel.projetojava.Model.personagens.Inventario;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 import main.br.inatel.projetojava.Model.personas.Habilidades;
 import main.br.inatel.projetojava.Model.personas.seres.Personas;
-import main.br.inatel.projetojava.Model.personas.seres.Shadow;
 
 import java.util.*;
 
@@ -209,11 +208,6 @@ public class Protagonista extends UsuarioPersona {
         }
 
         defesa = 0; // Reseta defesa no fim do turno
-    }
-
-    @Override
-    public boolean agirShadow(int turno, Personas persona, Shadow alvo) {
-        return false;
     }
 
     // --------------------------------- Getters e setters ---------------------------------

@@ -1210,11 +1210,11 @@ public class MenuGeral {
                                                 protagonistaParaAtualizar.setSaldo(Double.parseDouble(novoSaldoStr));
                                             }
 
-                                            System.out.print("ID Ativador atual: " + protagonistaParaAtualizar.getId() + " | Novo ID Ativador: "); // todo era pra ser get id ativador aq
+                                            System.out.print("ID Ativador atual: " + protagonistaParaAtualizar.getId() + " | Novo ID Ativador: ");
                                             String novoIdAtivadorStr = sqlScanner.nextLine();
                                             if (!novoIdAtivadorStr.trim().isEmpty()) {
                                                 // Assumindo que existe um method para setar o ativador
-                                                protagonistaParaAtualizar.setId(Integer.parseInt(novoIdAtivadorStr)); // todo era pra ser set id ativador aq
+                                                protagonistaParaAtualizar.setId(Integer.parseInt(novoIdAtivadorStr)); //arrumado
                                             }
 
                                             protagonistaDAO.updateProtagonista(protagonistaParaAtualizar);
