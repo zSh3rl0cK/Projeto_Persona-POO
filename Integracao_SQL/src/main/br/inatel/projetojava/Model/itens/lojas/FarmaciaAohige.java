@@ -41,7 +41,7 @@ public class FarmaciaAohige extends Lojas {
                     protagonista.setSaldo(protagonista.getSaldo() - novo_item.getValor());
                 }
             } else {
-                throw new IllegalStateException("Unexpected value: " + novo_item); // todo: tratar erro erro
+                throw new IllegalStateException("Unexpected value: " + novo_item);
             }
         }
     }
