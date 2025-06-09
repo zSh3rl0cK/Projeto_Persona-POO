@@ -20,7 +20,6 @@ public class Usuarios extends UsuarioPersona implements Interacao {
     public Usuarios(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, String papel, boolean vilao) {
         super(nome, idade, genero, nivel, arcana, hp, sp);
         this.vilao = vilao;
-        this.inventario = new Inventario();
         this.papel = papel;
     }
 

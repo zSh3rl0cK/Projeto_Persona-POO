@@ -28,7 +28,6 @@ public class Protagonista extends UsuarioPersona {
     public Protagonista(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, double saldo, int Ativador_idAtivador) {
         super(nome, idade, genero, nivel, arcana, hp, sp);
         this.personas = new ArrayList<>(); // Ordem necessária
-        this.inventario = new Inventario(); // Sem protagonista = Sem Inventário
         this.ativador = new Ativador(Ativador_idAtivador);
         this.saldo = saldo;
     }
