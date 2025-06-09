@@ -33,7 +33,7 @@ public class FarmaciaAohige extends Lojas {
         } else{
             if (novo_item instanceof Consumiveis consumiveis) {
                 if (this.getItens().containsKey(novo_item) && this.getItens().get(novo_item) > 0) {
-                    protagonista.getInventario().adicionarConsumivel(consumiveis, 1);
+                    protagonista.getInventario().adicionarItem(consumiveis, 1);
                     this.getItens().put(novo_item, this.getItens().get(novo_item) - 1);
                     if (this.getItens().get(novo_item) == 0) {
                         this.getItens().remove(novo_item);

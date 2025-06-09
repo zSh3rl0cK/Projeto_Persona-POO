@@ -13,7 +13,7 @@ public class Clock implements Runnable {
             LocalDateTime agora = LocalDateTime.now();
             String dataHoraFormatada = agora.format(formatter);
 
-            System.out.println(ANSI_GRAY + "Horário de agora: " + dataHoraFormatada + ANSI_RESET);
+            System.out.println(ANSI_GRAY + "Horário: " + dataHoraFormatada + ANSI_RESET);
 
             try {
                 Thread.sleep(1000); // atualiza a cada segundo

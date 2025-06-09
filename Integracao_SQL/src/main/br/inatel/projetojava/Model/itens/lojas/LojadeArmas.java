@@ -35,7 +35,7 @@ public class LojadeArmas extends Lojas {
             switch (novo_item) {
                 case Arma arma -> {
                     if (this.getItens().containsKey(novo_item) && this.getItens().get(novo_item) > 0) {
-                        protagonista.getInventario().adicionarArma(arma, 1);
+                        protagonista.getInventario().adicionarItem(arma, 1);
                         this.getItens().put(novo_item, this.getItens().get(novo_item) - 1);
                         if (this.getItens().get(novo_item) == 0) {
                             this.getItens().remove(novo_item);
@@ -45,7 +45,7 @@ public class LojadeArmas extends Lojas {
                 }
                 case Equipamento equipamento -> {
                     if (this.getItens().containsKey(novo_item) && this.getItens().get(novo_item) > 0) {
-                        protagonista.getInventario().adicionarEquipamento(equipamento, 1);
+                        protagonista.getInventario().adicionarItem(equipamento, 1);
                         this.getItens().put(novo_item, this.getItens().get(novo_item) - 1);
                         if (this.getItens().get(novo_item) == 0) {
                             this.getItens().remove(novo_item);

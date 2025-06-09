@@ -10,10 +10,12 @@ import main.br.inatel.projetojava.Model.personagens.Inventario;
 import main.br.inatel.projetojava.Model.personagens.abstratos.UsuarioPersona;
 import main.br.inatel.projetojava.Model.personas.Habilidades;
 import main.br.inatel.projetojava.Model.personas.seres.Personas;
+import main.br.inatel.projetojava.Model.personas.seres.Shadow;
 
 import java.util.*;
 
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
+import static main.br.inatel.projetojava.Model.sistema.front.Dado.imprimirDado;
 
 public class Protagonista extends UsuarioPersona {
 
@@ -66,8 +68,8 @@ public class Protagonista extends UsuarioPersona {
         switch(novo_item){
             case Arma armaItem -> {
                 if(this.inventario.getQuantidadeArma(armaItem) > 0){
-                    usuario.getInventario().adicionarArma((Arma)novo_item, 1);
-                    this.inventario.removerArma(novo_item);
+                    usuario.getInventario().adicionarItem((Arma)novo_item, 1);
+                    this.inventario.removerItem(novo_item);
                     System.out.println(ANSI_BLUE + "Arma " + novo_item.getNome() + " transferido para " + usuario.getNome() + "\n" + ANSI_RESET);
                 }
                 else{
@@ -76,8 +78,8 @@ public class Protagonista extends UsuarioPersona {
             }
             case Equipamento equipamento -> {
                 if(this.inventario.getQuantidadeEquipamento(equipamento) > 0){
-                    usuario.getInventario().adicionarEquipamento((Equipamento)novo_item, 1);
-                    this.inventario.removerEquipamento(novo_item);
+                    usuario.getInventario().adicionarItem((Equipamento)novo_item, 1);
+                    this.inventario.removerItem(novo_item);
                     System.out.println(ANSI_BLUE + "Equipamento " + novo_item.getNome() + " transferido para " + usuario.getNome() + "\n" + ANSI_RESET);
                 }
                 else{
@@ -86,8 +88,8 @@ public class Protagonista extends UsuarioPersona {
             }
             case Consumiveis consumivel -> {
                 if (this.inventario.getQuantidadeConsumivel(consumivel) > 0) {
-                    usuario.getInventario().adicionarConsumivel((Consumiveis)novo_item, 1);
-                    this.inventario.removerConsumivel(novo_item);
+                    usuario.getInventario().adicionarItem((Consumiveis)novo_item, 1);
+                    this.inventario.removerItem(novo_item);
                     System.out.println(ANSI_BLUE + "Colecionavel " + novo_item.getNome() + " transferido para " + usuario.getNome() + "\n" + ANSI_RESET);
                 }
                 else{
@@ -100,25 +102,46 @@ public class Protagonista extends UsuarioPersona {
 
     public void trocarPersona(){
         Scanner entrada = new Scanner(System.in);
-        int opcao;
+        String opcao;
 
         while(true) {
             System.out.println(ANSI_BLUE + "Suas personas são: \n" + ANSI_RESET);
             int i = 0;
             for (Personas persona : personas) {
-                System.out.println(ANSI_BLUE + (i+1) + " " + persona.getNome() + ANSI_RESET);
+                System.out.println(ANSI_BLUE + (i+1) + " - " + persona.getNome() + ANSI_RESET);
                 i++;
             }
-            System.out.println(ANSI_BLUE + "Digite o indice da persona para qual quer trocar: " + ANSI_RESET);
-            opcao = entrada.nextInt();
+            System.out.println(ANSI_BLUE + "Digite o índice ou nome da persona para qual quer trocar: " + ANSI_RESET);
+            opcao = entrada.nextLine().trim();
 
-            // acho que resolvi
-            if(opcao > 0 && opcao < (personas.size()+1)){
-                persona_atual = personas.get(opcao - 1);
-                break;
-            }
-            else{
-                System.out.println(ANSI_RED + "Escolha invalida" + ANSI_RESET);
+            // Primeiro tenta por índice
+            try {
+                int indice = Integer.parseInt(opcao);
+
+                if(indice > 0 && indice <= personas.size()){
+                    persona_atual = personas.get(indice - 1);
+                    System.out.println(ANSI_GREEN + "Persona trocada para: " + persona_atual.getNome() + ANSI_RESET);
+                    break;
+                } else {
+                    System.out.println(ANSI_RED + "Índice inválido. Digite um número entre 1 e " + personas.size() + ANSI_RESET);
+                }
+            } catch (NumberFormatException e) {
+                // Se não for número, tenta buscar por nome
+                boolean encontrada = false;
+                for (Personas persona : personas) {
+                    if (persona.getNome().equalsIgnoreCase(opcao)) {
+                        persona_atual = persona;
+                        System.out.println(ANSI_GREEN + "Persona trocada para: " + persona_atual.getNome() + ANSI_RESET);
+                        encontrada = true;
+                        break;
+                    }
+                }
+
+                if (encontrada) {
+                    break;
+                } else {
+                    System.out.println(ANSI_RED + "Persona não encontrada. Digite um índice válido ou nome exato da persona." + ANSI_RESET);
+                }
             }
         }
     }
@@ -202,6 +225,111 @@ public class Protagonista extends UsuarioPersona {
                 alvo.setHp(alvo.getHp() - danoFinal);
                 System.out.println(ANSI_BLUE + nome + " usou " + hab.nome() + " causando " + danoFinal + " de dano!");
                 System.out.println("SP restante: " + sp + ANSI_RESET);
+            }
+            case 3 -> trocarPersona();
+            default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
+        }
+
+        defesa = 0; // Reseta defesa no fim do turno
+    }
+
+    @Override
+    public void atacarShadow(Personas persona, Shadow alvo) throws InvalidMenuInputException {
+        Random random = new Random();
+        if (alvo == null || persona == null) {
+            System.out.println(ANSI_RED + "Ataque inválido! Persona ou alvo nulo." + ANSI_RESET);
+            return;
+        }
+
+        System.out.println(ANSI_BLUE + "\nEscolha o tipo de ataque:");
+        System.out.println("1 - Ataque Físico");
+        System.out.println("2 - Usar Habilidade da Persona");
+        System.out.println("3 - Trocar persona atual" + ANSI_RESET);
+
+        Scanner scanner = new Scanner(System.in);
+        int escolhaTipo;
+
+        // Loop para garantir entrada válida do tipo de ataque (1 ou 2)
+        while (true) {
+            try {
+                escolhaTipo = scanner.nextInt();
+                if (escolhaTipo == 1 || escolhaTipo == 2) {
+                    break; // Sai do loop se o número é 1 ou 2
+                } else {
+                    System.out.println(ANSI_RED + "Opção inválida! Digite 1 para Ataque Físico ou 2 para Usar Habilidade da Persona." + ANSI_RESET);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(ANSI_RED + "Por favor, digite um número válido!" + ANSI_RESET);
+                scanner.next(); // Limpa a entrada inválida
+            }
+        }
+
+        switch (escolhaTipo) {
+            case 1 -> {
+                double danoFinal = Math.max(0, this.arma.getDano() - alvo.getDefesa()); // todo: alterado danoArma para a arma (apenas observação)
+                int missHit = random.nextInt(6) + 1; // (1 a 6)
+                System.out.println(imprimirDado(missHit));
+                if(missHit == 1) System.out.println("Missed!");
+                else if (missHit == 6){
+                    danoFinal = danoFinal*1.5;
+                    alvo.setHp(alvo.getHp() - (danoFinal)); // Crítico
+                    System.out.println(ANSI_BLUE + nome + " realizou um ataque físico *crítico* causando " + danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
+                }
+                else {
+                    System.out.println(ANSI_GREEN + "Golpe executado com sucesso!" + ANSI_RESET);
+                    alvo.setHp(alvo.getHp() - danoFinal);
+                    System.out.println(ANSI_BLUE + nome + " realizou um ataque físico causando " + danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
+                }
+            }
+            case 2 -> {
+                List<Habilidades> habilidades = persona.getHabilidades();
+                if (habilidades.isEmpty()) {
+                    System.out.println(ANSI_RED + "Essa persona não possui habilidades!" + ANSI_RESET);
+                    return;
+                }
+
+                int missHit = random.nextInt(6) + 1;
+                System.out.println(imprimirDado(missHit));
+                if(missHit == 1) System.out.println("Missed!");
+                else {
+                    System.out.println(ANSI_GREEN + "Sucesso!" + ANSI_RESET);
+                    System.out.println(ANSI_BLUE + "Escolha a habilidade:" + ANSI_RESET);
+                    for (int i = 0; i < habilidades.size(); i++) {
+                        Habilidades hab = habilidades.get(i);
+                        System.out.println(ANSI_BLUE + (i + 1) + " - " + hab.nome() + " (Dano: " + (hab.dano() - alvo.getDefesa()) + ", SP: 10)" + ANSI_RESET);
+                    }
+
+                    int escolhaHab;
+
+                    // Loop para garantir entrada válida da habilidade
+                    while (true) {
+                        try {
+                            escolhaHab = scanner.nextInt() - 1;
+                            if (escolhaHab >= 0 && escolhaHab < habilidades.size()) {
+                                break; // Sai do loop se a escolha for válida
+                            } else {
+                                System.out.println(ANSI_RED + "Habilidade inválida! Escolha entre 1 e " + habilidades.size() + ANSI_RESET);
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println(ANSI_RED + "Por favor, digite um número válido!" + ANSI_RESET);
+                            scanner.next(); // Limpa a entrada inválida
+                        }
+                    }
+
+                    Habilidades hab = habilidades.get(escolhaHab);
+                    double custoSP = 10;
+
+                    if (sp < custoSP) {
+                        System.out.println(ANSI_RED + "SP insuficiente!" + ANSI_RESET);
+                        return;
+                    }
+
+                    sp -= custoSP;
+                    double danoFinal = Math.max(0, hab.dano() - alvo.getDefesa());
+                    alvo.setHp(alvo.getHp() - danoFinal);
+                    System.out.println(ANSI_BLUE + nome + " usou " + hab.nome() + " causando " + danoFinal + " de dano!");
+                    System.out.println("SP restante: " + sp + ANSI_RESET);
+                }
             }
             case 3 -> trocarPersona();
             default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);

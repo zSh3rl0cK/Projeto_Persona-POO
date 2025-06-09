@@ -10,41 +10,45 @@ import main.br.inatel.projetojava.Model.itens.equipaveis.Equipamento;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
 public class Inventario  {
-    // todo?: agregação com todos os tipos de itens, poderia ser uma agregaca com itens
-    private final HashMap<Arma, Integer> armas;
-    private final HashMap<Equipamento, Integer> equipamentos;
-    private final HashMap<Consumiveis, Integer> consumiveis;
+    private HashMap<Itens, Integer> itens = new HashMap<>();
 
-    public Inventario() {
-        this.armas = new HashMap<>();
-        this.equipamentos = new HashMap<>();
-        this.consumiveis = new HashMap<>();
-    }
-
-    public void mostrarInventarioPersonagem() {
-        if(!armas.isEmpty()) {
+    public void mostrarInventarioPersonagem() { // mano:
+        //Funcionamento básico:
+        //
+        //Se a chave existe: retorna o valor associado à chave
+        //Se a chave não existe: retorna o valor padrão especificado ok, um amigo meu quer ver dps kkkk
+        // vo manda pro claude faezr o ngc com isntace of
+        // Todo?: outra forma de fazer essa logica seria adicionar os ittens instancias de arma no arma
+        if(!itens.isEmpty()) {
             System.out.println(ANSI_YELLOW + "\n----- Arma -----" + ANSI_RESET);
-            for (Arma arma : armas.keySet()) {
-                System.out.println(arma);
+            for (Itens arma : itens.keySet()) {
+                if (arma instanceof Arma) {
+                    System.out.println(arma);
+                }
             }
         }
         else{
             System.out.println(ANSI_BLUE + "Personagem sem armas!" + ANSI_RESET);
         }
-        if(!equipamentos.isEmpty()) {
+
+        if(!itens.isEmpty()) {
             System.out.println(ANSI_YELLOW + "----- Equipamento -----" + ANSI_RESET);
-            for (Equipamento equipamento : equipamentos.keySet()) {
-                System.out.println(equipamento);
+            for (Itens equipamento : itens.keySet()) {
+                if(equipamento instanceof Equipamento) {
+                    System.out.println(equipamento);
+                }
             }
         }
         else{
             System.out.println(ANSI_BLUE + "Personagem sem equipamentos!" + ANSI_RESET);
         }
 
-        if(!consumiveis.isEmpty()) {
+        if(!itens.isEmpty()) {
             System.out.println(ANSI_YELLOW + "----- Consumiveis -----" + ANSI_RESET);
-            for (Consumiveis consumivel : consumiveis.keySet()) {
-                System.out.println(consumivel);
+            for (Itens consumivel : itens.keySet()) {
+                if(consumivel instanceof Consumiveis) {
+                    System.out.println(consumivel);
+                }
             }
         }
         else{
@@ -54,51 +58,53 @@ public class Inventario  {
     }
 
     // Getters e setters
-    public void adicionarArma(Arma arma, int quantidade) {
-        armas.put(arma, armas.getOrDefault(arma, 0) + quantidade);
-        // GetOrDefault : padrão é 0, quando se tem arma, incrementa.
+    public void adicionarItem(Itens item, int quantidade) {
+        itens.put(item, itens.getOrDefault(item, 0) + quantidade);
     }
 
-    public void adicionarEquipamento(Equipamento equipamento, int quantidade) {
-        equipamentos.put(equipamento, equipamentos.getOrDefault(equipamento, 0) + quantidade);
-    }
-
-    public void adicionarConsumivel(Consumiveis consumivel, int quantidade) {
-        consumiveis.put(consumivel, consumiveis.getOrDefault(consumivel, 0) + quantidade);
-    }
-
-    public void removerArma(Itens item) {
-        if (item instanceof Arma) {
-            armas.remove(item);
-        }
-    }
-
-    public void removerEquipamento(Itens item) {
-        if (item instanceof Equipamento) {
-            equipamentos.remove(item);
-        }
-    }
-
-    public void removerConsumivel(Itens item) {
-        if (item instanceof Consumiveis) {
-            consumiveis.remove(item);
-        }
+    public void removerItem(Itens item) {
+        itens.remove(item);
     }
 
     public int getQuantidadeArma(Arma arma) {
-        return armas.getOrDefault(arma, 0);
+        // Verifica se o item existe no HashMap e se é uma instância de Arma
+        if (arma != null) {
+            return itens.getOrDefault((Itens) arma, 0);
+        }
+        return 0;
     }
 
     public int getQuantidadeEquipamento(Equipamento equipamento) {
-        return equipamentos.getOrDefault(equipamento, 0);
+        // Verifica se o item existe no HashMap e se é uma instância de Equipamento
+        if (equipamento != null) {
+            return itens.getOrDefault((Itens) equipamento, 0);
+        }
+        return 0;
     }
 
     public int getQuantidadeConsumivel(Consumiveis consumivel) {
-        return consumiveis.getOrDefault(consumivel, 0);
+        // Verifica se o item existe no HashMap e se é uma instância de Consumiveis
+        if (consumivel != null) {
+            return itens.getOrDefault((Itens) consumivel, 0);
+        }
+        return 0;
     }
 
+    // Méto.do que retorna apenas os consumiveis do inventário
     public HashMap<Consumiveis, Integer> getConsumiveis() {
-        return new HashMap<>(consumiveis);
-    }
+        HashMap<Consumiveis, Integer> consumiveisMap = new HashMap<>();
 
+        // Itera sobre todos os itens no HashMap unificado
+        for (HashMap.Entry<Itens, Integer> entry : itens.entrySet()) {
+            Itens item = entry.getKey();
+            Integer quantidade = entry.getValue();
+
+            // Verifica se o item é uma instância de Consumiveis
+            if (item instanceof Consumiveis) {
+                consumiveisMap.put((Consumiveis) item, quantidade);
+            }
+        }
+
+        return consumiveisMap;
+    }
 }

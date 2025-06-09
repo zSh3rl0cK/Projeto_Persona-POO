@@ -1,9 +1,7 @@
 package main.br.inatel.projetojava;
 
-import main.br.inatel.projetojava.Model.sistema.front.TelaInicial;
-
 import java.util.concurrent.CountDownLatch;
-
+import static main.br.inatel.projetojava.Model.sistema.front.TelaInicial.exibirTela;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuThreads.inicioThreads;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuGeral.mostrarMenuGeral;
 
@@ -11,10 +9,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // -------------------------- Tela Inicial com controle -------------------------- //
+        // ----------------------------- Tela Inicial ----------------------------- //
 
-        CountDownLatch latch = new CountDownLatch(1);
-        TelaInicial.exibirTela(latch);
+        CountDownLatch latch = new CountDownLatch(1); // # de vezes que a thread rodará
+        exibirTela(latch);
 
         try {
             latch.await(); // Espera até que o botão "Iniciar" seja pressionado

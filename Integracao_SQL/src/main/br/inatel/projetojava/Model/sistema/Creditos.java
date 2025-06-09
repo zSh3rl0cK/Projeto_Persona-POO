@@ -69,7 +69,7 @@ public class Creditos extends JFrame {
     }
 
     private void iniciarAnimacao() {
-        timer = new Timer(2000, e -> mostrarProximoCredito());
+        timer = new Timer(2000, _ -> mostrarProximoCredito());
 
         mostrarProximoCredito();
         timer.start();
@@ -116,7 +116,7 @@ public class Creditos extends JFrame {
             finalLabel.setForeground(Color.LIGHT_GRAY);
             painelPrincipal.add(finalLabel, BorderLayout.SOUTH);
 
-            Timer closeTimer = new Timer(5000, e -> dispose());
+            Timer closeTimer = new Timer(5000, _ -> dispose());
             closeTimer.setRepeats(false);
             closeTimer.start();
         }

@@ -15,7 +15,7 @@ public abstract class ConnectionDAO {
     // Informações de acesso ao banco de dados:
     String database = "projeto_persona"; // Nome do BD
     String user = "root";
-    String password = "zSh3rl0cK$20"; // zSh3rl0cK$20
+    String password = "root"; // zSh3rl0cK$20
     String url = "jdbc:mysql://localhost:3306/" + database;
 
     // Estabelecer a conexão com o banco:

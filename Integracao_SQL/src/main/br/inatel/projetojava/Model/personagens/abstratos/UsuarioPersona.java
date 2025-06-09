@@ -72,7 +72,7 @@ public abstract class UsuarioPersona extends SerHumano implements Combate{
                 System.out.println(ANSI_GREEN + "SP recuperado: +" + itemSelecionado.getValor() + ANSI_RESET);
             }
 
-            this.inventario.removerConsumivel(itemSelecionado);
+            this.inventario.removerItem(itemSelecionado);
             System.out.println(ANSI_GREEN + "Item " + itemSelecionado.getNome() + " usado com sucesso!" + ANSI_RESET);
         } else {
             System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
