@@ -12,6 +12,14 @@ import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 public class CombateManager {
     private static final Random random = new Random();
 
+    private static void wait(int milissegundos) {
+        try {
+            Thread.sleep(milissegundos);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     public static void iniciarCombate(ArrayList<UsuarioPersona> grupo1, ArrayList<UsuarioPersona> grupo2) {
         int turno = 1;
         boolean turnoDoGrupo1 = true;
@@ -53,6 +61,7 @@ public class CombateManager {
                     }
                 } else {
                     System.out.println(ANSI_BLUE + "Turno dos inimigos:" + ANSI_RESET);
+                    wait(1000);
                     for (UsuarioPersona membro : grupo2) {
                         if (membro.getHp() <= 0) continue;
 
@@ -132,6 +141,7 @@ public class CombateManager {
                     }
                 } else {
                     System.out.println(ANSI_PURPLE + "Turno dos Shadows:" + ANSI_RESET);
+                    wait(1000);
                     for (Shadow membro : grupo2) {
                         if (membro.getHp() <= 0) continue;
 
@@ -196,11 +206,14 @@ public class CombateManager {
 
     private static boolean executarTurnoInimigoAutomatico(UsuarioPersona atacante, UsuarioPersona defensor, int turno) {
         System.out.println(ANSI_BLUE + "\nÉ o turno de " + atacante.getNome() + ANSI_RESET);
+        wait(1000);
 
         // "IA" decide o tipo de ação (50% físico, 50% habilidade)
         boolean usarHabilidade = random.nextBoolean();
         String tipoAtaque = usarHabilidade ? "habilidade" : "ataque físico";
 
+
+        wait(1500);
         System.out.println(ANSI_CYAN + atacante.getNome() + " prepara um " + tipoAtaque + " contra " + defensor.getNome() + "!" + ANSI_RESET);
 
         if (atacante instanceof Protagonista protagonista) {
@@ -214,12 +227,15 @@ public class CombateManager {
 
     private static boolean executarTurnoShadowAutomatico(Shadow atacante, UsuarioPersona defensor, int turno) {
         System.out.println(ANSI_PURPLE + "\nÉ o turno de " + atacante.getNome() + ANSI_RESET);
+        wait(1000);
 
         // "IA" decide o tipo de ação (50% físico, 50% habilidade)
         boolean usarHabilidade = random.nextBoolean();
         String tipoAtaque = usarHabilidade ? "habilidade sombria" : "ataque físico";
 
+        wait(1500);
         System.out.println(ANSI_PURPLE + atacante.getNome() + " prepara um " + tipoAtaque + " contra " + defensor.getNome() + "!" + ANSI_RESET);
+        wait(500);
 
         return atacante.agirAutomatico(turno, null, defensor, usarHabilidade);
     }
@@ -241,7 +257,9 @@ public class CombateManager {
         // "IA" escolhe alvo aleatório entre os disponíveis
         UsuarioPersona alvoEscolhido = alvosDisponiveis.get(random.nextInt(alvosDisponiveis.size()));
 
+        wait(1500);
         System.out.println(ANSI_CYAN + "Inimigo mira em " + alvoEscolhido.getNome() + "!" + ANSI_RESET);
+        wait(500);
 
         return alvoEscolhido;
     }

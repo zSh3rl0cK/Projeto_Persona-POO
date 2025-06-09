@@ -19,14 +19,15 @@ public class Usuarios extends UsuarioPersona implements Interacao {
     // Construtor existente
     public Usuarios(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, String papel, boolean vilao) {
         super(nome, idade, genero, nivel, arcana, hp, sp);
+        this.setPersona(persona); // Composição
         this.vilao = vilao;
         this.papel = papel;
     }
 
     public Usuarios(String nome, int idade, String genero, int nivel, String arcana, double hp, double sp, String papel, boolean vilao, int id) {
         super(nome, idade, genero, nivel, arcana, hp, sp);
+        this.setPersona(persona);
         this.vilao = vilao;
-        this.inventario = new Inventario();
         this.papel = papel;
         this.idUsuario = id;
     }
@@ -117,5 +118,10 @@ public class Usuarios extends UsuarioPersona implements Interacao {
 
     public void setHp(double hp){
         this.hp = hp;
+    }
+
+    // Setter para composição correta
+    public void setPersona(Personas persona) {
+        this.persona = persona;
     }
 }
