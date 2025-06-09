@@ -53,7 +53,7 @@ public class LojadeArmas extends Lojas {
                         protagonista.setSaldo(protagonista.getSaldo() - novo_item.getValor());
                     }
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + novo_item); // todo: tratar isso aqui
+                default -> throw new IllegalStateException("Valor Inesperado: " + novo_item);
             }
         }
     }

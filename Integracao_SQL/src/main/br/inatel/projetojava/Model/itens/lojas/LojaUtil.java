@@ -21,7 +21,10 @@ public abstract class LojaUtil {
             loja.venderItem(protagonista, itens.get(nomeItem));
             System.out.println(ANSI_GREEN + "Item comprado com sucesso!" + ANSI_RESET);
         } else {
+            try{
             System.out.println(ANSI_RED + "Item não encontrado!" + ANSI_RESET);
+        }catch(IllegalStateException e){
+            System.out.println(ANSI_RED + "Erro: " + e.getMessage() + ANSI_RESET);}
         }
     }
 
