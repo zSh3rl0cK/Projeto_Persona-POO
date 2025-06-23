@@ -29,7 +29,7 @@ import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuBuscas.mostrar_menu_buscas;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuCidade.mostrarMenuCidade;
 import static main.br.inatel.projetojava.Model.sistema.menus.MenuDoJogo.mostrar_menu_principal;
-import static main.br.inatel.projetojava.Model.sistema.menus.MenuSQL.mostrarMenuSQL;
+import static main.br.inatel.projetojava.Model.sistema.menus.MenuSQL.*;
 import static main.br.inatel.projetojava.Model.sistema.menus.MethodUtil.*;
 
 public class MenuGeral {
@@ -622,753 +622,817 @@ public class MenuGeral {
                                 }
                                 switch (opcao) {
                                     case 1 -> {
-                                        // Inserir Protagonista
-                                        System.out.println("\n=== INSERIR PROTAGONISTA ===");
-                                        System.out.print("Nome: ");
-                                        String nome = sqlScanner.nextLine();
-                                        int idade, nivel, idAtivador;
-                                        double hp, sp, saldo;
-
-                                        // Validação da Idade
+                                        // MENU DE INSERTS
                                         while (true) {
-                                            try {
-                                                System.out.print("Idade: ");
-                                                idade = sqlScanner.nextInt();
-                                                if (idade < 0 || idade > 100) {
-                                                    System.out.println("Idade inválida. Deve estar entre 0 e 100.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer após entrada válida
-                                                    break; // Sai do loop quando a idade é válida
+                                            int opcaoInsert = mostrarMenuInsert(); // Você precisará criar este método
+                                            if (opcaoInsert == 0) break;
+
+                                            switch (opcaoInsert) {
+                                                case 1 -> {
+                                                    // Inserir Protagonista
+                                                    System.out.println("\n=== INSERIR PROTAGONISTA ===");
+                                                    System.out.print("Nome: ");
+                                                    String nome = sqlScanner.nextLine();
+                                                    int idade, nivel, idAtivador;
+                                                    double hp, sp, saldo;
+
+                                                    // Validação da Idade
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Idade: ");
+                                                            idade = sqlScanner.nextInt();
+                                                            if (idade < 0 || idade > 100) {
+                                                                System.out.println("Idade inválida. Deve estar entre 0 e 100.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando a idade é válida
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor inteiro para a idade).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    System.out.print("Gênero: ");
+                                                    String genero = sqlScanner.nextLine();
+
+                                                    // Validação do Nível
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Nível: ");
+                                                            nivel = sqlScanner.nextInt();
+                                                            if (nivel < 1) {
+                                                                System.out.println("Nível inválido. Deve ser maior que 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor inteiro para o nível).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    System.out.print("Arcana: ");
+                                                    String arcana = sqlScanner.nextLine();
+
+                                                    // Validação do HP
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("HP: ");
+                                                            hp = sqlScanner.nextDouble();
+                                                            if (hp < 0) {
+                                                                System.out.println("HP inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor double para o HP).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    // Validação do SP
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("SP: ");
+                                                            sp = sqlScanner.nextDouble();
+                                                            if (sp < 0) {
+                                                                System.out.println("SP inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor double para o SP).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    // Validação do saldo
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Saldo: ");
+                                                            saldo = sqlScanner.nextDouble();
+                                                            if (saldo < 0) {
+                                                                System.out.println("Saldo inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor double para o Saldo).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    // Validação do ID_Ativador
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("IdAtivador: ");
+                                                            idAtivador = sqlScanner.nextInt();
+                                                            if (idAtivador < 0) {
+                                                                System.out.println("ID inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor double para o ID).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    // Criar objeto Protagonista (assumindo que existe um construtor adequado)
+                                                    Protagonista novoProtagonista = new Protagonista(nome, idade, genero, nivel, arcana, hp, sp, saldo, idAtivador);
+
+                                                    int idInserido = protagonistaDAO.insertProtagonista(novoProtagonista);
+
+                                                    if (idInserido != -1) {
+                                                        System.out.println("Protagonista inserido com sucesso! ID: " + idInserido);
+                                                    } else {
+                                                        System.out.println("Erro ao inserir protagonista.");
+                                                    }
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor inteiro para a idade).");
-                                                sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
-                                            }
-                                        }
 
-                                        System.out.print("Gênero: ");
-                                        String genero = sqlScanner.nextLine();
+                                                case 2 -> {
+                                                    // Inserir NPC
+                                                    System.out.println("\n=== INSERIR NPC ===");
 
-                                        // Validação do Nível
-                                        while (true) {
-                                            try {
-                                                System.out.print("Nível: ");
-                                                nivel = sqlScanner.nextInt();
-                                                if (nivel < 1) {
-                                                    System.out.println("Nível inválido. Deve ser maior que 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
+                                                    System.out.print("Nome: ");
+                                                    String nomeNPC = sqlScanner.nextLine();
+                                                    int idadeNPC;
+
+                                                    // Tratamento da idade
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Idade: ");
+                                                            idadeNPC = sqlScanner.nextInt();
+                                                            if (idadeNPC < 0 || idadeNPC > 100) {
+                                                                System.out.println("Idade inválida. Deve estar entre 0 e 100.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando a idade é válida
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor inteiro para a idade).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    System.out.print("Gênero: ");
+                                                    String generoNPC = sqlScanner.nextLine();
+
+                                                    System.out.print("Ocupação: ");
+                                                    String ocupacaoNPC = sqlScanner.nextLine();
+
+                                                    System.out.print("Arcana: ");
+                                                    String arcanaNPC = sqlScanner.nextLine();
+
+                                                    NPC novoNPC = new NPC(nomeNPC, idadeNPC, generoNPC, ocupacaoNPC, arcanaNPC);
+
+                                                    boolean sucessoInsercaoNPC = npcdao.insertNPC(novoNPC);
+
+                                                    if (sucessoInsercaoNPC) {
+                                                        System.out.println("NPC inserido com sucesso!");
+                                                    } else {
+                                                        System.out.println("Erro ao inserir NPC.");
+                                                    }
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor inteiro para o nível).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
-                                            }
-                                        }
 
-                                        System.out.print("Arcana: ");
-                                        String arcana = sqlScanner.nextLine();
+                                                case 3 -> {
+                                                    // Inserir Usuario
+                                                    int nivelUsuario;
+                                                    double hpUsuario;
+                                                    double spUsuario;
+                                                    boolean vilaoUsuario;
+                                                    int idadeUsuario;
 
-                                        // Validação do HP
-                                        while (true) {
-                                            try {
-                                                System.out.print("HP: ");
-                                                hp = sqlScanner.nextDouble();
-                                                if (hp < 0) {
-                                                    System.out.println("HP inválido. Deve ser maior ou igual a 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
+                                                    System.out.println("\n=== INSERIR USUÁRIO ===");
+                                                    System.out.print("Nome: ");
+                                                    String nomeUsuario = sqlScanner.nextLine();
+
+                                                    // Validação da Idade
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Idade: ");
+                                                            idadeUsuario = sqlScanner.nextInt();
+                                                            if (idadeUsuario < 0 || idadeUsuario > 100) {
+                                                                System.out.println("Idade inválida. Deve estar entre 0 e 100.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando a idade é válida
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor inteiro para a idade).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    System.out.print("Gênero: ");
+                                                    String generoUsuario = sqlScanner.nextLine();
+
+                                                    // Validação do Nível
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Nível: ");
+                                                            nivelUsuario = sqlScanner.nextInt();
+                                                            if (nivelUsuario < 1) {
+                                                                System.out.println("Nível inválido. Deve ser maior que 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor inteiro para o nível).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    System.out.print("Arcana: ");
+                                                    String arcanaUsuario = sqlScanner.nextLine();
+
+                                                    // Validação do HP
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("HP: ");
+                                                            hpUsuario = sqlScanner.nextDouble();
+                                                            if (hpUsuario < 0) {
+                                                                System.out.println("HP inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor double para o HP).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    // Validação do SP
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("SP: ");
+                                                            spUsuario = sqlScanner.nextDouble();
+                                                            if (spUsuario < 0) {
+                                                                System.out.println("SP inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                                break;
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor double para o SP).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    System.out.print("Papel: ");
+                                                    String papelUsuario = sqlScanner.nextLine();
+
+                                                    // Validação do Vilão
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("É vilão? (true/false): ");
+                                                            vilaoUsuario = sqlScanner.nextBoolean();
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                            break;
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor boolean para o vilão - true ou false).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer
+                                                        }
+                                                    }
+
+                                                    Usuarios novoUsuario = new Usuarios(nomeUsuario, idadeUsuario, generoUsuario, nivelUsuario,
+                                                            arcanaUsuario, hpUsuario, spUsuario, papelUsuario, vilaoUsuario);
+
+                                                    boolean sucessoInsercao = usuariosDAO.insertUsuario(novoUsuario);
+
+                                                    if (sucessoInsercao) {
+                                                        System.out.println("Usuário inserido com sucesso!");
+                                                    } else {
+                                                        System.out.println("Erro ao inserir usuário.");
+                                                    }
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor double para o HP).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
+
+                                                default ->
+                                                        System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                             }
-                                        }
-
-                                        // Validação do SP
-                                        while (true) {
-                                            try {
-                                                System.out.print("SP: ");
-                                                sp = sqlScanner.nextDouble();
-                                                if (sp < 0) {
-                                                    System.out.println("SP inválido. Deve ser maior ou igual a 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
-                                                }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor double para o SP).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
-                                            }
-                                        }
-
-                                        // Validação do saldo
-                                        while (true) {
-                                            try {
-                                                System.out.print("Saldo: ");
-                                                saldo = sqlScanner.nextDouble();
-                                                if (saldo < 0) {
-                                                    System.out.println("Saldo inválido. Deve ser maior ou igual a 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
-                                                }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor double para o Saldo).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
-                                            }
-                                        }
-
-                                        // Validação do ID_Ativador
-                                        while (true) {
-                                            try {
-                                                System.out.print("IdAtivador: ");
-                                                idAtivador = sqlScanner.nextInt();
-                                                if (idAtivador < 0) {
-                                                    System.out.println("ID inválido. Deve ser maior ou igual a 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
-                                                }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor double para o ID).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
-                                            }
-                                        }
-
-                                        // Criar objeto Protagonista (assumindo que existe um construtor adequado)
-                                        Protagonista novoProtagonista = new Protagonista(nome, idade, genero, nivel, arcana, hp, sp, saldo, idAtivador);
-
-                                        int idInserido = protagonistaDAO.insertProtagonista(novoProtagonista);
-
-                                        if (idInserido != -1) {
-                                            System.out.println("Protagonista inserido com sucesso! ID: " + idInserido);
-                                        } else {
-                                            System.out.println("Erro ao inserir protagonista.");
                                         }
                                     }
 
                                     case 2 -> {
-                                        // Atualizar Protagonista
-                                        System.out.println("\n=== ATUALIZAR PROTAGONISTA ===");
+                                        // MENU DE UPDATES
+                                        while (true) {
+                                            int opcaoUpdate = mostrarMenuUpdate(); // Você precisará criar este método
+                                            if (opcaoUpdate == 0) break;
 
-                                        // Primeiro listar os protagonistas existentes
-                                        List<Protagonista> protagonistasExistentes = protagonistaDAO.selectProtagonista();
-                                        if (protagonistasExistentes.isEmpty()) {
-                                            System.out.println("Nenhum protagonista encontrado para atualizar.");
-                                            break;
-                                        }
+                                            switch (opcaoUpdate) {
+                                                case 1 -> {
+                                                    // Atualizar Protagonista
+                                                    System.out.println("\n=== ATUALIZAR PROTAGONISTA ===");
 
-                                        System.out.println("Protagonistas disponíveis:");
-                                        for (Protagonista p : protagonistasExistentes) {
-                                            System.out.println("ID: " + p.getId() + " - Nome: " + p.getNome());
-                                        }
+                                                    // Primeiro listar os protagonistas existentes
+                                                    List<Protagonista> protagonistasExistentes = protagonistaDAO.selectProtagonista();
+                                                    if (protagonistasExistentes.isEmpty()) {
+                                                        System.out.println("Nenhum protagonista encontrado para atualizar.");
+                                                        break;
+                                                    }
 
-                                        try {
-                                            System.out.print("Digite o ID do protagonista que deseja atualizar: ");
-                                            int idParaAtualizar = sqlScanner.nextInt();
-                                            sqlScanner.nextLine();
+                                                    System.out.println("Protagonistas disponíveis:");
+                                                    for (Protagonista p : protagonistasExistentes) {
+                                                        System.out.println("ID: " + p.getId() + " - Nome: " + p.getNome());
+                                                    }
 
+                                                    try {
+                                                        System.out.print("Digite o ID do protagonista que deseja atualizar: ");
+                                                        int idParaAtualizar = sqlScanner.nextInt();
+                                                        sqlScanner.nextLine();
 
-                                            // Buscar o protagonista pelo ID
-                                            Protagonista protagonistaParaAtualizar = null;
-                                            for (Protagonista p : protagonistasExistentes) {
-                                                if (p.getId() == idParaAtualizar) {
-                                                    protagonistaParaAtualizar = p;
-                                                    break;
+                                                        // Buscar o protagonista pelo ID
+                                                        Protagonista protagonistaParaAtualizar = null;
+                                                        for (Protagonista p : protagonistasExistentes) {
+                                                            if (p.getId() == idParaAtualizar) {
+                                                                protagonistaParaAtualizar = p;
+                                                                break;
+                                                            }
+                                                        }
+
+                                                        if (protagonistaParaAtualizar == null) {
+                                                            System.out.println("Protagonista com ID " + idParaAtualizar + " não encontrado.");
+                                                            break;
+                                                        }
+
+                                                        // Coletar novos dados
+                                                        System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
+
+                                                        System.out.print("Nome atual: " + protagonistaParaAtualizar.getNome() + " | Novo nome: ");
+                                                        String novoNome = sqlScanner.nextLine();
+                                                        if (!novoNome.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setNome(novoNome);
+                                                        }
+
+                                                        System.out.print("Idade atual: " + protagonistaParaAtualizar.getIdade() + " | Nova idade: ");
+                                                        String novaIdadeStr = sqlScanner.nextLine();
+                                                        if (!novaIdadeStr.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setIdade(Integer.parseInt(novaIdadeStr));
+                                                        }
+
+                                                        System.out.print("Gênero atual: " + protagonistaParaAtualizar.getGenero() + " | Novo gênero: ");
+                                                        String novoGenero = sqlScanner.nextLine();
+                                                        if (!novoGenero.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setGenero(novoGenero);
+                                                        }
+
+                                                        System.out.print("Nível atual: " + protagonistaParaAtualizar.getNivel() + " | Novo nível: ");
+                                                        String novoNivelStr = sqlScanner.nextLine();
+                                                        if (!novoNivelStr.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setNivel(Integer.parseInt(novoNivelStr));
+                                                        }
+
+                                                        System.out.print("Arcana atual: " + protagonistaParaAtualizar.getArcana() + " | Nova arcana: ");
+                                                        String novaArcana = sqlScanner.nextLine();
+                                                        if (!novaArcana.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setArcana(novaArcana);
+                                                        }
+
+                                                        System.out.print("HP atual: " + protagonistaParaAtualizar.getHp() + " | Novo HP: ");
+                                                        String novoHpStr = sqlScanner.nextLine();
+                                                        if (!novoHpStr.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setHp(Double.parseDouble(novoHpStr));
+                                                        }
+
+                                                        System.out.print("SP atual: " + protagonistaParaAtualizar.getSp() + " | Novo SP: ");
+                                                        String novoSpStr = sqlScanner.nextLine();
+                                                        if (!novoSpStr.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setSp(Double.parseDouble(novoSpStr));
+                                                        }
+
+                                                        System.out.print("Saldo atual: " + protagonistaParaAtualizar.getSaldo() + " | Novo saldo: ");
+                                                        String novoSaldoStr = sqlScanner.nextLine();
+                                                        if (!novoSaldoStr.trim().isEmpty()) {
+                                                            protagonistaParaAtualizar.setSaldo(Double.parseDouble(novoSaldoStr));
+                                                        }
+
+                                                        System.out.print("ID Ativador atual: " + protagonistaParaAtualizar.getId() + " | Novo ID Ativador: ");
+                                                        String novoIdAtivadorStr = sqlScanner.nextLine();
+                                                        if (!novoIdAtivadorStr.trim().isEmpty()) {
+                                                            // Assumindo que existe um method para setar o ativador
+                                                            protagonistaParaAtualizar.setId(Integer.parseInt(novoIdAtivadorStr)); //arrumado
+                                                        }
+
+                                                        protagonistaDAO.updateProtagonista(protagonistaParaAtualizar);
+                                                        System.out.println("Protagonista atualizado com sucesso!");
+                                                    } catch (InputMismatchException e) {
+                                                        System.out.println("Erro ao atualizar protagonista(Insira um valor inteiro para o ID).");
+                                                    }
                                                 }
+
+                                                case 2 -> {
+                                                    // Atualizar NPC
+                                                    System.out.println("\n=== ATUALIZAR NPC ===");
+
+                                                    // Primeiro listar os NPCs existentes
+                                                    List<NPC> npcsExistentes = npcdao.selectNPC();
+                                                    if (npcsExistentes.isEmpty()) {
+                                                        System.out.println("Nenhum NPC encontrado para atualizar.");
+                                                        break;
+                                                    }
+
+                                                    System.out.println("NPCs disponíveis:");
+                                                    for (NPC n : npcsExistentes) {
+                                                        System.out.println("Nome: " + n.getNome() + " | Ocupação: " + n.getOcupacao() + " | Arcana: " + n.getArcana());
+                                                    }
+
+                                                    System.out.print("Digite o nome do NPC que deseja atualizar: ");
+                                                    String nomeNPCParaAtualizar = sqlScanner.nextLine();
+
+                                                    // Buscar o NPC pelo nome
+                                                    NPC npcParaAtualizar = null;
+                                                    for (NPC n : npcsExistentes) {
+                                                        if (n.getNome().equalsIgnoreCase(nomeNPCParaAtualizar)) {
+                                                            npcParaAtualizar = n;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (npcParaAtualizar == null) {
+                                                        System.out.println("NPC com nome '" + nomeNPCParaAtualizar + "' não encontrado.");
+                                                        break;
+                                                    }
+
+                                                    // Coletar novos dados
+                                                    System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
+
+                                                    System.out.print("Idade atual: " + npcParaAtualizar.getIdade() + " | Nova idade: ");
+                                                    String novaIdadeNPCStr = sqlScanner.nextLine();
+                                                    if (!novaIdadeNPCStr.trim().isEmpty()) {
+                                                        npcParaAtualizar.setIdade(Integer.parseInt(novaIdadeNPCStr));
+                                                    }
+
+                                                    System.out.print("Gênero atual: " + npcParaAtualizar.getGenero() + " | Novo gênero: ");
+                                                    String novoGeneroNPC = sqlScanner.nextLine();
+                                                    if (!novoGeneroNPC.trim().isEmpty()) {
+                                                        npcParaAtualizar.setGenero(novoGeneroNPC);
+                                                    }
+
+                                                    System.out.print("Ocupação atual: " + npcParaAtualizar.getOcupacao() + " | Nova ocupação: ");
+                                                    String novaOcupacaoNPC = sqlScanner.nextLine();
+                                                    if (!novaOcupacaoNPC.trim().isEmpty()) {
+                                                        npcParaAtualizar.setOcupacao(novaOcupacaoNPC);
+                                                    }
+
+                                                    System.out.print("Arcana atual: " + npcParaAtualizar.getArcana() + " | Nova arcana: ");
+                                                    String novaArcanaNPC = sqlScanner.nextLine();
+                                                    if (!novaArcanaNPC.trim().isEmpty()) {
+                                                        npcParaAtualizar.setArcana(novaArcanaNPC);
+                                                    }
+
+                                                    boolean sucessoAtualizacaoNPC = npcdao.updateNPC(npcParaAtualizar);
+
+                                                    if (sucessoAtualizacaoNPC) {
+                                                        System.out.println("NPC atualizado com sucesso!");
+                                                    } else {
+                                                        System.out.println("Erro ao atualizar NPC.");
+                                                    }
+                                                }
+
+                                                case 3 -> {
+                                                    // Atualizar Usuario
+                                                    System.out.println("\n=== ATUALIZAR USUÁRIO ===");
+
+                                                    // Primeiro listar os usuários existentes
+                                                    List<Usuarios> usuariosExistentes = usuariosDAO.selectUsuarios();
+                                                    if (usuariosExistentes.isEmpty()) {
+                                                        System.out.println("Nenhum usuário encontrado para atualizar.");
+                                                        break;
+                                                    }
+
+                                                    System.out.println("Usuários disponíveis:");
+                                                    for (Usuarios u : usuariosExistentes) {
+                                                        System.out.println("Nome: " + u.getNome() + " | Papel: " + u.getPapel() + " | Vilão: " + u.isVilao());
+                                                    }
+
+                                                    System.out.print("Digite o nome do usuário que deseja atualizar: ");
+                                                    String nomeParaAtualizar = sqlScanner.nextLine();
+
+                                                    // Buscar o usuário pelo nome
+                                                    Usuarios usuarioParaAtualizar = null;
+                                                    for (Usuarios u : usuariosExistentes) {
+                                                        if (u.getNome().equalsIgnoreCase(nomeParaAtualizar)) {
+                                                            usuarioParaAtualizar = u;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (usuarioParaAtualizar == null) {
+                                                        System.out.println("Usuário com nome '" + nomeParaAtualizar + "' não encontrado.");
+                                                        break;
+                                                    }
+
+                                                    // Coletar novos dados
+                                                    System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
+
+                                                    System.out.print("Idade atual: " + usuarioParaAtualizar.getIdade() + " | Nova idade: ");
+                                                    String novaIdadeUsuarioStr = sqlScanner.nextLine();
+                                                    if (!novaIdadeUsuarioStr.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setIdade(Integer.parseInt(novaIdadeUsuarioStr));
+                                                    }
+
+                                                    System.out.print("Gênero atual: " + usuarioParaAtualizar.getGenero() + " | Novo gênero: ");
+                                                    String novoGeneroUsuario = sqlScanner.nextLine();
+                                                    if (!novoGeneroUsuario.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setGenero(novoGeneroUsuario);
+                                                    }
+
+                                                    System.out.print("Nível atual: " + usuarioParaAtualizar.getNivel() + " | Novo nível: ");
+                                                    String novoNivelUsuarioStr = sqlScanner.nextLine();
+                                                    if (!novoNivelUsuarioStr.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setNivel(Integer.parseInt(novoNivelUsuarioStr));
+                                                    }
+
+                                                    System.out.print("Arcana atual: " + usuarioParaAtualizar.getArcana() + " | Nova arcana: ");
+                                                    String novaArcanaUsuario = sqlScanner.nextLine();
+                                                    if (!novaArcanaUsuario.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setArcana(novaArcanaUsuario);
+                                                    }
+
+                                                    System.out.print("HP atual: " + usuarioParaAtualizar.getHp() + " | Novo HP: ");
+                                                    String novoHpUsuarioStr = sqlScanner.nextLine();
+                                                    if (!novoHpUsuarioStr.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setHp(Double.parseDouble(novoHpUsuarioStr));
+                                                    }
+
+                                                    System.out.print("SP atual: " + usuarioParaAtualizar.getSp() + " | Novo SP: ");
+                                                    String novoSpUsuarioStr = sqlScanner.nextLine();
+                                                    if (!novoSpUsuarioStr.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setSp(Double.parseDouble(novoSpUsuarioStr));
+                                                    }
+
+                                                    System.out.print("Papel atual: " + usuarioParaAtualizar.getPapel() + " | Novo papel: ");
+                                                    String novoPapelUsuario = sqlScanner.nextLine();
+                                                    if (!novoPapelUsuario.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setPapel(novoPapelUsuario);
+                                                    }
+
+                                                    System.out.print("Vilão atual: " + usuarioParaAtualizar.isVilao() + " | É vilão? (true/false ou Enter para manter): ");
+                                                    String novoVilaoStr = sqlScanner.nextLine();
+                                                    if (!novoVilaoStr.trim().isEmpty()) {
+                                                        usuarioParaAtualizar.setVilao(Boolean.parseBoolean(novoVilaoStr));
+                                                    }
+
+                                                    boolean sucessoAtualizacao = usuariosDAO.updateUsuario(usuarioParaAtualizar);
+
+                                                    if (sucessoAtualizacao) {
+                                                        System.out.println("Usuário atualizado com sucesso!");
+                                                    } else {
+                                                        System.out.println("Erro ao atualizar usuário.");
+                                                    }
+                                                }
+
+                                                default ->
+                                                        System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                             }
-
-                                            if (protagonistaParaAtualizar == null) {
-                                                System.out.println("Protagonista com ID " + idParaAtualizar + " não encontrado.");
-                                                break;
-                                            }
-
-                                            // Coletar novos dados
-                                            System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
-
-                                            System.out.print("Nome atual: " + protagonistaParaAtualizar.getNome() + " | Novo nome: ");
-                                            String novoNome = sqlScanner.nextLine();
-                                            if (!novoNome.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setNome(novoNome);
-                                            }
-
-                                            System.out.print("Idade atual: " + protagonistaParaAtualizar.getIdade() + " | Nova idade: ");
-                                            String novaIdadeStr = sqlScanner.nextLine();
-                                            if (!novaIdadeStr.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setIdade(Integer.parseInt(novaIdadeStr));
-                                            }
-
-                                            System.out.print("Gênero atual: " + protagonistaParaAtualizar.getGenero() + " | Novo gênero: ");
-                                            String novoGenero = sqlScanner.nextLine();
-                                            if (!novoGenero.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setGenero(novoGenero);
-                                            }
-
-                                            System.out.print("Nível atual: " + protagonistaParaAtualizar.getNivel() + " | Novo nível: ");
-                                            String novoNivelStr = sqlScanner.nextLine();
-                                            if (!novoNivelStr.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setNivel(Integer.parseInt(novoNivelStr));
-                                            }
-
-                                            System.out.print("Arcana atual: " + protagonistaParaAtualizar.getArcana() + " | Nova arcana: ");
-                                            String novaArcana = sqlScanner.nextLine();
-                                            if (!novaArcana.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setArcana(novaArcana);
-                                            }
-
-                                            System.out.print("HP atual: " + protagonistaParaAtualizar.getHp() + " | Novo HP: ");
-                                            String novoHpStr = sqlScanner.nextLine();
-                                            if (!novoHpStr.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setHp(Double.parseDouble(novoHpStr));
-                                            }
-
-                                            System.out.print("SP atual: " + protagonistaParaAtualizar.getSp() + " | Novo SP: ");
-                                            String novoSpStr = sqlScanner.nextLine();
-                                            if (!novoSpStr.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setSp(Double.parseDouble(novoSpStr));
-                                            }
-
-                                            System.out.print("Saldo atual: " + protagonistaParaAtualizar.getSaldo() + " | Novo saldo: ");
-                                            String novoSaldoStr = sqlScanner.nextLine();
-                                            if (!novoSaldoStr.trim().isEmpty()) {
-                                                protagonistaParaAtualizar.setSaldo(Double.parseDouble(novoSaldoStr));
-                                            }
-
-                                            System.out.print("ID Ativador atual: " + protagonistaParaAtualizar.getId() + " | Novo ID Ativador: ");
-                                            String novoIdAtivadorStr = sqlScanner.nextLine();
-                                            if (!novoIdAtivadorStr.trim().isEmpty()) {
-                                                // Assumindo que existe um method para setar o ativador
-                                                protagonistaParaAtualizar.setId(Integer.parseInt(novoIdAtivadorStr)); //arrumado
-                                            }
-
-                                            protagonistaDAO.updateProtagonista(protagonistaParaAtualizar);
-                                            System.out.println("Protagonista atualizado com sucesso!");
-                                        } catch (InputMismatchException e) {
-                                            System.out.println("Erro ao atualizar protagonista(Insira um valor inteiro para o ID).");
                                         }
                                     }
 
                                     case 3 -> {
-                                        // Deletar Todos os Protagonistas
-                                        System.out.println("\n=== DELETAR TODOS OS PROTAGONISTAS ===");
-                                        System.out.print("ATENÇÃO: Esta ação irá deletar TODOS os protagonistas do banco de dados. Confirma? (s/N): ");
-                                        String confirmacao = sqlScanner.nextLine();
+                                        // MENU DE DELETES
+                                        while (true) {
+                                            int opcaoDelete = mostrarMenuDelete();
+                                            if(opcaoDelete == 0)
+                                                break;
+                                            switch (opcaoDelete) {
+                                                case 1 -> {
+                                                    // Deletar Todos os Protagonistas
+                                                    System.out.println("\n=== DELETAR TODOS OS PROTAGONISTAS ===");
+                                                    System.out.print("ATENÇÃO: Esta ação irá deletar TODOS os protagonistas do banco de dados. Confirma? (s/N): ");
+                                                    String confirmacao = sqlScanner.nextLine();
 
-                                        if (confirmacao.equalsIgnoreCase("s") || confirmacao.equalsIgnoreCase("sim")) {
-                                            protagonistaDAO.deleteProtagonista();
-                                            System.out.println("Todos os protagonistas foram deletados com sucesso!");
-                                        } else {
-                                            System.out.println("Operação cancelada.");
+                                                    if (confirmacao.equalsIgnoreCase("s") || confirmacao.equalsIgnoreCase("sim")) {
+                                                        protagonistaDAO.deleteProtagonista();
+                                                        System.out.println("Todos os protagonistas foram deletados com sucesso!");
+                                                    } else {
+                                                        System.out.println("Operação cancelada.");
+                                                    }
+
+                                                }
+                                                case 2 -> {
+                                                    // Deletar NPC
+                                                    System.out.println("\n=== DELETAR NPC ===");
+
+                                                    // Primeiro listar os NPCs existentes
+                                                    List<NPC> npcsExistentes = npcdao.selectNPC();
+                                                    if (npcsExistentes.isEmpty()) {
+                                                        System.out.println("Nenhum NPC encontrado para deletar.");
+                                                        break;
+                                                    }
+
+                                                    System.out.println("NPCs disponíveis:");
+                                                    for (NPC n : npcsExistentes) {
+                                                        System.out.println("Nome: " + n.getNome() + " | Ocupação: " + n.getOcupacao() + " | Arcana: " + n.getArcana());
+                                                    }
+
+                                                    System.out.print("Digite o nome do NPC que deseja deletar: ");
+                                                    String nomeNPCParaDeletar = sqlScanner.nextLine();
+
+                                                    // Verificar se o NPC existe
+                                                    boolean npcExiste = false;
+                                                    for (NPC n : npcsExistentes) {
+                                                        if (n.getNome().equalsIgnoreCase(nomeNPCParaDeletar)) {
+                                                            npcExiste = true;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (!npcExiste) {
+                                                        System.out.println("NPC com nome '" + nomeNPCParaDeletar + "' não encontrado.");
+                                                        break;
+                                                    }
+
+                                                    System.out.print("ATENÇÃO: Esta ação irá deletar permanentemente o NPC '" + nomeNPCParaDeletar + "'. Confirma? (s/N): ");
+                                                    String confirmacaoDeleteNPC = sqlScanner.nextLine();
+
+                                                    if (confirmacaoDeleteNPC.equalsIgnoreCase("s") || confirmacaoDeleteNPC.equalsIgnoreCase("sim")) {
+                                                        boolean sucessoDelecaoNPC = npcdao.deleteNPC(nomeNPCParaDeletar);
+
+                                                        if (sucessoDelecaoNPC) {
+                                                            System.out.println("NPC '" + nomeNPCParaDeletar + "' deletado com sucesso!");
+                                                        } else {
+                                                            System.out.println("Erro ao deletar NPC.");
+                                                        }
+                                                    } else {
+                                                        System.out.println("Operação cancelada.");
+                                                    }
+                                                }
+                                                case 3 -> {
+                                                    // Deletar Usuario
+                                                    System.out.println("\n=== DELETAR USUÁRIO ===");
+
+                                                    // Primeiro listar os usuários existentes
+                                                    List<Usuarios> usuariosExistentes = usuariosDAO.selectUsuarios();
+                                                    if (usuariosExistentes.isEmpty()) {
+                                                        System.out.println("Nenhum usuário encontrado para deletar.");
+                                                        break;
+                                                    }
+
+                                                    System.out.println("Usuários disponíveis:");
+                                                    for (Usuarios u : usuariosExistentes) {
+                                                        System.out.println("Nome: " + u.getNome() + " | Papel: " + u.getPapel() + " | Vilão: " + u.isVilao());
+                                                    }
+
+                                                    System.out.print("Digite o nome do usuário que deseja deletar: ");
+                                                    String nomeParaDeletar = sqlScanner.nextLine();
+
+                                                    // Verificar se o usuário existe
+                                                    boolean usuarioExiste = false;
+                                                    for (Usuarios u : usuariosExistentes) {
+                                                        if (u.getNome().equalsIgnoreCase(nomeParaDeletar)) {
+                                                            usuarioExiste = true;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (!usuarioExiste) {
+                                                        System.out.println("Usuário com nome '" + nomeParaDeletar + "' não encontrado.");
+                                                        break;
+                                                    }
+
+                                                    System.out.print(ANSI_RED + "ATENÇÃO: Esta ação irá deletar permanentemente o usuário '" + nomeParaDeletar + "'. Confirma? (s/N): " + ANSI_RESET);
+                                                    String confirmacaoDelete = sqlScanner.nextLine();
+
+                                                    if (confirmacaoDelete.equalsIgnoreCase("s") || confirmacaoDelete.equalsIgnoreCase("sim")) {
+                                                        boolean sucessoDelecao = usuariosDAO.deleteUsuario(nomeParaDeletar);
+
+                                                        if (sucessoDelecao) {
+                                                            System.out.println("Usuário '" + nomeParaDeletar + "' deletado com sucesso!");
+                                                        } else {
+                                                            System.out.println("Erro ao deletar usuário.");
+                                                        }
+                                                    } else {
+                                                        System.out.println("Operação cancelada.");
+                                                    }
+                                                }
+                                                default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
+                                            }
                                         }
-
                                     }
 
                                     case 4 -> {
-                                        // Listar Protagonistas
-                                        System.out.println("\n=== LISTA DE PROTAGONISTAS ===");
-                                        List<Protagonista> protagonistas = protagonistaDAO.selectProtagonista();
-
-                                        if (protagonistas.isEmpty()) {
-                                            System.out.println("Nenhum protagonista encontrado.");
-                                        } else {
-                                            System.out.println("Protagonistas cadastrados:");
-                                            System.out.println("------------------------------------------------");
-                                            for (Protagonista p : protagonistas) {
-                                                System.out.println("ID: " + p.getId());
-                                                System.out.println("Nome: " + p.getNome());
-                                                System.out.println("Idade: " + p.getIdade());
-                                                System.out.println("Gênero: " + p.getGenero());
-                                                System.out.println("Nível: " + p.getNivel());
-                                                System.out.println("Arcana: " + p.getArcana());
-                                                System.out.println("HP: " + p.getHp());
-                                                System.out.println("SP: " + p.getSp());
-                                                System.out.println("Saldo: " + p.getSaldo());
-                                                System.out.println("ID Ativador: " + p.getAtivador().getIdAtivador());
-                                                System.out.println("------------------------------------------------");
-                                            }
+                                        int opcaoSelect = mostrarMenuSelect();
+                                        if (opcaoSelect == 0) {
+                                            break;
                                         }
-                                    }
 
-                                    case 5 -> {
-                                        // Inserir NPC
-                                        System.out.println("\n=== INSERIR NPC ===");
+                                        switch (opcaoSelect) {
+                                            case 1 -> {
+                                                // Listar Protagonistas
+                                                System.out.println("\n=== LISTA DE PROTAGONISTAS ===");
+                                                List<Protagonista> protagonistas = protagonistaDAO.selectProtagonista();
 
-                                        System.out.print("Nome: ");
-                                        String nomeNPC = sqlScanner.nextLine();
-                                        int idadeNPC;
-
-                                        // Tratamento da idade
-                                        while (true) {
-                                            try {
-                                                System.out.print("Idade: ");
-                                                idadeNPC = sqlScanner.nextInt();
-                                                if (idadeNPC < 0 || idadeNPC > 100) {
-                                                    System.out.println("Idade inválida. Deve estar entre 0 e 100.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
+                                                if (protagonistas.isEmpty()) {
+                                                    System.out.println("Nenhum protagonista encontrado.");
                                                 } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer após entrada válida
-                                                    break; // Sai do loop quando a idade é válida
+                                                    System.out.println("Protagonistas cadastrados:");
+                                                    System.out.println("------------------------------------------------");
+                                                    for (Protagonista p : protagonistas) {
+                                                        System.out.println("ID: " + p.getId());
+                                                        System.out.println("Nome: " + p.getNome());
+                                                        System.out.println("Idade: " + p.getIdade());
+                                                        System.out.println("Gênero: " + p.getGenero());
+                                                        System.out.println("Nível: " + p.getNivel());
+                                                        System.out.println("Arcana: " + p.getArcana());
+                                                        System.out.println("HP: " + p.getHp());
+                                                        System.out.println("SP: " + p.getSp());
+                                                        System.out.println("Saldo: " + p.getSaldo());
+                                                        System.out.println("ID Ativador: " + p.getAtivador().getIdAtivador());
+                                                        System.out.println("------------------------------------------------");
+                                                    }
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor inteiro para a idade).");
-                                                sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
                                             }
-                                        }
 
-                                        System.out.print("Gênero: ");
-                                        String generoNPC = sqlScanner.nextLine();
+                                            case 2 -> {
+                                                // Listar NPCs
+                                                System.out.println("\n=== LISTA DE NPCs ===");
+                                                List<NPC> newNpcs = npcdao.selectNPC();
 
-                                        System.out.print("Ocupação: ");
-                                        String ocupacaoNPC = sqlScanner.nextLine();
-
-                                        System.out.print("Arcana: ");
-                                        String arcanaNPC = sqlScanner.nextLine();
-
-                                        NPC novoNPC = new NPC(nomeNPC, idadeNPC, generoNPC, ocupacaoNPC, arcanaNPC);
-
-                                        boolean sucessoInsercaoNPC = npcdao.insertNPC(novoNPC);
-
-                                        if (sucessoInsercaoNPC) {
-                                            System.out.println("NPC inserido com sucesso!");
-                                        } else {
-                                            System.out.println("Erro ao inserir NPC.");
-                                        }
-                                    }
-                                    case 6 -> {
-                                        // Atualizar NPC
-                                        System.out.println("\n=== ATUALIZAR NPC ===");
-
-                                        // Primeiro listar os NPCs existentes
-                                        List<NPC> npcsExistentes = npcdao.selectNPC();
-                                        if (npcsExistentes.isEmpty()) {
-                                            System.out.println("Nenhum NPC encontrado para atualizar.");
-                                            break;
-                                        }
-
-                                        System.out.println("NPCs disponíveis:");
-                                        for (NPC n : npcsExistentes) {
-                                            System.out.println("Nome: " + n.getNome() + " | Ocupação: " + n.getOcupacao() + " | Arcana: " + n.getArcana());
-                                        }
-
-                                        System.out.print("Digite o nome do NPC que deseja atualizar: ");
-                                        String nomeNPCParaAtualizar = sqlScanner.nextLine();
-
-                                        // Buscar o NPC pelo nome
-                                        NPC npcParaAtualizar = null;
-                                        for (NPC n : npcsExistentes) {
-                                            if (n.getNome().equalsIgnoreCase(nomeNPCParaAtualizar)) {
-                                                npcParaAtualizar = n;
-                                                break;
-                                            }
-                                        }
-
-                                        if (npcParaAtualizar == null) {
-                                            System.out.println("NPC com nome '" + nomeNPCParaAtualizar + "' não encontrado.");
-                                            break;
-                                        }
-
-                                        // Coletar novos dados
-                                        System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
-
-                                        System.out.print("Idade atual: " + npcParaAtualizar.getIdade() + " | Nova idade: ");
-                                        String novaIdadeNPCStr = sqlScanner.nextLine();
-                                        if (!novaIdadeNPCStr.trim().isEmpty()) {
-                                            npcParaAtualizar.setIdade(Integer.parseInt(novaIdadeNPCStr));
-                                        }
-
-                                        System.out.print("Gênero atual: " + npcParaAtualizar.getGenero() + " | Novo gênero: ");
-                                        String novoGeneroNPC = sqlScanner.nextLine();
-                                        if (!novoGeneroNPC.trim().isEmpty()) {
-                                            npcParaAtualizar.setGenero(novoGeneroNPC);
-                                        }
-
-                                        System.out.print("Ocupação atual: " + npcParaAtualizar.getOcupacao() + " | Nova ocupação: ");
-                                        String novaOcupacaoNPC = sqlScanner.nextLine();
-                                        if (!novaOcupacaoNPC.trim().isEmpty()) {
-                                            npcParaAtualizar.setOcupacao(novaOcupacaoNPC);
-                                        }
-
-                                        System.out.print("Arcana atual: " + npcParaAtualizar.getArcana() + " | Nova arcana: ");
-                                        String novaArcanaNPC = sqlScanner.nextLine();
-                                        if (!novaArcanaNPC.trim().isEmpty()) {
-                                            npcParaAtualizar.setArcana(novaArcanaNPC);
-                                        }
-
-                                        boolean sucessoAtualizacaoNPC = npcdao.updateNPC(npcParaAtualizar);
-
-                                        if (sucessoAtualizacaoNPC) {
-                                            System.out.println("NPC atualizado com sucesso!");
-                                        } else {
-                                            System.out.println("Erro ao atualizar NPC.");
-                                        }
-                                    }
-
-                                    case 7 -> {
-                                        // Deletar NPC
-                                        System.out.println("\n=== DELETAR NPC ===");
-
-                                        // Primeiro listar os NPCs existentes
-                                        List<NPC> npcsExistentes = npcdao.selectNPC();
-                                        if (npcsExistentes.isEmpty()) {
-                                            System.out.println("Nenhum NPC encontrado para deletar.");
-                                            break;
-                                        }
-
-                                        System.out.println("NPCs disponíveis:");
-                                        for (NPC n : npcsExistentes) {
-                                            System.out.println("Nome: " + n.getNome() + " | Ocupação: " + n.getOcupacao() + " | Arcana: " + n.getArcana());
-                                        }
-
-                                        System.out.print("Digite o nome do NPC que deseja deletar: ");
-                                        String nomeNPCParaDeletar = sqlScanner.nextLine();
-
-                                        // Verificar se o NPC existe
-                                        boolean npcExiste = false;
-                                        for (NPC n : npcsExistentes) {
-                                            if (n.getNome().equalsIgnoreCase(nomeNPCParaDeletar)) {
-                                                npcExiste = true;
-                                                break;
-                                            }
-                                        }
-
-                                        if (!npcExiste) {
-                                            System.out.println("NPC com nome '" + nomeNPCParaDeletar + "' não encontrado.");
-                                            break;
-                                        }
-
-                                        System.out.print("ATENÇÃO: Esta ação irá deletar permanentemente o NPC '" + nomeNPCParaDeletar + "'. Confirma? (s/N): ");
-                                        String confirmacaoDeleteNPC = sqlScanner.nextLine();
-
-                                        if (confirmacaoDeleteNPC.equalsIgnoreCase("s") || confirmacaoDeleteNPC.equalsIgnoreCase("sim")) {
-                                            boolean sucessoDelecaoNPC = npcdao.deleteNPC(nomeNPCParaDeletar);
-
-                                            if (sucessoDelecaoNPC) {
-                                                System.out.println("NPC '" + nomeNPCParaDeletar + "' deletado com sucesso!");
-                                            } else {
-                                                System.out.println("Erro ao deletar NPC.");
-                                            }
-                                        } else {
-                                            System.out.println("Operação cancelada.");
-                                        }
-                                    }
-
-                                    case 8 -> {
-                                        // Listar NPCs
-                                        System.out.println("\n=== LISTA DE NPCs ===");
-                                        List<NPC> newNpcs = npcdao.selectNPC();
-
-                                        if (newNpcs.isEmpty()) {
-                                            System.out.println("Nenhum NPC encontrado.");
-                                        } else {
-                                            System.out.println("NPCs cadastrados:");
-                                            System.out.println("==========================================");
-                                            for (NPC n : newNpcs) {
-                                                System.out.println("Nome: " + n.getNome());
-                                                System.out.println("Idade: " + n.getIdade());
-                                                System.out.println("Gênero: " + n.getGenero());
-                                                System.out.println("Ocupação: " + n.getOcupacao());
-                                                System.out.println("Arcana: " + n.getArcana());
-                                                System.out.println("==========================================");
-                                            }
-                                        }
-                                    }
-                                    case 9 -> {
-                                        // Inserir Usuario
-                                        int nivelUsuario;
-                                        double hpUsuario;
-                                        double spUsuario;
-                                        boolean vilaoUsuario;
-                                        int idadeUsuario;
-
-                                        System.out.println("\n=== INSERIR USUÁRIO ===");
-                                        System.out.print("Nome: ");
-                                        String nomeUsuario = sqlScanner.nextLine();
-
-                                        // Validação da Idade
-                                        while (true) {
-                                            try {
-                                                System.out.print("Idade: ");
-                                                idadeUsuario = sqlScanner.nextInt();
-                                                if (idadeUsuario < 0 || idadeUsuario > 100) {
-                                                    System.out.println("Idade inválida. Deve estar entre 0 e 100.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
+                                                if (newNpcs.isEmpty()) {
+                                                    System.out.println("Nenhum NPC encontrado.");
                                                 } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer após entrada válida
-                                                    break; // Sai do loop quando a idade é válida
+                                                    System.out.println("NPCs cadastrados:");
+                                                    System.out.println("==========================================");
+                                                    for (NPC n : newNpcs) {
+                                                        System.out.println("Nome: " + n.getNome());
+                                                        System.out.println("Idade: " + n.getIdade());
+                                                        System.out.println("Gênero: " + n.getGenero());
+                                                        System.out.println("Ocupação: " + n.getOcupacao());
+                                                        System.out.println("Arcana: " + n.getArcana());
+                                                        System.out.println("==========================================");
+                                                    }
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor inteiro para a idade).");
-                                                sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
                                             }
-                                        }
 
-                                        System.out.print("Gênero: ");
-                                        String generoUsuario = sqlScanner.nextLine();
+                                            case 3 -> {
+                                                // Listar Usuarios
+                                                System.out.println("\n=== LISTA DE USUÁRIOS ===");
+                                                List<Usuarios> usuario = usuariosDAO.selectUsuarios();
 
-                                        // Validação do Nível
-                                        while (true) {
-                                            try {
-                                                System.out.print("Nível: ");
-                                                nivelUsuario = sqlScanner.nextInt();
-                                                if (nivelUsuario < 1) {
-                                                    System.out.println("Nível inválido. Deve ser maior que 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
+                                                if (usuario.isEmpty()) {
+                                                    System.out.println("Nenhum usuário encontrado.");
                                                 } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
+                                                    System.out.println("Usuários cadastrados:");
+                                                    System.out.println("================================================");
+                                                    for (Usuarios u : usuario) {
+                                                        System.out.println("ID: " + u.getId());
+                                                        System.out.println("Nome: " + u.getNome());
+                                                        System.out.println("Idade: " + u.getIdade());
+                                                        System.out.println("Gênero: " + u.getGenero());
+                                                        System.out.println("Nível: " + u.getNivel());
+                                                        System.out.println("Arcana: " + u.getArcana());
+                                                        System.out.println("HP: " + u.getHp());
+                                                        System.out.println("SP: " + u.getSp());
+                                                        System.out.println("Papel: " + u.getPapel());
+                                                        System.out.println("Vilão: " + (u.isVilao() ? "Sim" : "Não"));
+                                                        System.out.println("================================================");
+                                                    }
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor inteiro para o nível).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
                                             }
-                                        }
-
-                                        System.out.print("Arcana: ");
-                                        String arcanaUsuario = sqlScanner.nextLine();
-
-                                        // Validação do HP
-                                        while (true) {
-                                            try {
-                                                System.out.print("HP: ");
-                                                hpUsuario = sqlScanner.nextDouble();
-                                                if (hpUsuario < 0) {
-                                                    System.out.println("HP inválido. Deve ser maior ou igual a 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
+                                            case 4 -> {
+                                                // Listar Personas de Protagonista
+                                                System.out.println("\n=== LISTA DE PERSONAS DE PROTAGONISTA ===");
+                                                // Chama o metodo que faz o SELECT com JOIN
+                                                List<String> protagonistaPersonas = new ProtagonistaHasPersonaDAO().SelectProtagonistaPersona();
+                                                if (protagonistaPersonas.isEmpty()) {
+                                                    System.out.println("Nenhuma relação Protagonista-Persona encontrada.");
                                                 } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
+                                                    System.out.println("Relações Protagonista-Persona encontradas:");
+                                                    System.out.println("========================================================");
+
+                                                    // Itera sobre a lista e exibe cada resultado
+                                                    for (String relacao : protagonistaPersonas) {
+                                                        System.out.println(relacao);
+                                                    }
+                                                    System.out.println("========================================================");
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor double para o HP).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
+
                                             }
-                                        }
-
-                                        // Validação do SP
-                                        while (true) {
-                                            try {
-                                                System.out.print("SP: ");
-                                                spUsuario = sqlScanner.nextDouble();
-                                                if (spUsuario < 0) {
-                                                    System.out.println("SP inválido. Deve ser maior ou igual a 0.");
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                } else {
-                                                    sqlScanner.nextLine(); // Limpa o buffer
-                                                    break;
-                                                }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor double para o SP).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
-                                            }
-                                        }
-
-                                        System.out.print("Papel: ");
-                                        String papelUsuario = sqlScanner.nextLine();
-
-                                        // Validação do Vilão
-                                        while (true) {
-                                            try {
-                                                System.out.print("É vilão? (true/false): ");
-                                                vilaoUsuario = sqlScanner.nextBoolean();
-                                                sqlScanner.nextLine(); // Limpa o buffer
-                                                break;
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("Erro ao inserir(Insira um valor boolean para o vilão - true ou false).");
-                                                sqlScanner.nextLine(); // Limpa o buffer
-                                            }
-                                        }
-
-                                        Usuarios novoUsuario = new Usuarios(nomeUsuario, idadeUsuario, generoUsuario, nivelUsuario,
-                                                arcanaUsuario, hpUsuario, spUsuario, papelUsuario, vilaoUsuario);
-
-                                        boolean sucessoInsercao = usuariosDAO.insertUsuario(novoUsuario);
-
-                                        if (sucessoInsercao) {
-                                            System.out.println("Usuário inserido com sucesso!");
-                                        } else {
-                                            System.out.println("Erro ao inserir usuário.");
+                                            default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                         }
                                     }
-
-                                    case 10 -> {
-                                        // Atualizar Usuario
-                                        System.out.println("\n=== ATUALIZAR USUÁRIO ===");
-
-                                        // Primeiro listar os usuários existentes
-                                        List<Usuarios> usuariosExistentes = usuariosDAO.selectUsuarios();
-                                        if (usuariosExistentes.isEmpty()) {
-                                            System.out.println("Nenhum usuário encontrado para atualizar.");
-                                            break;
-                                        }
-
-                                        System.out.println("Usuários disponíveis:");
-                                        for (Usuarios u : usuariosExistentes) {
-                                            System.out.println("Nome: " + u.getNome() + " | Papel: " + u.getPapel() + " | Vilão: " + u.isVilao());
-                                        }
-
-                                        System.out.print("Digite o nome do usuário que deseja atualizar: ");
-                                        String nomeParaAtualizar = sqlScanner.nextLine();
-
-                                        // Buscar o usuário pelo nome
-                                        Usuarios usuarioParaAtualizar = null;
-                                        for (Usuarios u : usuariosExistentes) {
-                                            if (u.getNome().equalsIgnoreCase(nomeParaAtualizar)) {
-                                                usuarioParaAtualizar = u;
-                                                break;
-                                            }
-                                        }
-
-                                        if (usuarioParaAtualizar == null) {
-                                            System.out.println("Usuário com nome '" + nomeParaAtualizar + "' não encontrado.");
-                                            break;
-                                        }
-
-                                        // Coletar novos dados
-                                        System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
-
-                                        System.out.print("Idade atual: " + usuarioParaAtualizar.getIdade() + " | Nova idade: ");
-                                        String novaIdadeUsuarioStr = sqlScanner.nextLine();
-                                        if (!novaIdadeUsuarioStr.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setIdade(Integer.parseInt(novaIdadeUsuarioStr));
-                                        }
-
-                                        System.out.print("Gênero atual: " + usuarioParaAtualizar.getGenero() + " | Novo gênero: ");
-                                        String novoGeneroUsuario = sqlScanner.nextLine();
-                                        if (!novoGeneroUsuario.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setGenero(novoGeneroUsuario);
-                                        }
-
-                                        System.out.print("Nível atual: " + usuarioParaAtualizar.getNivel() + " | Novo nível: ");
-                                        String novoNivelUsuarioStr = sqlScanner.nextLine();
-                                        if (!novoNivelUsuarioStr.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setNivel(Integer.parseInt(novoNivelUsuarioStr));
-                                        }
-
-                                        System.out.print("Arcana atual: " + usuarioParaAtualizar.getArcana() + " | Nova arcana: ");
-                                        String novaArcanaUsuario = sqlScanner.nextLine();
-                                        if (!novaArcanaUsuario.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setArcana(novaArcanaUsuario);
-                                        }
-
-                                        System.out.print("HP atual: " + usuarioParaAtualizar.getHp() + " | Novo HP: ");
-                                        String novoHpUsuarioStr = sqlScanner.nextLine();
-                                        if (!novoHpUsuarioStr.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setHp(Double.parseDouble(novoHpUsuarioStr));
-                                        }
-
-                                        System.out.print("SP atual: " + usuarioParaAtualizar.getSp() + " | Novo SP: ");
-                                        String novoSpUsuarioStr = sqlScanner.nextLine();
-                                        if (!novoSpUsuarioStr.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setSp(Double.parseDouble(novoSpUsuarioStr));
-                                        }
-
-                                        System.out.print("Papel atual: " + usuarioParaAtualizar.getPapel() + " | Novo papel: ");
-                                        String novoPapelUsuario = sqlScanner.nextLine();
-                                        if (!novoPapelUsuario.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setPapel(novoPapelUsuario);
-                                        }
-
-                                        System.out.print("Vilão atual: " + usuarioParaAtualizar.isVilao() + " | É vilão? (true/false ou Enter para manter): ");
-                                        String novoVilaoStr = sqlScanner.nextLine();
-                                        if (!novoVilaoStr.trim().isEmpty()) {
-                                            usuarioParaAtualizar.setVilao(Boolean.parseBoolean(novoVilaoStr));
-                                        }
-
-                                        boolean sucessoAtualizacao = usuariosDAO.updateUsuario(usuarioParaAtualizar);
-
-                                        if (sucessoAtualizacao) {
-                                            System.out.println("Usuário atualizado com sucesso!");
-                                        } else {
-                                            System.out.println("Erro ao atualizar usuário.");
-                                        }
-                                    }
-
-                                    case 11 -> {
-                                        // Deletar Usuario
-                                        System.out.println("\n=== DELETAR USUÁRIO ===");
-
-                                        // Primeiro listar os usuários existentes
-                                        List<Usuarios> usuariosExistentes = usuariosDAO.selectUsuarios();
-                                        if (usuariosExistentes.isEmpty()) {
-                                            System.out.println("Nenhum usuário encontrado para deletar.");
-                                            break;
-                                        }
-
-                                        System.out.println("Usuários disponíveis:");
-                                        for (Usuarios u : usuariosExistentes) {
-                                            System.out.println("Nome: " + u.getNome() + " | Papel: " + u.getPapel() + " | Vilão: " + u.isVilao());
-                                        }
-
-                                        System.out.print("Digite o nome do usuário que deseja deletar: ");
-                                        String nomeParaDeletar = sqlScanner.nextLine();
-
-                                        // Verificar se o usuário existe
-                                        boolean usuarioExiste = false;
-                                        for (Usuarios u : usuariosExistentes) {
-                                            if (u.getNome().equalsIgnoreCase(nomeParaDeletar)) {
-                                                usuarioExiste = true;
-                                                break;
-                                            }
-                                        }
-
-                                        if (!usuarioExiste) {
-                                            System.out.println("Usuário com nome '" + nomeParaDeletar + "' não encontrado.");
-                                            break;
-                                        }
-
-                                        System.out.print(ANSI_RED + "ATENÇÃO: Esta ação irá deletar permanentemente o usuário '" + nomeParaDeletar + "'. Confirma? (s/N): " + ANSI_RESET);
-                                        String confirmacaoDelete = sqlScanner.nextLine();
-
-                                        if (confirmacaoDelete.equalsIgnoreCase("s") || confirmacaoDelete.equalsIgnoreCase("sim")) {
-                                            boolean sucessoDelecao = usuariosDAO.deleteUsuario(nomeParaDeletar);
-
-                                            if (sucessoDelecao) {
-                                                System.out.println("Usuário '" + nomeParaDeletar + "' deletado com sucesso!");
-                                            } else {
-                                                System.out.println("Erro ao deletar usuário.");
-                                            }
-                                        } else {
-                                            System.out.println("Operação cancelada.");
-                                        }
-                                    }
-
-                                    case 12 -> {
-                                        // Listar Usuarios
-                                        System.out.println("\n=== LISTA DE USUÁRIOS ===");
-                                        List<Usuarios> usuario = usuariosDAO.selectUsuarios();
-
-                                        if (usuario.isEmpty()) {
-                                            System.out.println("Nenhum usuário encontrado.");
-                                        } else {
-                                            System.out.println("Usuários cadastrados:");
-                                            System.out.println("================================================");
-                                            for (Usuarios u : usuario) {
-                                                System.out.println("ID: " + u.getId());
-                                                System.out.println("Nome: " + u.getNome());
-                                                System.out.println("Idade: " + u.getIdade());
-                                                System.out.println("Gênero: " + u.getGenero());
-                                                System.out.println("Nível: " + u.getNivel());
-                                                System.out.println("Arcana: " + u.getArcana());
-                                                System.out.println("HP: " + u.getHp());
-                                                System.out.println("SP: " + u.getSp());
-                                                System.out.println("Papel: " + u.getPapel());
-                                                System.out.println("Vilão: " + (u.isVilao() ? "Sim" : "Não"));
-                                                System.out.println("================================================");
-                                            }
-                                        }
-                                    }
-                                    default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                 }
                             } catch (InvalidMenuInputException e) {
-                                System.out.println(ANSI_RED + "Erro: " + e.getMessage() + ANSI_RESET);
+                                throw new InvalidMenuInputException(e.getMessage());
                             }
                         }
                     }

@@ -49,7 +49,7 @@ public class ProtagonistaHasPersonaDAO extends ConnectionDAO {
         SELECT p.nome AS nomeProtagonista, pe.nome AS nomePersona
         FROM protagonistapersona pp
         JOIN protagonista p ON pp.Protagonista_idProtagonista = p.idProtagonista
-        JOIN persona pe ON pp.Persona_idPersona = pe.idPersona
+        JOIN personas pe ON pp.Persona_idPersona = pe.idPersona
         """;
 
         try {

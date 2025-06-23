@@ -57,6 +57,102 @@ public class ProtagonistaDAO extends ConnectionDAO {
         return idProtagonista;
     }
 
+    public boolean existeProtagonista(String nome) {
+        connectToDb();
+        boolean existe = false;
+
+        String sql = "SELECT COUNT(*) FROM protagonista WHERE nome = ?";
+
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                existe = rs.getInt(1) > 0;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar protagonista: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar recursos: " + e.getMessage());
+            }
+        }
+
+        return existe;
+    }
+
+    /*
+      Insere protagonista apenas se não existir um com o mesmo nome
+     */
+    public int insertProtagonistaSemDuplicata(Protagonista protagonista) {
+        // Verifica se já existe
+        if (existeProtagonista(protagonista.getNome())) {
+            /*
+            System.out.println("❌ Protagonista '" + protagonista.getNome() + "' já existe no banco de dados!");
+            System.out.println("   Use o menu de atualização se quiser modificar os dados.");
+            */
+            return -1; // Retorna -1 para indicar que não foi inserido
+        }
+
+        // Se não existe, insere normalmente
+        int idInserido = insertProtagonista(protagonista);
+        if (idInserido > 0) {
+            System.out.println("✅ Protagonista '" + protagonista.getNome() + "' inserido com sucesso! ID: " + idInserido);
+        }
+
+        return idInserido;
+    }
+
+    /*
+     Busca protagonista por nome
+     */
+    public Protagonista buscarProtagonistaPorNome(String nome) {
+        connectToDb();
+        Protagonista protagonista = null;
+
+        String sql = "SELECT * FROM protagonista WHERE nome = ?";
+
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                protagonista = new Protagonista(
+                        rs.getString("nome"),
+                        rs.getInt("idade"),
+                        rs.getString("genero"),
+                        rs.getInt("nivel"),
+                        rs.getString("arcana"),
+                        rs.getDouble("hp"),
+                        rs.getDouble("sp"),
+                        rs.getDouble("saldo"),
+                        rs.getInt("Ativador_idAtivador"),
+                        rs.getInt("idProtagonista")
+                );
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar protagonista: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar recursos: " + e.getMessage());
+            }
+        }
+
+        return protagonista;
+    }
+
     public List<Protagonista> selectProtagonista() {
         connectToDb();
         List<Protagonista> protagonistas = new ArrayList<>();

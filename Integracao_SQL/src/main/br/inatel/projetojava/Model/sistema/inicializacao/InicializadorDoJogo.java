@@ -46,7 +46,7 @@ public class InicializadorDoJogo {
                     "Makoto Yuki", 17, "Masculino", 20, "The Fool",
                     100.00, 50, 10000.00, 4
             );
-            protagonistaDAO.insertProtagonista(protagonista);
+            protagonistaDAO.insertProtagonistaSemDuplicata(protagonista);
 
             Map<String, Usuarios> usuarios = new HashMap<>();
             Map<String, NPC> npcs = new HashMap<>();
