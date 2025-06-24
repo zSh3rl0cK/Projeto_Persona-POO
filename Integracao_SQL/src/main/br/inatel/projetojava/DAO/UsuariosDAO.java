@@ -73,7 +73,7 @@ public class UsuariosDAO extends ConnectionDAO {
                         rs.getDouble("sp"),
                         rs.getString("papel"),
                         rs.getBoolean("vilao"),
-                        rs.getInt("idUsuario") 
+                        rs.getInt("idUsuarios") 
                 );
                 usuarios.add(usuario);
             }
