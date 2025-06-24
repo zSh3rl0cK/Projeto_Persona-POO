@@ -389,7 +389,8 @@ JOIN
 GROUP BY 
     p.nome;
 
-    
+/*  
+
     -- Persona e Habilidade + persona_has_habilidade:
 SELECT 
     p.Nome AS NomePersona,
@@ -420,6 +421,8 @@ FROM
     JOIN equipamento e ON e.idEquipamento = ue.Equipamento_idEquipamento
 ORDER BY 
     u.Nome, e.Nome;
+
+*/
     
     -- Protagonistas e Personas (sem arcana):
 SELECT 
