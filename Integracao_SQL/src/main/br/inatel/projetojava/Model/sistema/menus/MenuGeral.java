@@ -1383,7 +1383,10 @@ public class MenuGeral {
                                                 }
                                             }
 
+                                            // Um dado de uma tabela:
+
                                             case 3 -> {
+
                                                 // Listar Usuarios
                                                 System.out.println("\n=== LISTA DE USUÁRIOS ===");
                                                 List<Usuarios> usuario = usuariosDAO.selectUsuarios();
@@ -1408,7 +1411,27 @@ public class MenuGeral {
                                                     }
                                                 }
                                             }
+
                                             case 4 -> {
+                                                // Buscar arcana de um NPC específico
+                                                Scanner scanner = new Scanner(System.in);
+                                                System.out.println("\n=== BUSCAR ARCANA DE NPC ===");
+                                                System.out.print("Digite o nome do NPC: ");
+                                                String nomeNPC = scanner.nextLine();
+
+                                                String arcana = npcdao.selectArcana(nomeNPC);
+
+                                                if (arcana != null) {
+                                                    System.out.println("==========================================");
+                                                    System.out.println("NPC: " + nomeNPC);
+                                                    System.out.println("Arcana: " + arcana);
+                                                    System.out.println("==========================================");
+                                                } else {
+                                                    System.out.println("NPC '" + nomeNPC + "' não encontrado.");
+                                                }
+                                            }
+
+                                            case 5 -> {
                                                 // Listar Personas de Protagonista
                                                 System.out.println("\n=== LISTA DE PERSONAS DE PROTAGONISTA ===");
                                                 // Chama o metodo que faz o SELECT com JOIN
