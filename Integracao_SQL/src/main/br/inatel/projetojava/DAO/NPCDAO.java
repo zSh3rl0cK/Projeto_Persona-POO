@@ -61,6 +61,29 @@ public class NPCDAO extends ConnectionDAO {
         return npcs;
     }
 
+    public String selectArcana(String nome) {
+        String arcana = null;
+        connectToDb();
+        String sql = "SELECT arcana FROM NPC WHERE nome=?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                arcana = rs.getString("arcana");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar arcana do NPC: " + e.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar conexão: " + e.getMessage());
+            }
+        }
+        return arcana;
+    }
+
     public boolean updateNPC(NPC npc) {
         connectToDb();
         String sql = "UPDATE NPC SET idade=?, genero=?, ocupacao=?, arcana=? WHERE nome=?";

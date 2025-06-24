@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.PreparedStatement;
 
 public class ProtagonistaDAO extends ConnectionDAO {
 
@@ -220,21 +221,29 @@ public class ProtagonistaDAO extends ConnectionDAO {
         }
     }
 
-    public void deleteProtagonista() {
+    public boolean deleteProtagonista(int id) {
         connectToDb();
-        String sql = "DELETE FROM protagonista";
+        String sql = "DELETE FROM protagonista WHERE id = ?";
+        boolean deletado = false;
+
         try {
-            st = connection.createStatement();
-            st.execute(sql);
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setInt(1, id);
+
+            int rowsAffected = pst.executeUpdate();
+            deletado = rowsAffected > 0;
+
+            pst.close();
         } catch (SQLException e) {
             System.out.println("Erro ao deletar protagonista: " + e.getMessage());
         } finally {
             try {
-                if (st != null) st.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 System.out.println("Erro ao fechar conexão: " + e.getMessage());
             }
         }
+
+        return deletado;
     }
 }

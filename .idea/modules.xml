@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Integracao_SQL/Integracao_SQL.iml" filepath="$PROJECT_DIR$/Integracao_SQL/Integracao_SQL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Projeto_Persona-POO/Integracao_SQL/Integracao_SQL.iml" filepath="$PROJECT_DIR$/Projeto_Persona-POO/Integracao_SQL/Integracao_SQL.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Integracao_SQL(2.0).iml" filepath="$PROJECT_DIR$/.idea/Integracao_SQL(2.0).iml" />
     </modules>
   </component>

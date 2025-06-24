@@ -1215,18 +1215,29 @@ public class MenuGeral {
                                                 break;
                                             switch (opcaoDelete) {
                                                 case 1 -> {
-                                                    // Deletar Todos os Protagonistas
-                                                    System.out.println("\n=== DELETAR TODOS OS PROTAGONISTAS ===");
-                                                    System.out.print("ATENÇÃO: Esta ação irá deletar TODOS os protagonistas do banco de dados. Confirma? (s/N): ");
-                                                    String confirmacao = sqlScanner.nextLine();
+                                                    // Deletar Protagonista por ID
+                                                    System.out.println("\n=== DELETAR PROTAGONISTA ===");
+                                                    System.out.print("Digite o ID do protagonista que deseja deletar: ");
 
-                                                    if (confirmacao.equalsIgnoreCase("s") || confirmacao.equalsIgnoreCase("sim")) {
-                                                        protagonistaDAO.deleteProtagonista();
-                                                        System.out.println("Todos os protagonistas foram deletados com sucesso!");
-                                                    } else {
-                                                        System.out.println("Operação cancelada.");
+                                                    try {
+                                                        int id = Integer.parseInt(sqlScanner.nextLine());
+
+                                                        System.out.print("ATENÇÃO: Esta ação irá deletar o protagonista com ID " + id + ". Confirma? (s/N): ");
+                                                        String confirmacao = sqlScanner.nextLine();
+
+                                                        if (confirmacao.equalsIgnoreCase("s") || confirmacao.equalsIgnoreCase("sim")) {
+                                                            boolean deletado = protagonistaDAO.deleteProtagonista(id);
+                                                            if (deletado) {
+                                                                System.out.println("Protagonista com ID " + id + " foi deletado com sucesso!");
+                                                            } else {
+                                                                System.out.println("Nenhum protagonista encontrado com o ID " + id + ".");
+                                                            }
+                                                        } else {
+                                                            System.out.println("Operação cancelada.");
+                                                        }
+                                                    } catch (NumberFormatException e) {
+                                                        System.out.println("Erro: Por favor, digite um número válido para o ID.");
                                                     }
-
                                                 }
                                                 case 2 -> {
                                                     // Deletar NPC
