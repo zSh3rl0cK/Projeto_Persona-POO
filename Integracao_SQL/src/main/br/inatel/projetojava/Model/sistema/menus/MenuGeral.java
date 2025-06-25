@@ -1348,7 +1348,7 @@ public class MenuGeral {
 
                                         switch (opcaoSelect) {
                                             case 1 -> {
-                                                // Listar Protagonistas
+                                                // Listar Protagonistas (tabela 1 - Protagonista)
                                                 System.out.println("\n=== LISTA DE PROTAGONISTAS ===");
                                                 List<Protagonista> protagonistas = protagonistaDAO.selectProtagonista();
 
@@ -1374,7 +1374,7 @@ public class MenuGeral {
                                             }
 
                                             case 2 -> {
-                                                // Listar NPCs
+                                                // Listar NPCs (tabela 2 - NPC)
                                                 System.out.println("\n=== LISTA DE NPCs ===");
                                                 List<NPC> newNpcs = npcdao.selectNPC();
 
@@ -1398,7 +1398,7 @@ public class MenuGeral {
 
                                             case 3 -> {
 
-                                                // Listar Usuarios
+                                                // Listar Usuarios (tabela 3 - Usuarios)
                                                 System.out.println("\n=== LISTA DE USUÁRIOS ===");
                                                 List<Usuarios> usuario = usuariosDAO.selectUsuarios();
 
@@ -1424,7 +1424,7 @@ public class MenuGeral {
                                             }
 
                                             case 4 -> {
-                                                // Buscar arcana de um NPC específico
+                                                // Buscar arcana de um NPC específico (dado específico de uma tabela)
                                                 Scanner scanner = new Scanner(System.in);
                                                 System.out.println("\n=== BUSCAR ARCANA DE NPC ===");
                                                 System.out.print("Digite o nome do NPC: ");
@@ -1443,7 +1443,7 @@ public class MenuGeral {
                                             }
 
                                             case 5 -> {
-                                                // Listar Personas de Protagonista
+                                                // Listar Personas de Protagonista(tabela 4 - ProtagonistaHasPersona)
                                                 System.out.println("\n=== LISTA DE PERSONAS DE PROTAGONISTA ===");
                                                 // Chama o metodo que faz o SELECT com JOIN
                                                 List<String> protagonistaPersonas = new ProtagonistaHasPersonaDAO().SelectProtagonistaPersona();
@@ -1460,6 +1460,25 @@ public class MenuGeral {
                                                     System.out.println("========================================================");
                                                 }
 
+                                            }
+
+                                            case 6 -> {
+                                                // Listar Personas de Usuario (tabela 5 - UsuarioHasPersona)
+                                                System.out.println("\n=== LISTA DE PERSONAS DE USUARIO ===");
+                                                // Chama o método que faz o SELECT com JOIN
+                                                List<String> usuarioPersonas = new UsuarioHasPersonaDAO().selectUsuarioPersona();
+                                                if (usuarioPersonas.isEmpty()) {
+                                                    System.out.println("Nenhuma relação Usuario-Persona encontrada.");
+                                                } else {
+                                                    System.out.println("Relações Usuario-Persona encontradas:");
+                                                    System.out.println("========================================================");
+
+                                                    // Itera sobre a lista e exibe cada resultado
+                                                    for (String relacao : usuarioPersonas) {
+                                                        System.out.println(relacao);
+                                                    }
+                                                    System.out.println("========================================================");
+                                                }
                                             }
                                             default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                         }

@@ -29,7 +29,7 @@ public class MenuSQL {
 
         try {
             opcao = sc.nextInt();
-            if (opcao < 0 || opcao > 5) {
+            if (opcao < 0 || opcao > 4) {
                 throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
             }
             sc.nextLine(); // limpa o buffer
@@ -160,6 +160,7 @@ public class MenuSQL {
         System.out.println("║ [3] 👥 Listar todos os Usuários                                            ║");
         System.out.println("║ [4] 🎴 Buscar Arcana de NPC                                                ║");
         System.out.println("║ [5] 🎭 Selecionar (Buscar) Personas de Protagonista                        ║");
+        System.out.println("║ [6] 🎭 Selecionar (Buscar) Personas de Usuários                            ║");
         System.out.println("║ [0] ⬅ Voltar ao menu anterior                                             ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
 
@@ -167,7 +168,7 @@ public class MenuSQL {
 
         try {
             opcao = sc.nextInt();
-            if (opcao < 0 || opcao > 5) {
+            if (opcao < 0 || opcao > 6) {
                 throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
             }
             sc.nextLine(); // limpa o buffer

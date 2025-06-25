@@ -2,6 +2,8 @@ package main.br.inatel.projetojava.DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioHasPersonaDAO extends ConnectionDAO {
 
@@ -98,5 +100,39 @@ public class UsuarioHasPersonaDAO extends ConnectionDAO {
         }
     }
 
+    public List<String> selectUsuarioPersona() {
+        connectToDb();
+        List<String> resultado = new ArrayList<>();
 
+        String sql = """
+    SELECT u.nome AS nomeUsuario, pe.nome AS nomePersona
+    FROM usuario_has_persona uhp
+    JOIN usuarios u ON uhp.idUsuarios = u.idUsuarios
+    JOIN personas pe ON uhp.idPersona = pe.idPersona
+    """;
+
+        try {
+            pst = connection.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String nomeUsuario = rs.getString("nomeUsuario");
+                String nomePersona = rs.getString("nomePersona");
+                resultado.add("Usuario: " + nomeUsuario + " | Persona: " + nomePersona);
+            }
+
+            rs.close();
+        } catch (SQLException exc) {
+            System.out.println("Erro ao executar join: " + exc.getMessage());
+        } finally {
+            try {
+                if (pst != null) pst.close();
+                if (connection != null) connection.close();
+            } catch (SQLException exc) {
+                System.out.println("Erro ao fechar recursos: " + exc.getMessage());
+            }
+        }
+
+        return resultado;
+    }
 }
