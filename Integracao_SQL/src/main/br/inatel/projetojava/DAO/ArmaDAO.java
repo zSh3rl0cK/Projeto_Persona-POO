@@ -34,9 +34,10 @@ public class ArmaDAO extends ConnectionDAO {
     }
 
     public List<Arma> selectArmas() {
-        connectToDb();
         List<Arma> armas = new ArrayList<>();
+        connectToDb();
         String sql = "SELECT * FROM Arma";
+
         try {
             st = connection.createStatement();
             rs = st.executeQuery(sql);
@@ -54,13 +55,31 @@ public class ArmaDAO extends ConnectionDAO {
             System.out.println("Erro ao buscar armas: " + e.getMessage());
         } finally {
             try {
-                connection.close();
-                st.close();
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+                if (connection != null) connection.close();
             } catch (SQLException e) {
                 System.out.println("Erro ao fechar conexão: " + e.getMessage());
             }
         }
         return armas;
+    }
+
+    public int selectGunDamage(String nome){
+        int damage = -1;
+        connectToDb();
+        String sql = "SELECT dano FROM Arma WHERE nome=?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                damage = rs.getInt("dano");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar arcana do NPC: " + e.getMessage());
+        }
+        return damage;
     }
 
     public boolean updateArma(Arma arma) {
@@ -108,4 +127,6 @@ public class ArmaDAO extends ConnectionDAO {
             }
         }
     }
+
+
 }

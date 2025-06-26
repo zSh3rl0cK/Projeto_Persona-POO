@@ -1,9 +1,12 @@
 package main.br.inatel.projetojava.Model.sistema.menus;
 
+import main.br.inatel.projetojava.Model.itens.equipaveis.Arma;
 import main.br.inatel.projetojava.Model.personagens.NPC;
 import main.br.inatel.projetojava.Model.personagens.jogaveis.Usuarios;
+import main.br.inatel.projetojava.Model.personas.seres.Shadow;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -68,6 +71,18 @@ public class MethodUtil {
 
         if (!temAliados) {
             System.out.println(ANSI_YELLOW + "Nenhum aliado encontrado." + ANSI_RESET);
+        }
+    }
+
+    public static void listarShadowsArcana(List<Shadow> Shadow) {
+        if (Shadow.isEmpty()) {
+            System.out.println(ANSI_YELLOW + "Nenhum Shadow encontrado." + ANSI_RESET);
+        }
+        else{
+            int count = 1;
+            for (Shadow shadow : Shadow) {
+                System.out.println(ANSI_BLUE + count++ + ". " + shadow.getArcana() + ANSI_RESET);
+            }
         }
     }
 

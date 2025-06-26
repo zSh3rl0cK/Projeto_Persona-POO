@@ -10,11 +10,11 @@ public class Personas {
 
     private String nome;
     private int nivel;
-    private final String arcana;
-    private final List<String> tipo;
-    private final String fraqueza;
-    private final String resistencia;
-    private final int dano;
+    private String arcana;
+    private List<String> tipo;
+    private String fraqueza;
+    private String resistencia;
+    private int dano;
     private int id;
     private final List<Habilidades> habilidades = new ArrayList<>();
 
@@ -110,5 +110,24 @@ public class Personas {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setFraqueza(String fraqueza) {
+        this.fraqueza = fraqueza;
+    }
+    public void setResistencia(String resistencia) {
+        this.resistencia = resistencia;
+    }
+    public void setDano(int dano) {
+        this.dano = dano;
+    }
+    public void setTipo(List<String> tipo) {
+        this.tipo = tipo;
+    }
+    public void setArcana(String arcana) {
+        this.arcana = arcana;
+    }
+    public void setHabilidades(List<Habilidades> habilidades) {
+        this.habilidades.addAll(habilidades);
     }
 }

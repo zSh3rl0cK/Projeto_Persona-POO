@@ -12,6 +12,7 @@ import main.br.inatel.projetojava.Model.sistema.Cidade;
 import java.util.*;
 
 public class DadosIniciais {
+
     private Protagonista protagonista;
     private Map<String, Usuarios> usuarios;
     private Map<String, NPC> npcs;

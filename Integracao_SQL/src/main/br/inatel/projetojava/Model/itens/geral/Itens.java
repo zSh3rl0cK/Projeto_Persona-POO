@@ -29,4 +29,20 @@ public abstract class Itens {
     public String getStatus() {
         return status;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

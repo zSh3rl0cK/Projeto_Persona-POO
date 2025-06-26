@@ -110,50 +110,6 @@ public class ProtagonistaDAO extends ConnectionDAO {
         return idInserido;
     }
 
-    /*
-     Busca protagonista por nome
-     */
-    public Protagonista buscarProtagonistaPorNome(String nome) {
-        connectToDb();
-        Protagonista protagonista = null;
-
-        String sql = "SELECT * FROM protagonista WHERE nome = ?";
-
-        try {
-            pst = connection.prepareStatement(sql);
-            pst.setString(1, nome);
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-                protagonista = new Protagonista(
-                        rs.getString("nome"),
-                        rs.getInt("idade"),
-                        rs.getString("genero"),
-                        rs.getInt("nivel"),
-                        rs.getString("arcana"),
-                        rs.getDouble("hp"),
-                        rs.getDouble("sp"),
-                        rs.getDouble("saldo"),
-                        rs.getInt("Ativador_idAtivador"),
-                        rs.getInt("idProtagonista")
-                );
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar protagonista: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (pst != null) pst.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.out.println("Erro ao fechar recursos: " + e.getMessage());
-            }
-        }
-
-        return protagonista;
-    }
-
     public List<Protagonista> selectProtagonista() {
         connectToDb();
         List<Protagonista> protagonistas = new ArrayList<>();
@@ -194,6 +150,25 @@ public class ProtagonistaDAO extends ConnectionDAO {
         return protagonistas;
     }
 
+    public double selectSaldo(String nome){
+        double saldo = 0;
+        connectToDb();
+        String sql = "SELECT saldo FROM protagonista WHERE nome=?";
+
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                saldo = rs.getDouble("saldo");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar saldo do Protagonista: " + e.getMessage());
+        }
+
+        return saldo;
+    }
+
     public void updateProtagonista(Protagonista protagonista) {
         connectToDb();
         String sql = "UPDATE protagonista SET nome=?, idade=?, genero=?, nivel=?, arcana=?, hp=?, sp=?, saldo=?, Ativador_idAtivador=? WHERE idProtagonista=?";
@@ -223,7 +198,7 @@ public class ProtagonistaDAO extends ConnectionDAO {
 
     public boolean deleteProtagonista(int id) {
         connectToDb();
-        String sql = "DELETE FROM protagonista WHERE id = ?";
+        String sql = "DELETE FROM protagonista WHERE idProtagonista = ?";
         boolean deletado = false;
 
         try {

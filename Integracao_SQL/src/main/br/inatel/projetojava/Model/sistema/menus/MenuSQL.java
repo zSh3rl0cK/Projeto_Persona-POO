@@ -18,11 +18,11 @@ public class MenuSQL {
                 "╔════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                      🗃 MENU DE OPERAÇÕES SQL POR ENTIDADE                 ║");
         System.out.println("╠════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ [1] ➕ Operações de INSERT                                                ║");
-        System.out.println("║ [2] 🔄 Operações de UPDATE                                                ║");
-        System.out.println("║ [3] ❌ Operações de DELETE                                                ║");
-        System.out.println("║ [4] 🔍 Operações de SELECT                                                ║");
-        System.out.println("║ [0] 🚪 Sair                                                               ║");
+        System.out.println("║ [1] ➕ Operações de INSERT                                                 ║");
+        System.out.println("║ [2] 🔄 Operações de UPDATE                                                 ║");
+        System.out.println("║ [3] ❌ Operações de DELETE                                                 ║");
+        System.out.println("║ [4] 🔍 Operações de SELECT                                                 ║");
+        System.out.println("║ [0] 🚪 Sair                                                                ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
 
         System.out.print(ANSI_CYAN + "👉 Escolha uma opção: " + ANSI_RESET);
@@ -56,6 +56,8 @@ public class MenuSQL {
         System.out.println("║ [1] ➕ Inserir Protagonista                                              ║");
         System.out.println("║ [2] ➕ Inserir NPC                                                       ║");
         System.out.println("║ [3] ➕ Inserir Usuário                                                   ║");
+        System.out.println("║ [4] ➕ Inserir Shadow                                                    ║");
+        System.out.println("║ [5] ➕ Inserir Arma                                                      ║");
         System.out.println("║ [0] ⬅ Voltar ao menu anterior                                            ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
 
@@ -63,7 +65,7 @@ public class MenuSQL {
 
         try {
             opcao = sc.nextInt();
-            if (opcao < 0 || opcao > 3) {
+            if (opcao < 0 || opcao > 5) {
                 throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
             }
             sc.nextLine(); // limpa o buffer
@@ -90,6 +92,8 @@ public class MenuSQL {
         System.out.println("║ [1] 🔄 Atualizar Protagonista                                            ║");
         System.out.println("║ [2] 🔄 Atualizar NPC                                                     ║");
         System.out.println("║ [3] 🔄 Atualizar Usuário                                                 ║");
+        System.out.println("║ [4] 🔄 Atualizar Shadow                                                  ║");
+        System.out.println("║ [5] 🔄 Atualizar Armas                                                   ║");
         System.out.println("║ [0] ⬅ Voltar ao menu anterior                                            ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
 
@@ -97,7 +101,7 @@ public class MenuSQL {
 
         try {
             opcao = sc.nextInt();
-            if (opcao < 0 || opcao > 3) {
+            if (opcao < 0 || opcao > 5) {
                 throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
             }
             sc.nextLine(); // limpa o buffer
@@ -121,17 +125,19 @@ public class MenuSQL {
                 "╔════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                        ❌ MENU DE OPERAÇÕES DELETE                         ║");
         System.out.println("╠════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ [1] ❌ Deletar Protagonista                                              ║");
-        System.out.println("║ [2] ❌ Deletar NPC                                                       ║");
-        System.out.println("║ [3] ❌ Deletar Usuário                                                   ║");
-        System.out.println("║ [0] ⬅ Voltar ao menu anterior                                            ║");
+        System.out.println("║ [1] ❌ Deletar Protagonista                                                ║");
+        System.out.println("║ [2] ❌ Deletar NPC                                                         ║");
+        System.out.println("║ [3] ❌ Deletar Usuário                                                     ║");
+        System.out.println("║ [4] ❌ Deletar Shadows                                                     ║");
+        System.out.println("║ [5] ❌ Deletar Armas                                                       ║");
+        System.out.println("║ [0] ⬅ Voltar ao menu anterior                                             ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
 
         System.out.print(ANSI_CYAN + "👉 Escolha uma opção: " + ANSI_RESET);
 
         try {
             opcao = sc.nextInt();
-            if (opcao < 0 || opcao > 3) {
+            if (opcao < 0 || opcao > 5) {
                 throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
             }
             sc.nextLine(); // limpa o buffer
@@ -152,23 +158,29 @@ public class MenuSQL {
         Scanner sc = new Scanner(System.in);
 
         System.out.println(ANSI_CYAN +
-                "╔════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                        🔍 MENU DE OPERAÇÕES SELECT                         ║");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ [1] 🔍 Selecionar (Buscar) Protagonista                                    ║");
-        System.out.println("║ [2] 📋 Listar todos os NPCs                                                ║");
-        System.out.println("║ [3] 👥 Listar todos os Usuários                                            ║");
-        System.out.println("║ [4] 🎴 Buscar Arcana de NPC                                                ║");
-        System.out.println("║ [5] 🎭 Selecionar (Buscar) Personas de Protagonista                        ║");
-        System.out.println("║ [6] 🎭 Selecionar (Buscar) Personas de Usuários                            ║");
-        System.out.println("║ [0] ⬅ Voltar ao menu anterior                                             ║");
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
+                "╔═════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                        🔍 MENU DE OPERAÇÕES SELECT                          ║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ [1] 🔍 Selecionar (Buscar) Protagonista                                     ║");
+        System.out.println("║ [2] 📋 Listar todos os NPCs                                                 ║");
+        System.out.println("║ [3] 👥 Listar todos os Usuários                                             ║");
+        System.out.println("║ [4] 😈 Listar todas as Shadows                                              ║");
+        System.out.println("║ [5] 🗡️ Listar todas as Armas                                                ║");
+        System.out.println("║ [6] 💵 Buscar Saldo de protagonista                                         ║");
+        System.out.println("║ [7] 🎴 Buscar Arcana de NPC                                                 ║");
+        System.out.println("║ [8] 🕵️ Buscar Papel de Usuário                                              ║");
+        System.out.println("║ [9] 📛 Buscar Nome de Shadow                                                ║");
+        System.out.println("║ [10] 💥 Buscar Dano de Arma                                                 ║");
+        System.out.println("║ [11] 🎭 Listar Personas de Protagonista                                     ║");
+        System.out.println("║ [12] 🎭 Listar Personas de Usuários                                         ║");
+        System.out.println("║ [0] ⬅ Voltar ao menu anterior                                               ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════╝" + ANSI_RESET);
 
         System.out.print(ANSI_CYAN + "👉 Escolha uma opção: " + ANSI_RESET);
 
         try {
             opcao = sc.nextInt();
-            if (opcao < 0 || opcao > 6) {
+            if (opcao < 0 || opcao > 12) {
                 throw new InvalidMenuInputException("Valor inválido! Tente novamente...");
             }
             sc.nextLine(); // limpa o buffer

@@ -1,28 +1,31 @@
 package main.br.inatel.projetojava.DAO;
 
+import main.br.inatel.projetojava.Model.personagens.NPC;
 import main.br.inatel.projetojava.Model.personas.seres.Personas;
+import main.br.inatel.projetojava.Model.personas.seres.Shadow;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ShadowDAO extends ConnectionDAO {
 
     //Inserir shadow no banco
-    public void insertShadow(Personas shadow) {
+    public void insertShadow(Shadow shadow) {
         connectToDb();
-        String sql = "INSERT INTO shadow(nome, nivel, arcana, tipos, fraqueza, resistencia, dano) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO shadow(nome, hp,  nivel, arcana, tipos, fraqueza, resistencia, dano) VALUES(?,?,?,?,?,?,?,?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setString(1, shadow.getNome());
-            pst.setInt(2, shadow.getNivel());
-            pst.setString(3, shadow.getArcana());
-            pst.setString(4, String.join(",", shadow.getTipo()));
-            pst.setString(5, shadow.getFraqueza());
-            pst.setString(6, shadow.getResistencia());
-            pst.setDouble(7, shadow.getDano());
+            pst.setInt(2, shadow.getHp());
+            pst.setInt(3, shadow.getNivel());
+            pst.setString(4, shadow.getArcana());
+            pst.setString(5, String.join(",", shadow.getTipo()));
+            pst.setString(6, shadow.getFraqueza());
+            pst.setString(7, shadow.getResistencia());
+            pst.setDouble(8, shadow.getDano());
             pst.execute();
-            // System.out.println("Shadow inserido com sucesso: " + shadow.getNome());
         } catch (SQLException e) {
             System.out.println("Erro ao inserir Shadow: " + e.getMessage());
         } finally {
@@ -35,46 +38,57 @@ public class ShadowDAO extends ConnectionDAO {
         }
     }
 
-    //Buscar shadow pelo nome
-    public Personas getShadowByName(String nome) {
+    //Buscar shadow
+    public List<Shadow> selectShadow() {
+        List<Shadow> shadows = new ArrayList<>();
         connectToDb();
-        Personas shadow = null;
-        String sql = "SELECT * FROM shadow WHERE nome=?";
+        String sql = "SELECT * FROM shadow";
         try {
-            pst = connection.prepareStatement(sql);
-            pst.setString(1, nome);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                // CORREÇÃO: Convertendo a string de tipos de volta para ArrayList
+            st = connection.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
                 String tiposString = rs.getString("tipos");
-                ArrayList<String> tipos = new ArrayList<>();
-                if (tiposString != null && !tiposString.isEmpty()) {
-                    tipos.addAll(Arrays.asList(tiposString.split(",")));
-                }
+                List<String> tiposList = Arrays.asList(tiposString.split(","));
 
-                shadow = new Personas(
+                Shadow shadow = new Shadow(
                         rs.getString("nome"),
+                        rs.getInt("hp"),
                         rs.getInt("nivel"),
                         rs.getString("arcana"),
-                        tipos,
+                        tiposList,
                         rs.getString("fraqueza"),
                         rs.getString("resistencia"),
-                        rs.getInt("dano"),
-                        rs.getInt("id")
+                        rs.getInt("dano")
                 );
+                shadows.add(shadow);
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar Shadow: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (pst != null) pst.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
-                System.out.println("Erro ao fechar recursos: " + e.getMessage());
+                System.out.println("Erro ao fechar conexão: " + e.getMessage());
             }
         }
-        return shadow;
+        return shadows;
+    }
+
+    public String selectShadowName(String arcana){
+        String nome = null;
+        connectToDb();
+        String sql = "SELECT nome FROM shadow WHERE arcana=?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, arcana);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                nome = rs.getString("nome");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar nome de Shadow: " + e.getMessage());
+        }
+        return nome;
     }
 
     //Atualizar shadow

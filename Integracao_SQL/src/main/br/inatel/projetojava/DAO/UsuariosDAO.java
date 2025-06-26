@@ -90,6 +90,24 @@ public class UsuariosDAO extends ConnectionDAO {
         return usuarios;
     }
 
+    public String selectUserRole(String nome){
+        String papel = null;
+        connectToDb();
+        String sql = "SELECT papel FROM usuarios WHERE nome=?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                papel = rs.getString("papel");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar papel de Usuário: " + e.getMessage());
+        }
+
+        return papel;
+    }
+
     public boolean updateUsuario(Usuarios usuario) {
         connectToDb();
         String sql = "UPDATE usuarios SET idade=?, genero=?, nivel=?, arcana=?, hp=?, sp=?, papel=?, vilao=? WHERE nome=?";

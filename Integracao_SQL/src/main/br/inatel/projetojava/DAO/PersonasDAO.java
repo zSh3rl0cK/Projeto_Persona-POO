@@ -128,58 +128,6 @@ public class PersonasDAO extends ConnectionDAO {
         return sucesso;
     }
 
-    public ArrayList<Personas> selectPersonas() {
-        this.connectToDb();
-        ArrayList<Personas> personas = new ArrayList<>();
-        String sql = "SELECT * FROM Personas";
-
-        try {
-            this.st = this.connection.createStatement();
-            this.rs = this.st.executeQuery(sql);
-            System.out.println("Lista de Personas:");
-
-            while (this.rs.next()) {
-                // Parse the tipo field from comma-separated string back to List
-                String tipoString = this.rs.getString("tipo");
-                List<String> tipoList = Arrays.asList(tipoString.split(","));
-
-                Personas personaAux = new Personas(
-                        this.rs.getString("nome"),
-                        this.rs.getInt("nivel"),
-                        this.rs.getString("arcana"),
-                        tipoList,
-                        this.rs.getString("fraqueza"),
-                        this.rs.getString("resistencia"),
-                        this.rs.getInt("dano")
-                );
-
-                // Load habilidades for each persona
-                loadHabilidadesForPersona(personaAux);
-
-                PrintStream var10000 = System.out;
-                String var10001 = personaAux.getNome();
-                var10000.println("Nome: " + var10001 + " | Nível: " + personaAux.getNivel() +
-                        " | Arcana: " + personaAux.getArcana());
-                System.out.println("--------------------");
-                personas.add(personaAux);
-            }
-        } catch (SQLException exc) {
-            System.out.println("Erro: " + exc.getMessage());
-        } finally {
-            try {
-                this.connection.close();
-                this.st.close();
-                this.rs.close();
-            } catch (SQLException exc) {
-                System.out.println("Erro: " + exc.getMessage());
-            }
-        }
-
-        return personas;
-    }
-
-    // Helper method to load habilidades for a specific persona
-    // This would need a separate table for habilidades and a relationship to personas
     public void loadHabilidadesForPersona(Personas persona) {
         this.connectToDb();
         String sql = "SELECT * FROM Habilidades WHERE persona_id = ?";

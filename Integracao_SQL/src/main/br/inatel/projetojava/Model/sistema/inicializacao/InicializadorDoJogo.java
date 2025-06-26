@@ -21,6 +21,7 @@ import main.br.inatel.projetojava.Model.sistema.Cidade;
 import java.util.*;
 
 public class InicializadorDoJogo {
+    public static int idProtagonista;
 
     // Constantes para manutenção
     private static final String[] USUARIOS_SEES = {
@@ -46,7 +47,7 @@ public class InicializadorDoJogo {
                     "Makoto Yuki", 17, "Masculino", 20, "The Fool",
                     100.00, 50, 10000.00, 4
             );
-            protagonistaDAO.insertProtagonistaSemDuplicata(protagonista);
+            idProtagonista = protagonistaDAO.insertProtagonistaSemDuplicata(protagonista);
 
             Map<String, Usuarios> usuarios = new HashMap<>();
             Map<String, NPC> npcs = new HashMap<>();

@@ -271,12 +271,12 @@ public class Protagonista extends UsuarioPersona {
                 if(missHit == 1) System.out.println("Missed!");
                 else if (missHit == 6){
                     danoFinal = danoFinal*1.5;
-                    alvo.setHp(alvo.getHp() - (danoFinal)); // Crítico
+                    alvo.setHp(alvo.getHp() - (int)danoFinal); // Crítico
                     System.out.println(ANSI_BLUE + nome + " realizou um ataque físico *crítico* causando " + danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
                 }
                 else {
                     System.out.println(ANSI_GREEN + "Golpe executado com sucesso!" + ANSI_RESET);
-                    alvo.setHp(alvo.getHp() - danoFinal);
+                    alvo.setHp(alvo.getHp() - (int)danoFinal);
                     System.out.println(ANSI_BLUE + nome + " realizou um ataque físico causando " + danoFinal + " de dano em " + alvo.getNome() + ANSI_RESET);
                 }
             }
@@ -325,7 +325,7 @@ public class Protagonista extends UsuarioPersona {
 
                     sp -= custoSP;
                     double danoFinal = Math.max(0, hab.dano() - alvo.getDefesa());
-                    alvo.setHp(alvo.getHp() - danoFinal);
+                    alvo.setHp(alvo.getHp() - (int)danoFinal);
                     System.out.println(ANSI_BLUE + nome + " usou " + hab.nome() + " causando " + danoFinal + " de dano!");
                     System.out.println("SP restante: " + sp + ANSI_RESET);
                 }

@@ -10,10 +10,10 @@ import java.util.Random;
 import static main.br.inatel.projetojava.Model.sistema.front.Cores.*;
 
 public class Shadow extends Personas implements CombateInimigo {
-    private double hp;
+    private int hp;
     private double sp;
     private double defesa;
-    private static final Random random = new Random();
+    Random random = new Random();
 
     public Shadow(String nome, int hp, int nivel, String arcana, List<String> tipo, String fraqueza, String resistencia, int dano) {
         super(nome, nivel, arcana, tipo, fraqueza, resistencia, dano);
@@ -28,9 +28,9 @@ public class Shadow extends Personas implements CombateInimigo {
     }
 
     public String toString() {
-        return String.format(ANSI_PURPLE + "\nNome: %s\nVida: %.1f\nNível: %d\nArcana: %s\nFraqueza: %s\nResistência: %s\nDano: %s" + ANSI_RESET,
+        return String.format(ANSI_PURPLE + "\nNome: %s\nVida: %s\nNível: %d\nArcana: %s\nFraqueza: %s\nResistência: %s\nDano: %s" + ANSI_RESET,
                 this.getNome(),
-                this.hp,
+                this.getHp(),
                 this.getNivel(),
                 this.getArcana(),
                 this.getFraqueza(),
@@ -106,11 +106,11 @@ public class Shadow extends Personas implements CombateInimigo {
     }
 
     // Getters e Setters específicos para combate
-    public double getHp() {
+    public int getHp() {
         return hp;
     }
 
-    public void setHp(double hp) {
+    public void setHp(int hp) {
         this.hp = Math.max(0, hp); // HP não pode ser negativo
     }
 
@@ -146,4 +146,6 @@ public class Shadow extends Personas implements CombateInimigo {
         this.sp += quantidade;
         System.out.println(ANSI_PURPLE + this.getNome() + " recuperou " + quantidade + " de SP!" + ANSI_RESET);
     }
+
+
 }

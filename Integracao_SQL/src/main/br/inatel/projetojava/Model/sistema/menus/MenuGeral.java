@@ -925,6 +925,150 @@ public class MenuGeral {
                                                         System.out.println("Erro ao inserir usuário.");
                                                     }
                                                 }
+                                                // Case para inserir Shadow
+                                                case 4 -> {
+                                                    // Inserir Shadow
+                                                    System.out.println("\n=== INSERIR SHADOW ===");
+                                                    System.out.print("Nome: ");
+                                                    String nomeShadow = sqlScanner.nextLine();
+
+                                                    int hpShadow;
+                                                    // Tratamento do HP
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("HP: ");
+                                                            hpShadow = sqlScanner.nextInt();
+                                                            if (hpShadow <= 0) {
+                                                                System.out.println("HP inválido. Deve ser maior que 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando o HP é válido
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor inteiro para o HP).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    int nivelShadow;
+                                                    // Tratamento do nível
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Nível: ");
+                                                            nivelShadow = sqlScanner.nextInt();
+                                                            if (nivelShadow <= 0 || nivelShadow > 100) {
+                                                                System.out.println("Nível inválido. Deve estar entre 1 e 100.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando o nível é válido
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor inteiro para o nível).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    System.out.print("Arcana: ");
+                                                    String arcanaShadow = sqlScanner.nextLine();
+
+                                                    System.out.print("Tipos (separados por vírgula): ");
+                                                    String tiposInput = sqlScanner.nextLine();
+                                                    List<String> tiposShadow = Arrays.asList(tiposInput.split(","));
+
+                                                    System.out.print("Fraqueza: ");
+                                                    String fraquezaShadow = sqlScanner.nextLine();
+
+                                                    System.out.print("Resistência: ");
+                                                    String resistenciaShadow = sqlScanner.nextLine();
+
+                                                    double danoShadow;
+                                                    // Tratamento do dano
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Dano: ");
+                                                            danoShadow = sqlScanner.nextDouble();
+                                                            if (danoShadow < 0) {
+                                                                System.out.println("Dano inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando o dano é válido
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor numérico para o dano).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    Shadow novoShadow = new Shadow(nomeShadow, hpShadow, nivelShadow, arcanaShadow, tiposShadow, fraquezaShadow, resistenciaShadow, (int) danoShadow);
+
+                                                    ShadowDAO shadowDAO = new ShadowDAO();
+                                                    shadowDAO.insertShadow(novoShadow);
+                                                    System.out.println("Shadow inserido com sucesso!");
+                                                }
+
+                                                // Case para inserir Arma
+                                                case 5 -> {
+                                                    // Inserir Arma
+                                                    System.out.println("\n=== INSERIR ARMA ===");
+                                                    System.out.print("Nome: ");
+                                                    String nomeArma = sqlScanner.nextLine();
+                                                    System.out.print("Tipo: ");
+                                                    String tipoArma = sqlScanner.nextLine();
+
+                                                    double valorArma;
+                                                    // Tratamento do valor
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Valor: ");
+                                                            valorArma = sqlScanner.nextDouble();
+                                                            if (valorArma < 0) {
+                                                                System.out.println("Valor inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando o valor é válido
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor numérico para o valor).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    System.out.print("Status: ");
+                                                    String statusArma = sqlScanner.nextLine();
+
+                                                    double danoArma;
+                                                    // Tratamento do dano
+                                                    while (true) {
+                                                        try {
+                                                            System.out.print("Dano: ");
+                                                            danoArma = sqlScanner.nextDouble();
+                                                            if (danoArma < 0) {
+                                                                System.out.println("Dano inválido. Deve ser maior ou igual a 0.");
+                                                                sqlScanner.nextLine(); // Limpa o buffer
+                                                            } else {
+                                                                sqlScanner.nextLine(); // Limpa o buffer após entrada válida
+                                                                break; // Sai do loop quando o dano é válido
+                                                            }
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Erro ao inserir(Insira um valor numérico para o dano).");
+                                                            sqlScanner.nextLine(); // Limpa o buffer para remover a entrada inválida
+                                                        }
+                                                    }
+
+                                                    Arma novaArma = new Arma(nomeArma, tipoArma, valorArma, statusArma, danoArma);
+
+                                                    ArmaDAO armaDAO = new ArmaDAO();
+                                                    boolean sucessoInsercaoArma = armaDAO.insertArma(novaArma);
+                                                    if (sucessoInsercaoArma) {
+                                                        System.out.println("Arma inserida com sucesso!");
+                                                    } else {
+                                                        System.out.println("Erro ao inserir Arma.");
+                                                    }
+                                                }
 
                                                 default ->
                                                         System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
@@ -1201,6 +1345,191 @@ public class MenuGeral {
                                                     }
                                                 }
 
+                                                case 4 -> {
+                                                    // Atualizar Shadow
+                                                    System.out.println("\n=== ATUALIZAR SHADOW ===");
+                                                    ShadowDAO shadowDAO = new ShadowDAO();
+
+                                                    // Primeiro listar os shadows existentes
+                                                    List<Shadow> shadowsExistentes = shadowDAO.selectShadow();
+                                                    if (shadowsExistentes.isEmpty()) {
+                                                        System.out.println("Nenhum Shadow encontrado para atualizar.");
+                                                        break;
+                                                    }
+
+                                                    System.out.println("Shadows disponíveis:");
+                                                    for (Shadow s : shadowsExistentes) {
+                                                        System.out.println("Nome: " + s.getNome() + " | Nível: " + s.getNivel() + " | Arcana: " + s.getArcana() + " | HP: " + s.getHp());
+                                                    }
+
+                                                    System.out.print("Digite o nome do Shadow que deseja atualizar: ");
+                                                    String nomeParaAtualizar = sqlScanner.nextLine();
+
+                                                    // Buscar o shadow pelo nome
+                                                    Shadow shadowParaAtualizar = null;
+                                                    for (Shadow s : shadowsExistentes) {
+                                                        if (s.getNome().equalsIgnoreCase(nomeParaAtualizar)) {
+                                                            shadowParaAtualizar = s;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (shadowParaAtualizar == null) {
+                                                        System.out.println("Shadow com nome '" + nomeParaAtualizar + "' não encontrado.");
+                                                        break;
+                                                    }
+
+                                                    // Coletar novos dados
+                                                    System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
+
+                                                    System.out.print("Nível atual: " + shadowParaAtualizar.getNivel() + " | Novo nível: ");
+                                                    String novoNivelStr = sqlScanner.nextLine();
+                                                    if (!novoNivelStr.trim().isEmpty()) {
+                                                        try {
+                                                            int novoNivel = Integer.parseInt(novoNivelStr);
+                                                            if (novoNivel <= 0 || novoNivel > 100) {
+                                                                System.out.println("Nível inválido. Mantendo valor atual.");
+                                                            } else {
+                                                                shadowParaAtualizar.setNivel(novoNivel);
+                                                            }
+                                                        } catch (NumberFormatException e) {
+                                                            System.out.println("Valor inválido para nível. Mantendo valor atual.");
+                                                        }
+                                                    }
+
+                                                    System.out.print("Arcana atual: " + shadowParaAtualizar.getArcana() + " | Nova arcana: ");
+                                                    String novaArcana = sqlScanner.nextLine();
+                                                    if (!novaArcana.trim().isEmpty()) {
+                                                        shadowParaAtualizar.setArcana(novaArcana);
+                                                    }
+
+                                                    System.out.print("Tipos atuais: " + String.join(",", shadowParaAtualizar.getTipo()) + " | Novos tipos (separados por vírgula): ");
+                                                    String novosTipos = sqlScanner.nextLine();
+                                                    if (!novosTipos.trim().isEmpty()) {
+                                                        List<String> tiposList = Arrays.asList(novosTipos.split(","));
+                                                        shadowParaAtualizar.setTipo(tiposList);
+                                                    }
+
+                                                    System.out.print("Fraqueza atual: " + shadowParaAtualizar.getFraqueza() + " | Nova fraqueza: ");
+                                                    String novaFraqueza = sqlScanner.nextLine();
+                                                    if (!novaFraqueza.trim().isEmpty()) {
+                                                        shadowParaAtualizar.setFraqueza(novaFraqueza);
+                                                    }
+
+                                                    System.out.print("Resistência atual: " + shadowParaAtualizar.getResistencia() + " | Nova resistência: ");
+                                                    String novaResistencia = sqlScanner.nextLine();
+                                                    if (!novaResistencia.trim().isEmpty()) {
+                                                        shadowParaAtualizar.setResistencia(novaResistencia);
+                                                    }
+
+                                                    System.out.print("Dano atual: " + shadowParaAtualizar.getDano() + " | Novo dano: ");
+                                                    String novoDanoStr = sqlScanner.nextLine();
+                                                    if (!novoDanoStr.trim().isEmpty()) {
+                                                        try {
+                                                            double novoDano = Double.parseDouble(novoDanoStr);
+                                                            if (novoDano < 0) {
+                                                                System.out.println("Dano inválido. Mantendo valor atual.");
+                                                            } else {
+                                                                shadowParaAtualizar.setDano((int) novoDano);
+                                                            }
+                                                        } catch (NumberFormatException e) {
+                                                            System.out.println("Valor inválido para dano. Mantendo valor atual.");
+                                                        }
+                                                    }
+
+                                                    shadowDAO.updateShadow(shadowParaAtualizar);
+                                                    System.out.println("Shadow atualizado com sucesso!");
+                                                }
+
+                                                // Case para atualizar Arma
+                                                case 5 -> {
+                                                    // Atualizar Arma
+                                                    System.out.println("\n=== ATUALIZAR ARMA ===");
+                                                    ArmaDAO armaDAO = new ArmaDAO();
+
+                                                    // Primeiro listar as armas existentes
+                                                    List<Arma> armasExistentes = armaDAO.selectArmas();
+                                                    if (armasExistentes.isEmpty()) {
+                                                        System.out.println("Nenhuma Arma encontrada para atualizar.");
+                                                        break;
+                                                    }
+
+                                                    System.out.println("Armas disponíveis:");
+                                                    for (Arma a : armasExistentes) {
+                                                        System.out.println("Nome: " + a.getNome() + " | Tipo: " + a.getTipo() + " | Valor: " + a.getValor() + " | Dano: " + a.getDano());
+                                                    }
+
+                                                    System.out.print("Digite o nome da Arma que deseja atualizar: ");
+                                                    String nomeParaAtualizar = sqlScanner.nextLine();
+
+                                                    // Buscar a arma pelo nome
+                                                    Arma armaParaAtualizar = null;
+                                                    for (Arma a : armasExistentes) {
+                                                        if (a.getNome().equalsIgnoreCase(nomeParaAtualizar)) {
+                                                            armaParaAtualizar = a;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (armaParaAtualizar == null) {
+                                                        System.out.println("Arma com nome '" + nomeParaAtualizar + "' não encontrada.");
+                                                        break;
+                                                    }
+
+                                                    // Coletar novos dados
+                                                    System.out.println("Digite os novos dados (pressione Enter para manter o valor atual):");
+
+                                                    System.out.print("Tipo atual: " + armaParaAtualizar.getTipo() + " | Novo tipo: ");
+                                                    String novoTipo = sqlScanner.nextLine();
+                                                    if (!novoTipo.trim().isEmpty()) {
+                                                        armaParaAtualizar.setTipo(novoTipo);
+                                                    }
+
+                                                    System.out.print("Valor atual: " + armaParaAtualizar.getValor() + " | Novo valor: ");
+                                                    String novoValorStr = sqlScanner.nextLine();
+                                                    if (!novoValorStr.trim().isEmpty()) {
+                                                        try {
+                                                            double novoValor = Double.parseDouble(novoValorStr);
+                                                            if (novoValor < 0) {
+                                                                System.out.println("Valor inválido. Mantendo valor atual.");
+                                                            } else {
+                                                                armaParaAtualizar.setValor(novoValor);
+                                                            }
+                                                        } catch (NumberFormatException e) {
+                                                            System.out.println("Valor inválido para valor. Mantendo valor atual.");
+                                                        }
+                                                    }
+
+                                                    System.out.print("Status atual: " + armaParaAtualizar.getStatus() + " | Novo status: ");
+                                                    String novoStatus = sqlScanner.nextLine();
+                                                    if (!novoStatus.trim().isEmpty()) {
+                                                        armaParaAtualizar.setStatus(novoStatus);
+                                                    }
+
+                                                    System.out.print("Dano atual: " + armaParaAtualizar.getDano() + " | Novo dano: ");
+                                                    String novoDanoStr = sqlScanner.nextLine();
+                                                    if (!novoDanoStr.trim().isEmpty()) {
+                                                        try {
+                                                            double novoDano = Double.parseDouble(novoDanoStr);
+                                                            if (novoDano < 0) {
+                                                                System.out.println("Dano inválido. Mantendo valor atual.");
+                                                            } else {
+                                                                armaParaAtualizar.setDano(novoDano);
+                                                            }
+                                                        } catch (NumberFormatException e) {
+                                                            System.out.println("Valor inválido para dano. Mantendo valor atual.");
+                                                        }
+                                                    }
+
+                                                    boolean sucessoAtualizacao = armaDAO.updateArma(armaParaAtualizar);
+
+                                                    if (sucessoAtualizacao) {
+                                                        System.out.println("Arma atualizada com sucesso!");
+                                                    } else {
+                                                        System.out.println("Erro ao atualizar Arma.");
+                                                    }
+                                                }
+
                                                 default ->
                                                         System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                             }
@@ -1335,6 +1664,89 @@ public class MenuGeral {
                                                         System.out.println("Operação cancelada.");
                                                     }
                                                 }
+
+                                                // Case para deletar Shadow
+                                                case 4 -> {
+                                                    // Deletar Shadow
+                                                    System.out.println("\n=== DELETAR SHADOW ===");
+                                                    ShadowDAO shadowDAO = new ShadowDAO();
+
+                                                    // Primeiro listar os shadows existentes
+                                                    List<Shadow> shadowsExistentes = shadowDAO.selectShadow();
+                                                    if (shadowsExistentes.isEmpty()) {
+                                                        System.out.println("Nenhum Shadow encontrado para deletar.");
+                                                        break;
+                                                    }
+                                                    System.out.println("Shadows disponíveis:");
+                                                    for (Shadow s : shadowsExistentes) {
+                                                        System.out.println("Nome: " + s.getNome() + " | Nível: " + s.getNivel() + " | Arcana: " + s.getArcana() + " | HP: " + s.getHp());
+                                                    }
+                                                    System.out.print("Digite o nome do Shadow que deseja deletar: ");
+                                                    String nomeParaDeletar = sqlScanner.nextLine();
+
+                                                    // Verificar se o shadow existe
+                                                    boolean shadowExiste = shadowDAO.shadowExists(nomeParaDeletar);
+                                                    if (!shadowExiste) {
+                                                        System.out.println("Shadow com nome '" + nomeParaDeletar + "' não encontrado.");
+                                                        break;
+                                                    }
+
+                                                    System.out.print(ANSI_RED + "ATENÇÃO: Esta ação irá deletar permanentemente o Shadow '" + nomeParaDeletar + "'. Confirma? (s/N): " + ANSI_RESET);
+                                                    String confirmacaoDelete = sqlScanner.nextLine();
+                                                    if (confirmacaoDelete.equalsIgnoreCase("s") || confirmacaoDelete.equalsIgnoreCase("sim")) {
+                                                        shadowDAO.deleteShadow(nomeParaDeletar);
+                                                        System.out.println("Shadow '" + nomeParaDeletar + "' deletado com sucesso!");
+                                                    } else {
+                                                        System.out.println("Operação cancelada.");
+                                                    }
+                                                }
+
+                                                // Case para deletar Arma
+                                                case 5 -> {
+                                                    // Deletar Arma
+                                                    System.out.println("\n=== DELETAR ARMA ===");
+                                                    ArmaDAO armaDAO = new ArmaDAO();
+
+                                                    // Primeiro listar as armas existentes
+                                                    List<Arma> armasExistentes = armaDAO.selectArmas();
+                                                    if (armasExistentes.isEmpty()) {
+                                                        System.out.println("Nenhuma Arma encontrada para deletar.");
+                                                        break;
+                                                    }
+                                                    System.out.println("Armas disponíveis:");
+                                                    for (Arma a : armasExistentes) {
+                                                        System.out.println("Nome: " + a.getNome() + " | Tipo: " + a.getTipo() + " | Valor: " + a.getValor() + " | Dano: " + a.getDano());
+                                                    }
+                                                    System.out.print("Digite o nome da Arma que deseja deletar: ");
+                                                    String nomeParaDeletar = sqlScanner.nextLine();
+
+                                                    // Verificar se a arma existe
+                                                    boolean armaExiste = false;
+                                                    for (Arma a : armasExistentes) {
+                                                        if (a.getNome().equalsIgnoreCase(nomeParaDeletar)) {
+                                                            armaExiste = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (!armaExiste) {
+                                                        System.out.println("Arma com nome '" + nomeParaDeletar + "' não encontrada.");
+                                                        break;
+                                                    }
+
+                                                    System.out.print(ANSI_RED + "ATENÇÃO: Esta ação irá deletar permanentemente a Arma '" + nomeParaDeletar + "'. Confirma? (s/N): " + ANSI_RESET);
+                                                    String confirmacaoDelete = sqlScanner.nextLine();
+                                                    if (confirmacaoDelete.equalsIgnoreCase("s") || confirmacaoDelete.equalsIgnoreCase("sim")) {
+                                                        boolean sucessoDelecao = armaDAO.deleteArma(nomeParaDeletar);
+                                                        if (sucessoDelecao) {
+                                                            System.out.println("Arma '" + nomeParaDeletar + "' deletada com sucesso!");
+                                                        } else {
+                                                            System.out.println("Erro ao deletar Arma.");
+                                                        }
+                                                    } else {
+                                                        System.out.println("Operação cancelada.");
+                                                    }
+                                                }
+
                                                 default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                             }
                                         }
@@ -1424,11 +1836,84 @@ public class MenuGeral {
                                             }
 
                                             case 4 -> {
-                                                // Buscar arcana de um NPC específico (dado específico de uma tabela)
-                                                Scanner scanner = new Scanner(System.in);
+                                                // Listar Shadows
+                                                System.out.println("\n=== LISTA DE SHADOWS ===");
+                                                ShadowDAO newShadowDAO = new ShadowDAO();
+                                                List<Shadow> sombras = newShadowDAO.selectShadow();
+
+                                                if (sombras.isEmpty()) {
+                                                    System.out.println("Nenhuma shadow encontrada.");
+                                                } else {
+                                                    System.out.println("Shadows cadastradas:");
+                                                    System.out.println("================================================");
+                                                    for (Shadow s : sombras) {
+                                                        System.out.println("Nome: " + s.getNome());
+                                                        System.out.println("HP: " + s.getHp());
+                                                        System.out.println("SP: " + s.getSp());
+                                                        System.out.println("Nível: " + s.getNivel());
+                                                        System.out.println("Arcana: " + s.getArcana());
+
+                                                        // Format types list nicely
+                                                        List<String> tipos = s.getTipo();
+                                                        if (tipos != null && !tipos.isEmpty()) {
+                                                            System.out.println("Tipos: " + String.join(", ", tipos));
+                                                        } else {
+                                                            System.out.println("Tipos: Nenhum");
+                                                        }
+
+                                                        System.out.println("Fraqueza: " + s.getFraqueza());
+                                                        System.out.println("Resistência: " + s.getResistencia());
+                                                        System.out.println("Dano: " + s.getDano());
+                                                        System.out.println("Defesa: " + s.getDefesa());
+                                                        System.out.println("================================================");
+                                                    }
+                                                }
+                                            }
+
+                                            case 5 -> {
+                                                // Listar Armas
+                                                System.out.println("\n=== LISTA DE ARMAS ===");
+
+                                                ArmaDAO armaDAO = new ArmaDAO(); // Create instance to avoid static context error
+                                                List<Arma> armas = armaDAO.selectArmas();
+
+                                                if (armas.isEmpty()) {
+                                                    System.out.println("Nenhuma arma encontrada.");
+                                                } else {
+                                                    System.out.println("Armas cadastradas:");
+                                                    System.out.println("================================================");
+                                                    for (Arma arma : armas) {
+                                                        System.out.println("Nome: " + arma.getNome());
+                                                        System.out.println("Tipo: " + arma.getTipo());
+                                                        System.out.println("Valor: R$ " + String.format("%.2f", arma.getValor()));
+                                                        System.out.println("Status: " + arma.getStatus());
+                                                        System.out.println("Dano: " + arma.getDano());
+                                                        System.out.println("================================================");
+                                                    }
+                                                    System.out.println("Total de armas: " + armas.size());
+                                                }
+                                            }
+
+                                            // Dados específicos das tabelas:
+                                            case 6 -> {
+                                                // Buscar saldo de Protagonista
+                                                System.out.println("\n=== BUSCAR SALDO DE PROTAGONISTA ===");
+                                                System.out.print("Digite o nome do protagonista que deseja buscar o saldo: ");
+                                                String nomeParaBuscarSaldo = sqlScanner.nextLine();
+                                                double saldo = protagonistaDAO.selectSaldo(nomeParaBuscarSaldo);
+
+                                                System.out.println("Saldo atual: R$ " + String.format("%.2f", saldo));
+                                            }
+
+                                            case 7 -> {
+
+                                                // Buscar arcana de um NPC específico
                                                 System.out.println("\n=== BUSCAR ARCANA DE NPC ===");
+                                                // Mostrando os NPCS para auxiliar na busca:
+                                                Map<String, NPC> npcsExistentes = (Map<String, NPC>) npcdao.selectNPC();
+                                                listarNPCs(npcsExistentes);
                                                 System.out.print("Digite o nome do NPC: ");
-                                                String nomeNPC = scanner.nextLine();
+                                                String nomeNPC = sqlScanner.nextLine();
 
                                                 String arcana = npcdao.selectArcana(nomeNPC);
 
@@ -1442,7 +1927,74 @@ public class MenuGeral {
                                                 }
                                             }
 
-                                            case 5 -> {
+                                            case 8 -> {
+                                                // Buscar Papel do Usuário baseado no seu nome
+                                                System.out.println("\n=== BUSCAR PAPEL DE UM USUÁRIO ===");
+                                                Map<String, Usuarios> usuariosExistentes = (Map<String, Usuarios>) usuariosDAO.selectUsuarios();
+                                                listarUsuarios(usuariosExistentes);
+                                                System.out.println("Digite o nome do Usuário");
+                                                String nomeUsuario = sqlScanner.nextLine();
+                                                UsuariosDAO newUsuariosDAO = new UsuariosDAO();
+
+                                                String papel = newUsuariosDAO.selectUserRole(nomeUsuario);
+
+                                                if(papel != null){
+                                                    System.out.println("==========================================");
+                                                    System.out.println("Nome: " + nomeUsuario);
+                                                    System.out.println("Papel: " + papel);
+                                                    System.out.println("==========================================");
+                                                }
+                                                else{
+                                                    System.out.println("Usuário não encontrado com esse nome!");
+                                                }
+                                            }
+
+                                            case 9 -> {
+                                                // Buscar nome de Shadow baseado na sua arcana
+                                                System.out.println("\n=== BUSCAR NOME DE SHADOW ===");
+                                                ShadowDAO newShadowDAO = new ShadowDAO();
+                                                List<Shadow> sombra = newShadowDAO.selectShadow();
+                                                listarShadowsArcana(sombra);
+                                                System.out.print("Digite a arcana do shadow: ");
+                                                String arcanaParaBuscarNome = sqlScanner.nextLine();
+
+                                                String name = newShadowDAO.selectShadowName(arcanaParaBuscarNome);
+
+                                                if(name != null){
+                                                    System.out.println("Nome do shadow: " + name);
+                                                    System.out.println("==========================================");
+                                                    System.out.println("Arcana: " + arcanaParaBuscarNome);
+                                                    System.out.println("==========================================");
+                                                }
+                                                else{
+                                                    System.out.println("Shadow não encontrada!");
+                                                }
+                                            }
+
+                                            case 10 -> {
+                                                // Buscar Dano de Arma
+                                                System.out.println("\n=== BUSCAR DANO DE ARMA ===");
+                                                System.out.print("Digite o nome da arma: ");
+                                                String nomeArma = sqlScanner.nextLine();
+                                                ArmaDAO newArmaDAO = new ArmaDAO();
+
+                                                int damage = newArmaDAO.selectGunDamage(nomeArma);
+
+                                                if(damage != -1){
+                                                    System.out.println("Dano da arma: " + damage);
+                                                    System.out.println("==========================================");
+                                                    System.out.println("Nome: " + nomeArma);
+                                                    System.out.println("==========================================");
+                                                }
+                                                else{
+                                                    System.out.println("Arma não encontrada ou dano negativo!");
+                                                }
+                                            }
+
+                                            // Joins:
+
+                                            case 11 -> {
+
                                                 // Listar Personas de Protagonista(tabela 4 - ProtagonistaHasPersona)
                                                 System.out.println("\n=== LISTA DE PERSONAS DE PROTAGONISTA ===");
                                                 // Chama o metodo que faz o SELECT com JOIN
@@ -1459,13 +2011,12 @@ public class MenuGeral {
                                                     }
                                                     System.out.println("========================================================");
                                                 }
-
                                             }
 
-                                            case 6 -> {
+                                            case 12 -> {
+
                                                 // Listar Personas de Usuario (tabela 5 - UsuarioHasPersona)
                                                 System.out.println("\n=== LISTA DE PERSONAS DE USUARIO ===");
-                                                // Chama o método que faz o SELECT com JOIN
                                                 List<String> usuarioPersonas = new UsuarioHasPersonaDAO().selectUsuarioPersona();
                                                 if (usuarioPersonas.isEmpty()) {
                                                     System.out.println("Nenhuma relação Usuario-Persona encontrada.");
@@ -1480,6 +2031,7 @@ public class MenuGeral {
                                                     System.out.println("========================================================");
                                                 }
                                             }
+
                                             default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
                                         }
                                     }
