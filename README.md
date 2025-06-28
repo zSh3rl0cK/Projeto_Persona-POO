@@ -140,3 +140,6 @@ Menus implementados:
 
 Inspirado por *Persona 3 Reload* (Atlus)  
 Desenvolvido como parte do projeto final das disciplinas Banco de Dados & POO  
+
+Músicas do jogo:
+"https://open.spotify.com/embed/album/20Bf2RVERC5Bc2eo3vyvJv?utm_source=generator"
